@@ -4228,7 +4228,3 @@ html.is-animating .mil-menu-frame {
   -webkit-transition-delay: 0.3s;
           transition-delay: 0.3s;
 }
-.far.fa-instagram {
-  content: "\f16d";
-  font-size: 20px;
-}
