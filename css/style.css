@@ -3061,7 +3061,7 @@ footer
   color: rgb(0, 0, 0);
   font-size: 12px;
   font-weight: 500;
-  text-transform: uppercase;
+  text-transform: none;
   letter-spacing: 2px;
   border: none;
   border-radius: 70px;
@@ -3074,7 +3074,7 @@ footer
   font-family: "Outfit", sans-serif;
   font-size: 12px;
   font-weight: 500;
-  text-transform: uppercase;
+  text-transform: none;
   letter-spacing: 2px;
 }
 .mil-subscribe-form input::-moz-placeholder {
@@ -3082,7 +3082,7 @@ footer
   font-family: "Outfit", sans-serif;
   font-size: 12px;
   font-weight: 500;
-  text-transform: uppercase;
+  text-transform: none;
   letter-spacing: 2px;
 }
 .mil-subscribe-form input:-ms-input-placeholder {
@@ -3090,7 +3090,7 @@ footer
   font-family: "Outfit", sans-serif;
   font-size: 12px;
   font-weight: 500;
-  text-transform: uppercase;
+  text-transform: none;
   letter-spacing: 2px;
 }
 .mil-subscribe-form input::-ms-input-placeholder {
@@ -3098,7 +3098,7 @@ footer
   font-family: "Outfit", sans-serif;
   font-size: 12px;
   font-weight: 500;
-  text-transform: uppercase;
+  text-transform: none;
   letter-spacing: 2px;
 }
 .mil-subscribe-form input::placeholder {
@@ -3106,7 +3106,7 @@ footer
   font-family: "Outfit", sans-serif;
   font-size: 12px;
   font-weight: 500;
-  text-transform: uppercase;
+  text-transform: none;
   letter-spacing: 2px;
 }
 .mil-subscribe-form input:focus {
@@ -4227,4 +4227,8 @@ html.is-animating .mil-menu-frame {
   opacity: 0;
   -webkit-transition-delay: 0.3s;
           transition-delay: 0.3s;
+}
+.far.fa-instagram {
+  content: "\f16d";
+  font-size: 20px;
 }
