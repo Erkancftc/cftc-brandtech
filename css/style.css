@@ -4094,8 +4094,8 @@ images
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
-  -o-object-position: center;
-     object-position: center;
+  -o-object-position: top;
+     object-position: top;
 }
 .mil-image-frame.mil-horizontal {
   padding-bottom: 65%;
