@@ -631,7 +631,7 @@ button
   background-color: var(--bs-red);
 }
 .mil-button.mil-icon-button-sm svg path {
-  fill: rgb(0, 0, 0);
+  fill: white;
 }
 .mil-button:hover {
   -webkit-transform: scale(1.015);
