@@ -614,7 +614,7 @@ button
   transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
 }
 .mil-button svg path {
-  fill: var(--bs-red);
+  fill: var(--bs-white);
 }
 .mil-button.mil-icon-button {
   padding: 15px;
@@ -1189,13 +1189,19 @@ frame
 ------------------------------------------- */
 .mil-logo {
   font-size: 42px;
-  font-weight: 500;
+  font-weight: 800;
   line-height: 100%;
 }
 @media screen and (max-width: 992px) {
   .mil-logo {
     font-size: 36px;
   }
+}
+.mil-logo img{
+  display: block;
+  position: relative;
+  z-index: 1;
+  width: 75%;
 }
 
 .mil-frame {
