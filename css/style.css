@@ -2476,6 +2476,16 @@ services
 .mil-service-card-lg.mil-other-card:hover {
   background-color: var(--bs-red);
 }
+.mil-service-card-lg.mil-other-card:hover,
+.mil-service-card-lg.mil-other-card:hover h4,
+.mil-service-card-lg.mil-other-card:hover p,
+.mil-service-card-lg.mil-other-card:hover li,
+.mil-service-card-lg.mil-other-card:hover span {
+  color: #fff !important;
+}
+.mil-service-card-lg.mil-other-card:hover .mil-link.mil-dark svg path{
+  fill: #fff;
+}
 .mil-service-card-lg.mil-other-card:hover .mil-link svg {
   background-color: rgb(0, 0, 0);
 }
