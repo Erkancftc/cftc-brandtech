@@ -3247,12 +3247,12 @@ portfolio
   top: 1289px;
 }
 
-.mil-portfolio-slide.htmlr-frame {
+.mil-portfolio-slider-frame {
   z-index: 0;
   padding-top: 150px;
 }
 @media screen and (max-width: 992px) {
-  .mil-portfolio-slide.htmlr-frame {
+  .mil-portfolio-slider-frame {
     padding-top: 180px;
   }
 }
