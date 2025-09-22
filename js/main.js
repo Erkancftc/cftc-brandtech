@@ -545,7 +545,7 @@ $(function () {
     portfolio slider
 
     ***************************/
-    var swiper = new Swiper('.mil-portfolio-slide.htmlr', {
+    var swiper = new Swiper('.mil-portfolio-slider', {
         slidesPerView: 1,
         spaceBetween: 0,
         speed: 800,
@@ -986,7 +986,7 @@ $(function () {
         portfolio slider
 
         ***************************/
-        var swiper = new Swiper('.mil-portfolio-slide.htmlr', {
+        var swiper = new Swiper('.mil-portfolio-slider', {
             slidesPerView: 1,
             spaceBetween: 0,
             speed: 800,
