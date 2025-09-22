@@ -119,23 +119,20 @@ $(function () {
     anchor scroll
 
     ***************************/
-   // Global scroll-kilitleyen dinleyicileri iptal et
-['wheel','mousewheel','DOMMouseScroll','touchmove'].forEach(evt => {
-  $(window).off(evt);
-  $(document).off(evt);
-  $('body').off(evt);
-});
+    $(document).on('click', 'a[href^="#"]', function (event) {
+        event.preventDefault();
 
-// Anchor scroll'u native'e çevir (Safari stabil)
-$(document).on('click','a[href^="#"]:not([href="#"])', function (e) {
-  const href = $(this).attr('href');
-  const el = document.querySelector(href);
-  if (!el) return;
-  e.preventDefault();
-  const offset = (window.innerWidth < 1200) ? 90 : 0;
-  const y = el.getBoundingClientRect().top + window.pageYOffset - offset;
-  window.scrollTo({ top: y, behavior: 'smooth' });
-});
+        var target = $($.attr(this, 'href'));
+        var offset = 0;
+
+        if ($(window).width() < 1200) {
+            offset = 90;
+        }
+
+        $('html, body').animate({
+            scrollTop: target.offset().top - offset
+        }, 400);
+    });
     /***************************
 
     append
