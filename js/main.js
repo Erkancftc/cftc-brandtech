@@ -119,20 +119,29 @@ $(function () {
     anchor scroll
 
     ***************************/
-    $(document).on('click', 'a[href^="#"]', function (event) {
-        event.preventDefault();
+    // Anchor scroll - Safari uyumlu
+    $(document).on('click', 'a[href^="#"]:not([href="#"])', function (e) {
+    const href = $(this).attr('href');
+    const targetEl = document.querySelector(href);
+    if (!targetEl) return; // Hedef yoksa hiçbir şey yapma
 
-        var target = $($.attr(this, 'href'));
-        var offset = 0;
+    e.preventDefault();
 
-        if ($(window).width() < 1200) {
-            offset = 90;
-        }
+    const offset = (window.innerWidth < 1200) ? 90 : 0;
+    const y = targetEl.getBoundingClientRect().top + window.pageYOffset - offset;
 
-        $('html, body').animate({
-            scrollTop: target.offset().top - offset
-        }, 400);
+    // jQuery animasyon kuyruğunu temizle (varsa)
+    $('html, body').stop(true);
+
+    // Native smooth scroll (Safari’de daha stabil)
+    window.scrollTo({ top: y, behavior: 'smooth' });
     });
+
+    // Kullanıcı tekerlek/trackpad ile kaydırırsa animasyonu kes
+    $(window).on('wheel mousewheel DOMMouseScroll touchmove', function () {
+    $('html, body').stop(true);
+    });
+
     /***************************
 
     append

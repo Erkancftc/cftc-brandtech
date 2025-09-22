@@ -76,7 +76,6 @@ body {
   line-height: 150%;
   -ms-scroll-chaining: none;
       overscroll-behavior: none;
-   -webkit-overflow-scrolling: touch;
 }
 @media screen and (max-width: 768px) {
   html,
