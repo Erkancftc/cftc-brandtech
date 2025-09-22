@@ -119,29 +119,23 @@ $(function () {
     anchor scroll
 
     ***************************/
-    // Anchor scroll - Safari uyumlu
-    $(document).on('click', 'a[href^="#"]:not([href="#"])', function (e) {
-    const href = $(this).attr('href');
-    const targetEl = document.querySelector(href);
-    if (!targetEl) return; // Hedef yoksa hiçbir şey yapma
+   // Global scroll-kilitleyen dinleyicileri iptal et
+['wheel','mousewheel','DOMMouseScroll','touchmove'].forEach(evt => {
+  $(window).off(evt);
+  $(document).off(evt);
+  $('body').off(evt);
+});
 
-    e.preventDefault();
-
-    const offset = (window.innerWidth < 1200) ? 90 : 0;
-    const y = targetEl.getBoundingClientRect().top + window.pageYOffset - offset;
-
-    // jQuery animasyon kuyruğunu temizle (varsa)
-    $('html, body').stop(true);
-
-    // Native smooth scroll (Safari’de daha stabil)
-    window.scrollTo({ top: y, behavior: 'smooth' });
-    });
-
-    // Kullanıcı tekerlek/trackpad ile kaydırırsa animasyonu kes
-    $(window).on('wheel mousewheel DOMMouseScroll touchmove', function () {
-    $('html, body').stop(true);
-    });
-
+// Anchor scroll'u native'e çevir (Safari stabil)
+$(document).on('click','a[href^="#"]:not([href="#"])', function (e) {
+  const href = $(this).attr('href');
+  const el = document.querySelector(href);
+  if (!el) return;
+  e.preventDefault();
+  const offset = (window.innerWidth < 1200) ? 90 : 0;
+  const y = el.getBoundingClientRect().top + window.pageYOffset - offset;
+  window.scrollTo({ top: y, behavior: 'smooth' });
+});
     /***************************
 
     append
