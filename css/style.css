@@ -361,7 +361,9 @@ blockquote {
   font-weight: 500;
   letter-spacing: 2px;
 }
-
+#blog > div > div > div.col-lg-8 > ul{
+list-style: circle;
+}
 .mil-bold {
   font-weight: 500;
 }
@@ -1626,7 +1628,7 @@ menu
           transform: translateX(5px);
 }
 .mil-main-menu ul li.mil-has-children ul.mil-active {
-  max-height: 220px;
+  max-height: 260px;
 }
 @media screen and (max-width: 1200px) {
   .mil-main-menu {
