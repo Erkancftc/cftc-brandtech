@@ -27,7 +27,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (shown >= items.length) {
       btn.disabled = true;
       btn.setAttribute('aria-disabled', 'true');
-      btn.textContent = 'HEPSİ YÜKLENDİ';
+      btn.classList.add('mil-disabled');
+      btn.style.backgroundColor = '#ccccccff';
+      btn.style.boxShadow = '1px 1px 8px 0px #ff0000';
     }
   });
 });
