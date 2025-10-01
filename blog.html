@@ -251,10 +251,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row posts js-posts" data-batch="4">
                             <div class="col-lg-12">
 
-                                <a href="publication.html" class="mil-blog-card mil-blog-card-hori mil-more mil-mb-60">
+                                <a href="publication.html" class="mil-blog-card mil-blog-card-hori mil-more mil-mb-60 js-post">
                                     <div class="mil-cover-frame mil-up">
                                         <img src="img/blog/3.jpg" alt="cover">
                                     </div>
@@ -274,7 +274,7 @@
                             </div>
                             <div class="col-lg-12">
 
-                                <a href="publication-5.html" class="mil-blog-card mil-blog-card-hori mil-more mil-mb-60">
+                                <a href="publication-5.html" class="mil-blog-card mil-blog-card-hori mil-more mil-mb-60 js-post">
                                     <div class="mil-cover-frame mil-up">
                                         <img src="img/blog/erkan1.jpg" alt="renk psikolojisi">
                                     </div>
@@ -294,7 +294,7 @@
                             </div>
                             <div class="col-lg-12">
 
-                                <a href="publication.html" class="mil-blog-card mil-blog-card-hori mil-more mil-mb-60">
+                                <a href="publication.html" class="mil-blog-card mil-blog-card-hori mil-more mil-mb-60 js-post">
                                     <div class="mil-cover-frame mil-up">
                                         <img src="img/blog/5.jpg" alt="cover">
                                     </div>
@@ -314,7 +314,7 @@
                             </div>
                             <div class="col-lg-12">
 
-                                <a href="publication.html" class="mil-blog-card mil-blog-card-hori mil-more mil-mb-60">
+                                <a href="publication.html" class="mil-blog-card mil-blog-card-hori mil-more mil-mb-60 js-post">
                                     <div class="mil-cover-frame mil-up">
                                         <img src="img/blog/6.jpg" alt="cover">
                                     </div>
@@ -332,17 +332,16 @@
                                 </a>
 
                             </div>
-                            <div class="col-lg-12">
-                                <div class="mil-pagination">
-                                    <a href="blog-inner.html" class="mil-pagination-btn mil-active">1</a>
-                                    <a href="blog-inner.html" class="mil-pagination-btn">2</a>
-                                    <a href="blog-inner.html" class="mil-pagination-btn">3</a>
-                                    <a href="blog-inner.html" class="mil-pagination-btn">4</a>
-                                    <a href="blog-inner.html" class="mil-pagination-btn">5</a>
-                                </div>
+                            
+                            <div class="col-lg-12 mil-center mil-mb-30">
+                                <button id="loadMore" class="mil-button mil-arrow-place mil-btn-place mil-btn-space mil-link mil-down-arrow mil-up ">
+                                <span>Daha Fazla</span>
+                                </button>
                             </div>
+                        
                         </div>
                     </div>
+                             
                 </section>
                 <!-- blog end -->
                 <!-- popular -->
@@ -651,6 +650,7 @@
     <script src="js/plugins/ScrollTo.min.js"></script>
     <!-- ashley js -->
     <script src="js/main.js"></script>
+    <script src="js/plugins/load-more.js"></script>
 
 </body>
 
