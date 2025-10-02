@@ -130,12 +130,62 @@ $(document).on('click', 'a[href^="#"]:not(.author-link)', function (event) {
     append
 
     ***************************/
-    $(document).ready(function () {
-        $(".mil-arrow").clone().appendTo(".mil-arrow-place");
-        $(".mil-dodecahedron").clone().appendTo(".mil-animation");
-        $(".mil-lines").clone().appendTo(".mil-lines-place");
-        $(".mil-main-menu ul li.mil-active > a").clone().appendTo(".mil-current-page");
-    });
+    // $(document).ready(function () {
+    //     $(".mil-arrow").clone().appendTo(".mil-arrow-place");
+    //     $(".mil-dodecahedron").clone().appendTo(".mil-animation");
+    //     $(".mil-lines").clone().appendTo(".mil-lines-place");
+    //     $(".mil-main-menu ul li.mil-active > a").clone().appendTo(".mil-current-page");
+    // });
+    
+$(function () {
+  // Oklar
+  copyOnce('.mil-arrow',        '.mil-arrow-place');
+
+  // Dodecahedron
+  copyOnce('.mil-dodecahedron', '.mil-animation');
+
+  // Lines
+  copyOnce('.mil-lines',        '.mil-lines-place');
+
+  // Aktif menüdeki sayfa başlığı
+  copyOnce('.mil-main-menu ul li.mil-active > a', '.mil-current-page', {
+    clearTargetCompletely: true // mevcut <a>’ları komple temizle
+  });
+
+  // Aynı elementlere biriken event'leri tekilleştir
+  $('.mil-arrow').off('click').on('click', handleArrowClick);
+});
+
+function copyOnce(srcSel, targetSel, opts = {}) {
+  const $targets = $(targetSel);
+  if ($targets.length === 0) return;
+
+  // Kaynaklardan sadece İLKİNİ al: birden fazla .mil-arrow varsa çoğalma engellenir
+  const $src = $(srcSel).first();
+  if ($src.length === 0) return;
+
+  $targets.each(function () {
+    const $t = $(this);
+
+    // Hedefte aynı tip öğe varsa temizle
+    if (opts.clearTargetCompletely) {
+      $t.empty(); // örn. .mil-current-page içini tamamen boşalt
+    } else {
+      // Sadece aynı sınıfa sahip kopyaları temizle
+      // (örn. .mil-arrow-place içindeki .mil-arrow'ları)
+      $t.find(srcSel).remove();
+    }
+
+    // KOPYALA → EKLE  (event'leriyle birlikte kopyalamak için true,true)
+    $src.clone(true, true).appendTo($t);
+  });
+}
+
+function handleArrowClick(e){
+  // ... senin click handler'ın
+}
+
+    
     /***************************
 
     accordion
@@ -631,13 +681,62 @@ $(document).on('click', 'a[href^="#"]:not(.author-link)', function (event) {
         append
 
         ***************************/
-        $(document).ready(function () {
-            $(".mil-arrow-place .mil-arrow, .mil-animation .mil-dodecahedron, .mil-current-page a").remove();
-            $(".mil-arrow").clone().appendTo(".mil-arrow-place");
-            $(".mil-dodecahedron").clone().appendTo(".mil-animation");
-            $(".mil-lines").clone().appendTo(".mil-lines-place");
-            $(".mil-main-menu ul li.mil-active > a").clone().appendTo(".mil-current-page");
-        });
+        // $(document).ready(function () {
+        //     $(".mil-arrow-place .mil-arrow, .mil-animation .mil-dodecahedron, .mil-current-page a").remove();
+        //     $(".mil-arrow").clone().appendTo(".mil-arrow-place");
+        //     $(".mil-dodecahedron").clone().appendTo(".mil-animation");
+        //     $(".mil-lines").clone().appendTo(".mil-lines-place");
+        //     $(".mil-main-menu ul li.mil-active > a").clone().appendTo(".mil-current-page");
+        // });
+
+        $(function () {
+  // Oklar
+  copyOnce('.mil-arrow',        '.mil-arrow-place');
+
+  // Dodecahedron
+  copyOnce('.mil-dodecahedron', '.mil-animation');
+
+  // Lines
+  copyOnce('.mil-lines',        '.mil-lines-place');
+
+  // Aktif menüdeki sayfa başlığı
+  copyOnce('.mil-main-menu ul li.mil-active > a', '.mil-current-page', {
+    clearTargetCompletely: true // mevcut <a>’ları komple temizle
+  });
+
+  // Aynı elementlere biriken event'leri tekilleştir
+  $('.mil-arrow').off('click').on('click', handleArrowClick);
+});
+
+function copyOnce(srcSel, targetSel, opts = {}) {
+  const $targets = $(targetSel);
+  if ($targets.length === 0) return;
+
+  // Kaynaklardan sadece İLKİNİ al: birden fazla .mil-arrow varsa çoğalma engellenir
+  const $src = $(srcSel).first();
+  if ($src.length === 0) return;
+
+  $targets.each(function () {
+    const $t = $(this);
+
+    // Hedefte aynı tip öğe varsa temizle
+    if (opts.clearTargetCompletely) {
+      $t.empty(); // örn. .mil-current-page içini tamamen boşalt
+    } else {
+      // Sadece aynı sınıfa sahip kopyaları temizle
+      // (örn. .mil-arrow-place içindeki .mil-arrow'ları)
+      $t.find(srcSel).remove();
+    }
+
+    // KOPYALA → EKLE  (event'leriyle birlikte kopyalamak için true,true)
+    $src.clone(true, true).appendTo($t);
+  });
+}
+
+function handleArrowClick(e){
+  // ... senin click handler'ın
+}
+
         /***************************
 
         accordion
