@@ -4271,3 +4271,16 @@ html.is-animating .mil-menu-frame {
 .author-link:hover {
   transform: scale(1.1);
 }
+/* İstersen global CSS'ine ekle */
+[data-cursor]{
+  position: fixed;
+  left: 0; top: 0;
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  background: var(--cursor-dark, #111);
+  opacity: .1;
+  mix-blend-mode: difference; /* istersen kaldır */
+  z-index: 99999;
+}
