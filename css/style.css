@@ -572,6 +572,10 @@ link
   -webkit-transform: scale(1.15) rotate(180deg);
           transform: scale(1.15) rotate(180deg);
 }
+.mil-link a{
+  color: inherit;
+  text-decoration: none;
+}
 
 /* -------------------------------------------
 

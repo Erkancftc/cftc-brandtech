@@ -98,20 +98,33 @@ if (alreadyShown) {
     anchor scroll
 
     ***************************/
-    $(document).on('click', 'a[href^="#"]', function (event) {
-        event.preventDefault();
+    // Anchor scroll (jQuery) — güvenli sürüm
+$(document).on('click', 'a[href^="#"]:not(.author-link)', function (event) {
+  const href = this.getAttribute('href');
 
-        var target = $($.attr(this, 'href'));
-        var offset = 0;
+  // Boş/sahte anchor'lar: #, #!, #0 → sayfayı oynatma
+  if (!href || href === '#' || href === '#!' || href === '#0') {
+    event.preventDefault();
+    return;
+  }
 
-        if ($(window).width() < 1200) {
-            offset = 90;
-        }
+  const $target = $(href);
+  if (!$target.length) {
+    // Hedef yoksa bırak; seçici hatasına düşmeyelim
+    return;
+  }
 
-        $('html, body').animate({
-            scrollTop: target.offset().top - offset
-        }, 400);
-    });
+  event.preventDefault();
+
+  // Header yüksekliği vs. için offset
+  let offset = 0;
+  if ($(window).width() < 1200) offset = 90;
+
+  $('html, body').animate({
+    scrollTop: $target.offset().top - offset
+  }, 400);
+});
+
     /***************************
 
     append

@@ -1,35 +1,51 @@
-
 document.addEventListener('DOMContentLoaded', () => {
-  const list = document.querySelector('.js-posts');                 // liste kapsayıcısı
-  const items = Array.from(list.querySelectorAll('.js-post'));      // tüm kartlar
-  const btn   = document.getElementById('loadMore');                // buton
-  const btnRow = btn.closest('.row') || btn.parentElement;          // butonun içinde bulunduğu satır
-  const BATCH = Number(list.dataset.batch || 4);                    // her seferde 4
+  const list = document.querySelector('.js-posts'); // posts container
+  if (!list) return;
 
-  // Başlangıçta sadece ilk 4'ü göster
-  items.forEach((el, i) => { el.hidden = i >= BATCH; });
-  let shown = Math.min(BATCH, items.length);
+  const btn = document.getElementById('loadMore'); // load more button
+  if (!btn) return;
+
+  const btnRow = btn.closest('.col-lg-12') || btn.parentElement; // the button's column
+  const BATCH = Number(list.dataset.batch || 4); // items per click
+
+  // get columns that actually contain posts (keeps author-link sibling with each col)
+  const getCols = () => Array.from(list.querySelectorAll('.col-lg-12')).filter(col => col.querySelector('.js-post'));
+
+  // initial state: hide everything after initial batch
+  let cols = getCols();
+  cols.forEach((col, i) => { if (i >= BATCH) col.style.display = 'none'; });
+  let shown = Math.min(BATCH, cols.length);
+
+  // ensure the button row sits after the posts container (don't append into list)
+  if (btnRow && list.parentNode) {
+    list.parentNode.insertBefore(btnRow, list.nextSibling);
+    btnRow.style.display = ''; // ensure visible
+  }
 
   btn.addEventListener('click', () => {
-    // Sonraki 4'ü aç
-    const next = Math.min(shown + BATCH, items.length);
-    for (let i = shown; i < next; i++) items[i].hidden = false;
+    cols = getCols(); // recompute in case DOM changed
+    const next = Math.min(shown + BATCH, cols.length);
+
+    // reveal next batch and append them to the end of the posts container
+    for (let i = shown; i < next; i++) {
+      const col = cols[i];
+      if (!col) continue;
+      col.style.display = '';
+      list.appendChild(col); // move to end so newly shown items appear before the button row
+    }
     shown = next;
 
-    // Butonu, liste kapsayıcısından hemen sonraya taşı (section sonunda dursun)
-    // Böylece yeni açılan kartların da altında kalır.
-    list.parentNode.insertBefore(btnRow, list.nextSibling);
+    // keep the button row after the posts list
+    if (btnRow && list.parentNode) list.parentNode.insertBefore(btnRow, list.nextSibling);
 
-    // Ekranı butona kaydır (buton görünür kalsın)
+    // keep button visible
     btn.scrollIntoView({ behavior: 'smooth', block: 'end' });
 
-    // Hepsi yüklendiyse butonu pasifleştir (görünmeye devam etsin)
-    if (shown >= items.length) {
+    // disable button when done
+    if (shown >= cols.length) {
       btn.disabled = true;
       btn.setAttribute('aria-disabled', 'true');
       btn.classList.add('mil-disabled');
-      btn.style.backgroundColor = '#ccccccff';
-      btn.style.boxShadow = '1px 1px 8px 0px #ff0000';
     }
   });
 });
