@@ -130,12 +130,62 @@ $(document).on('click', 'a[href^="#"]:not(.author-link)', function (event) {
     append
 
     ***************************/
-    $(document).ready(function () {
-        $(".mil-arrow").clone().appendTo(".mil-arrow-place");
-        $(".mil-dodecahedron").clone().appendTo(".mil-animation");
-        $(".mil-lines").clone().appendTo(".mil-lines-place");
-        $(".mil-main-menu ul li.mil-active > a").clone().appendTo(".mil-current-page");
-    });
+    // $(document).ready(function () {
+    //     $(".mil-arrow").clone().appendTo(".mil-arrow-place");
+    //     $(".mil-dodecahedron").clone().appendTo(".mil-animation");
+    //     $(".mil-lines").clone().appendTo(".mil-lines-place");
+    //     $(".mil-main-menu ul li.mil-active > a").clone().appendTo(".mil-current-page");
+    // });
+    
+$(function () {
+  // Oklar
+  copyOnce('.mil-arrow',        '.mil-arrow-place');
+
+  // Dodecahedron
+  copyOnce('.mil-dodecahedron', '.mil-animation');
+
+  // Lines
+  copyOnce('.mil-lines',        '.mil-lines-place');
+
+  // Aktif menüdeki sayfa başlığı
+  copyOnce('.mil-main-menu ul li.mil-active > a', '.mil-current-page', {
+    clearTargetCompletely: true // mevcut <a>’ları komple temizle
+  });
+
+  // Aynı elementlere biriken event'leri tekilleştir
+  $('.mil-arrow').off('click').on('click', handleArrowClick);
+});
+
+function copyOnce(srcSel, targetSel, opts = {}) {
+  const $targets = $(targetSel);
+  if ($targets.length === 0) return;
+
+  // Kaynaklardan sadece İLKİNİ al: birden fazla .mil-arrow varsa çoğalma engellenir
+  const $src = $(srcSel).first();
+  if ($src.length === 0) return;
+
+  $targets.each(function () {
+    const $t = $(this);
+
+    // Hedefte aynı tip öğe varsa temizle
+    if (opts.clearTargetCompletely) {
+      $t.empty(); // örn. .mil-current-page içini tamamen boşalt
+    } else {
+      // Sadece aynı sınıfa sahip kopyaları temizle
+      // (örn. .mil-arrow-place içindeki .mil-arrow'ları)
+      $t.find(srcSel).remove();
+    }
+
+    // KOPYALA → EKLE  (event'leriyle birlikte kopyalamak için true,true)
+    $src.clone(true, true).appendTo($t);
+  });
+}
+
+function handleArrowClick(e){
+  // ... senin click handler'ın
+}
+
+    
     /***************************
 
     accordion
@@ -224,133 +274,133 @@ $(document).on('click', 'a[href^="#"]:not(.author-link)', function (event) {
     cursor
 
     ***************************/
-    const cursor = document.querySelector('.mil-ball');
+    // const cursor = document.querySelector('.mil-ball');
 
-    gsap.set(cursor, {
-        xPercent: -50,
-        yPercent: -50,
-    });
+    // gsap.set(cursor, {
+    //     xPercent: -50,
+    //     yPercent: -50,
+    // });
 
-    document.addEventListener('pointermove', movecursor);
+    // document.addEventListener('pointermove', movecursor);
 
-    function movecursor(e) {
-        gsap.to(cursor, {
-            duration: 0.6,
-            ease: 'sine',
-            x: e.clientX,
-            y: e.clientY,
-        });
-    }
+    // function movecursor(e) {
+    //     gsap.to(cursor, {
+    //         duration: 0.6,
+    //         ease: 'sine',
+    //         x: e.clientX,
+    //         y: e.clientY,
+    //     });
+    // }
 
-    $('.mil-drag, .mil-more, .mil-choose').mouseover(function () {
-        gsap.to($(cursor), .2, {
-            width: 90,
-            height: 90,
-            opacity: 1,
-            ease: 'sine',
-        });
-    });
+    // $('.mil-drag, .mil-more, .mil-choose').mouseover(function () {
+    //     gsap.to($(cursor), .2, {
+    //         width: 90,
+    //         height: 90,
+    //         opacity: 1,
+    //         ease: 'sine',
+    //     });
+    // });
 
-    $('.mil-drag, .mil-more, .mil-choose').mouseleave(function () {
-        gsap.to($(cursor), .2, {
-            width: 20,
-            height: 20,
-            opacity: .1,
-            ease: 'sine',
-        });
-    });
+    // $('.mil-drag, .mil-more, .mil-choose').mouseleave(function () {
+    //     gsap.to($(cursor), .2, {
+    //         width: 20,
+    //         height: 20,
+    //         opacity: .1,
+    //         ease: 'sine',
+    //     });
+    // });
 
-    $('.mil-accent-cursor').mouseover(function () {
-        gsap.to($(cursor), .2, {
-            background: accent,
-            ease: 'sine',
-        });
-        $(cursor).addClass('mil-accent');
-    });
+    // $('.mil-accent-cursor').mouseover(function () {
+    //     gsap.to($(cursor), .2, {
+    //         background: accent,
+    //         ease: 'sine',
+    //     });
+    //     $(cursor).addClass('mil-accent');
+    // });
 
-    $('.mil-accent-cursor').mouseleave(function () {
-        gsap.to($(cursor), .2, {
-            background: dark,
-            ease: 'sine',
-        });
-        $(cursor).removeClass('mil-accent');
-    });
+    // $('.mil-accent-cursor').mouseleave(function () {
+    //     gsap.to($(cursor), .2, {
+    //         background: dark,
+    //         ease: 'sine',
+    //     });
+    //     $(cursor).removeClass('mil-accent');
+    // });
 
-    $('.mil-drag').mouseover(function () {
-        gsap.to($('.mil-ball .mil-icon-1'), .2, {
-            scale: '1',
-            ease: 'sine',
-        });
-    });
+    // $('.mil-drag').mouseover(function () {
+    //     gsap.to($('.mil-ball .mil-icon-1'), .2, {
+    //         scale: '1',
+    //         ease: 'sine',
+    //     });
+    // });
 
-    $('.mil-drag').mouseleave(function () {
-        gsap.to($('.mil-ball .mil-icon-1'), .2, {
-            scale: '0',
-            ease: 'sine',
-        });
-    });
+    // $('.mil-drag').mouseleave(function () {
+    //     gsap.to($('.mil-ball .mil-icon-1'), .2, {
+    //         scale: '0',
+    //         ease: 'sine',
+    //     });
+    // });
 
-    $('.mil-more').mouseover(function () {
-        gsap.to($('.mil-ball .mil-more-text'), .2, {
-            scale: '1',
-            ease: 'sine',
-        });
-    });
+    // $('.mil-more').mouseover(function () {
+    //     gsap.to($('.mil-ball .mil-more-text'), .2, {
+    //         scale: '1',
+    //         ease: 'sine',
+    //     });
+    // });
 
-    $('.mil-more').mouseleave(function () {
-        gsap.to($('.mil-ball .mil-more-text'), .2, {
-            scale: '0',
-            ease: 'sine',
-        });
-    });
+    // $('.mil-more').mouseleave(function () {
+    //     gsap.to($('.mil-ball .mil-more-text'), .2, {
+    //         scale: '0',
+    //         ease: 'sine',
+    //     });
+    // });
 
-    $('.mil-choose').mouseover(function () {
-        gsap.to($('.mil-ball .mil-choose-text'), .2, {
-            scale: '1',
-            ease: 'sine',
-        });
-    });
+    // $('.mil-choose').mouseover(function () {
+    //     gsap.to($('.mil-ball .mil-choose-text'), .2, {
+    //         scale: '1',
+    //         ease: 'sine',
+    //     });
+    // });
 
-    $('.mil-choose').mouseleave(function () {
-        gsap.to($('.mil-ball .mil-choose-text'), .2, {
-            scale: '0',
-            ease: 'sine',
-        });
-    });
+    // $('.mil-choose').mouseleave(function () {
+    //     gsap.to($('.mil-ball .mil-choose-text'), .2, {
+    //         scale: '0',
+    //         ease: 'sine',
+    //     });
+    // });
 
-    $('a:not(".mil-choose , .mil-more , .mil-drag , .mil-accent-cursor"), input , textarea, .mil-accordion-menu').mouseover(function () {
-        gsap.to($(cursor), .2, {
-            scale: 0,
-            ease: 'sine',
-        });
-        gsap.to($('.mil-ball svg'), .2, {
-            scale: 0,
-        });
-    });
+    // $('a:not(".mil-choose , .mil-more , .mil-drag , .mil-accent-cursor"), input , textarea, .mil-accordion-menu').mouseover(function () {
+    //     gsap.to($(cursor), .2, {
+    //         scale: 0,
+    //         ease: 'sine',
+    //     });
+    //     gsap.to($('.mil-ball svg'), .2, {
+    //         scale: 0,
+    //     });
+    // });
 
-    $('a:not(".mil-choose , .mil-more , .mil-drag , .mil-accent-cursor"), input, textarea, .mil-accordion-menu').mouseleave(function () {
-        gsap.to($(cursor), .2, {
-            scale: 1,
-            ease: 'sine',
-        });
+    // $('a:not(".mil-choose , .mil-more , .mil-drag , .mil-accent-cursor"), input, textarea, .mil-accordion-menu').mouseleave(function () {
+    //     gsap.to($(cursor), .2, {
+    //         scale: 1,
+    //         ease: 'sine',
+    //     });
 
-        gsap.to($('.mil-ball svg'), .2, {
-            scale: 1,
-        });
-    });
+    //     gsap.to($('.mil-ball svg'), .2, {
+    //         scale: 1,
+    //     });
+    // });
 
-    $('body').mousedown(function () {
-        gsap.to($(cursor), .2, {
-            scale: .1,
-            ease: 'sine',
-        });
-    });
-    $('body').mouseup(function () {
-        gsap.to($(cursor), .2, {
-            scale: 1,
-            ease: 'sine',
-        });
-    });
+    // $('body').mousedown(function () {
+    //     gsap.to($(cursor), .2, {
+    //         scale: .1,
+    //         ease: 'sine',
+    //     });
+    // });
+    // $('body').mouseup(function () {
+    //     gsap.to($(cursor), .2, {
+    //         scale: 1,
+    //         ease: 'sine',
+    //     });
+    // });
     /***************************
 
      menu
@@ -631,13 +681,62 @@ $(document).on('click', 'a[href^="#"]:not(.author-link)', function (event) {
         append
 
         ***************************/
-        $(document).ready(function () {
-            $(".mil-arrow-place .mil-arrow, .mil-animation .mil-dodecahedron, .mil-current-page a").remove();
-            $(".mil-arrow").clone().appendTo(".mil-arrow-place");
-            $(".mil-dodecahedron").clone().appendTo(".mil-animation");
-            $(".mil-lines").clone().appendTo(".mil-lines-place");
-            $(".mil-main-menu ul li.mil-active > a").clone().appendTo(".mil-current-page");
-        });
+        // $(document).ready(function () {
+        //     $(".mil-arrow-place .mil-arrow, .mil-animation .mil-dodecahedron, .mil-current-page a").remove();
+        //     $(".mil-arrow").clone().appendTo(".mil-arrow-place");
+        //     $(".mil-dodecahedron").clone().appendTo(".mil-animation");
+        //     $(".mil-lines").clone().appendTo(".mil-lines-place");
+        //     $(".mil-main-menu ul li.mil-active > a").clone().appendTo(".mil-current-page");
+        // });
+
+        $(function () {
+  // Oklar
+  copyOnce('.mil-arrow',        '.mil-arrow-place');
+
+  // Dodecahedron
+  copyOnce('.mil-dodecahedron', '.mil-animation');
+
+  // Lines
+  copyOnce('.mil-lines',        '.mil-lines-place');
+
+  // Aktif menüdeki sayfa başlığı
+  copyOnce('.mil-main-menu ul li.mil-active > a', '.mil-current-page', {
+    clearTargetCompletely: true // mevcut <a>’ları komple temizle
+  });
+
+  // Aynı elementlere biriken event'leri tekilleştir
+  $('.mil-arrow').off('click').on('click', handleArrowClick);
+});
+
+function copyOnce(srcSel, targetSel, opts = {}) {
+  const $targets = $(targetSel);
+  if ($targets.length === 0) return;
+
+  // Kaynaklardan sadece İLKİNİ al: birden fazla .mil-arrow varsa çoğalma engellenir
+  const $src = $(srcSel).first();
+  if ($src.length === 0) return;
+
+  $targets.each(function () {
+    const $t = $(this);
+
+    // Hedefte aynı tip öğe varsa temizle
+    if (opts.clearTargetCompletely) {
+      $t.empty(); // örn. .mil-current-page içini tamamen boşalt
+    } else {
+      // Sadece aynı sınıfa sahip kopyaları temizle
+      // (örn. .mil-arrow-place içindeki .mil-arrow'ları)
+      $t.find(srcSel).remove();
+    }
+
+    // KOPYALA → EKLE  (event'leriyle birlikte kopyalamak için true,true)
+    $src.clone(true, true).appendTo($t);
+  });
+}
+
+function handleArrowClick(e){
+  // ... senin click handler'ın
+}
+
         /***************************
 
         accordion
@@ -704,116 +803,118 @@ $(document).on('click', 'a[href^="#"]:not(.author-link)', function (event) {
         cursor
 
         ***************************/
+         if (document.querySelector('.mil-cursor')) {
+        gsap.to('.mil-cursor', { duration: 0.3, opacity: 1 });
+        }
+        // $('.mil-drag, .mil-more, .mil-choose').mouseover(function () {
+        //     gsap.to($(cursor), .2, {
+        //         width: 90,
+        //         height: 90,
+        //         opacity: 1,
+        //         ease: 'sine',
+        //     });
+        // });
 
-        $('.mil-drag, .mil-more, .mil-choose').mouseover(function () {
-            gsap.to($(cursor), .2, {
-                width: 90,
-                height: 90,
-                opacity: 1,
-                ease: 'sine',
-            });
-        });
+        // $('.mil-drag, .mil-more, .mil-choose').mouseleave(function () {
+        //     gsap.to($(cursor), .2, {
+        //         width: 20,
+        //         height: 20,
+        //         opacity: .1,
+        //         ease: 'sine',
+        //     });
+        // });
 
-        $('.mil-drag, .mil-more, .mil-choose').mouseleave(function () {
-            gsap.to($(cursor), .2, {
-                width: 20,
-                height: 20,
-                opacity: .1,
-                ease: 'sine',
-            });
-        });
+        // $('.mil-accent-cursor').mouseover(function () {
+        //     gsap.to($(cursor), .2, {
+        //         background: accent,
+        //         ease: 'sine',
+        //     });
+        //     $(cursor).addClass('mil-accent');
+        // });
 
-        $('.mil-accent-cursor').mouseover(function () {
-            gsap.to($(cursor), .2, {
-                background: accent,
-                ease: 'sine',
-            });
-            $(cursor).addClass('mil-accent');
-        });
+        // $('.mil-accent-cursor').mouseleave(function () {
+        //     gsap.to($(cursor), .2, {
+        //         background: dark,
+        //         ease: 'sine',
+        //     });
+        //     $(cursor).removeClass('mil-accent');
+        // });
 
-        $('.mil-accent-cursor').mouseleave(function () {
-            gsap.to($(cursor), .2, {
-                background: dark,
-                ease: 'sine',
-            });
-            $(cursor).removeClass('mil-accent');
-        });
+        // $('.mil-drag').mouseover(function () {
+        //     gsap.to($('.mil-ball .mil-icon-1'), .2, {
+        //         scale: '1',
+        //         ease: 'sine',
+        //     });
+        // });
 
-        $('.mil-drag').mouseover(function () {
-            gsap.to($('.mil-ball .mil-icon-1'), .2, {
-                scale: '1',
-                ease: 'sine',
-            });
-        });
+        // $('.mil-drag').mouseleave(function () {
+        //     gsap.to($('.mil-ball .mil-icon-1'), .2, {
+        //         scale: '0',
+        //         ease: 'sine',
+        //     });
+        // });
 
-        $('.mil-drag').mouseleave(function () {
-            gsap.to($('.mil-ball .mil-icon-1'), .2, {
-                scale: '0',
-                ease: 'sine',
-            });
-        });
+        // $('.mil-more').mouseover(function () {
+        //     gsap.to($('.mil-ball .mil-more-text'), .2, {
+        //         scale: '1',
+        //         ease: 'sine',
+        //     });
+        // });
 
-        $('.mil-more').mouseover(function () {
-            gsap.to($('.mil-ball .mil-more-text'), .2, {
-                scale: '1',
-                ease: 'sine',
-            });
-        });
+        // $('.mil-more').mouseleave(function () {
+        //     gsap.to($('.mil-ball .mil-more-text'), .2, {
+        //         scale: '0',
+        //         ease: 'sine',
+        //     });
+        // });
 
-        $('.mil-more').mouseleave(function () {
-            gsap.to($('.mil-ball .mil-more-text'), .2, {
-                scale: '0',
-                ease: 'sine',
-            });
-        });
+        // $('.mil-choose').mouseover(function () {
+        //     gsap.to($('.mil-ball .mil-choose-text'), .2, {
+        //         scale: '1',
+        //         ease: 'sine',
+        //     });
+        // });
 
-        $('.mil-choose').mouseover(function () {
-            gsap.to($('.mil-ball .mil-choose-text'), .2, {
-                scale: '1',
-                ease: 'sine',
-            });
-        });
+        // $('.mil-choose').mouseleave(function () {
+        //     gsap.to($('.mil-ball .mil-choose-text'), .2, {
+        //         scale: '0',
+        //         ease: 'sine',
+        //     });
+        // });
 
-        $('.mil-choose').mouseleave(function () {
-            gsap.to($('.mil-ball .mil-choose-text'), .2, {
-                scale: '0',
-                ease: 'sine',
-            });
-        });
+        // $('a:not(".mil-choose , .mil-more , .mil-drag , .mil-accent-cursor"), input , textarea, .mil-accordion-menu').mouseover(function () {
+        //     gsap.to($(cursor), .2, {
+        //         scale: 0,
+        //         ease: 'sine',
+        //     });
+        //     gsap.to($('.mil-ball svg'), .2, {
+        //         scale: 0,
+        //     });
+        // });
 
-        $('a:not(".mil-choose , .mil-more , .mil-drag , .mil-accent-cursor"), input , textarea, .mil-accordion-menu').mouseover(function () {
-            gsap.to($(cursor), .2, {
-                scale: 0,
-                ease: 'sine',
-            });
-            gsap.to($('.mil-ball svg'), .2, {
-                scale: 0,
-            });
-        });
+        // $('a:not(".mil-choose , .mil-more , .mil-drag , .mil-accent-cursor"), input, textarea, .mil-accordion-menu').mouseleave(function () {
+        //     gsap.to($(cursor), .2, {
+        //         scale: 1,
+        //         ease: 'sine',
+        //     });
 
-        $('a:not(".mil-choose , .mil-more , .mil-drag , .mil-accent-cursor"), input, textarea, .mil-accordion-menu').mouseleave(function () {
-            gsap.to($(cursor), .2, {
-                scale: 1,
-                ease: 'sine',
-            });
+        //     gsap.to($('.mil-ball svg'), .2, {
+        //         scale: 1,
+        //     });
+        // });
 
-            gsap.to($('.mil-ball svg'), .2, {
-                scale: 1,
-            });
-        });
-
-        $('body').mousedown(function () {
-            gsap.to($(cursor), .2, {
-                scale: .1,
-                ease: 'sine',
-            });
-        });
-        $('body').mouseup(function () {
-            gsap.to($(cursor), .2, {
-                scale: 1,
-                ease: 'sine',
-            });
-        });
+        // $('body').mousedown(function () {
+        //     gsap.to($(cursor), .2, {
+        //         scale: .1,
+        //         ease: 'sine',
+        //     });
+        // });
+        // $('body').mouseup(function () {
+        //     gsap.to($(cursor), .2, {
+        //         scale: 1,
+        //         ease: 'sine',
+        //     });
+        // });
         /***************************
 
         main menu
