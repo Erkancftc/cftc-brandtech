@@ -4262,3 +4262,12 @@ html.is-animating .mil-menu-frame {
   box-shadow: 1px 1px 8px 0px rgb(0, 0, 0, 0.4);
 }
 .js-post[hidden] { display: none !important; }
+
+.author-link {
+  transition: transform 0.3s ease;
+  display: inline-block;
+}
+
+.author-link:hover {
+  transform: scale(1.1);
+}
