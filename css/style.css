@@ -1833,7 +1833,9 @@ banner
 }
 
 .mil-portrait-frame {
-  position: relative;
+      position: relative;
+    margin-bottom: -15%;
+    z-index: -1;
 }
 .mil-portrait-frame img {
   position: relative;
