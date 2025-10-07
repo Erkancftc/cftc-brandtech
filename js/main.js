@@ -1143,3 +1143,70 @@ function handleArrowClick(e){
     });
 
 });
+// ---- BLOG FİLTRELERİ ----
+(function () {
+  // Türkçe güvenli, boşluk ve noktalama ayırt etmeyen normalize
+  const norm = s => (s || '')
+    .normalize('NFKC')
+    .toLocaleLowerCase('tr')
+    .replace(/\s+/g, '')             // tüm boşlukları sil
+    .replace(/[^\p{Letter}\p{Number}]+/gu, '') // harf/rakam dışını temizle
+    .trim();
+
+  function get(param) {
+    const usp = new URLSearchParams(location.search);
+    const v = usp.get(param);
+    return v ? decodeURIComponent(v) : null;
+  }
+
+  function showAll() {
+    document.querySelectorAll('.js-post').forEach(el => {
+      el.style.removeProperty('display');
+      el.hidden = false;
+      el.classList.remove('filtered-out','d-none','is-hidden');
+      const col = el.closest('.col, .col-lg-12, .col-md-12');
+      if (col) col.classList.remove('filtered-out','d-none','is-hidden');
+    });
+  }
+
+  function applyAuthorFromURL() {
+    const posts = Array.from(document.querySelectorAll('.js-post'));
+    if (!posts.length) return; // bu sayfa blog listesi değil
+
+    const authorRaw = get('author');
+    if (!authorRaw) { showAll(); return; }
+
+    const wanted = norm(authorRaw);
+
+    posts.forEach(post => {
+      const postAuthor = norm(post.dataset.author);
+      const match = (postAuthor === wanted);
+      post.style.display = match ? '' : 'none';
+      post.hidden = !match;
+      post.classList.toggle('filtered-out', !match);
+    });
+  }
+
+  function clearAllFiltersAndURL() {
+    showAll();
+    // URL parametrelerini temizle
+    const url = new URL(location.href);
+    ['author','category','tag','q','search'].forEach(k => url.searchParams.delete(k));
+    history.replaceState(null, '', url.pathname + (url.searchParams.toString() ? '?' + url.searchParams.toString() : ''));
+  }
+
+  // “Tüm Kategoriler” butonu
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.js-clear-filters');
+    if (!btn) return;
+    e.preventDefault();
+    clearAllFiltersAndURL();
+  });
+
+  // Sayfa giriş noktaları: klasik yükleme + bfcache + Swup
+  function init() { applyAuthorFromURL(); }
+  document.addEventListener('DOMContentLoaded', init);
+  window.addEventListener('pageshow', init);
+  document.addEventListener('swup:contentReplaced', init);
+})();
+
