@@ -594,7 +594,17 @@
     <!-- ashley js -->
     <script src="js/main.js"></script>
     <script src="js/plugins/filterbyauthor.js"></script>
-     
+     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.author-link').forEach(a => {
+            a.addEventListener('click', function () {
+            const raw = (this.dataset.author || this.textContent || '').replace(/Yazar:\s*/i,'').trim();
+            if (raw) sessionStorage.setItem('filterAuthor', raw);
+      // allow navigation to happen (don't preventDefault)
+    });
+  });
+});
+</script>
 
 </body>
 

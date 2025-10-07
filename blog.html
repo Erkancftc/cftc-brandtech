@@ -291,7 +291,7 @@
                                         <li><a href="#" data-category="Sanat">Sanat</a></li>
                                         <li><a href="#" data-category="Yazılım">Yazılım</a></li>
                                         <li><a href="#" data-category="Teknoloji">Teknoloji</a></li>
-                                        <li><a href="#" data-category="all" class="js-clear-filters">TÜM KATEGORİLER</a></li>
+                                        <li><a href="#" data-category="all" class="js-clear-filters mil-active">TÜM KATEGORİLER</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -671,18 +671,9 @@
     <!-- ashley js -->
     <script src="js/main.js"></script>
     <script src="js/plugins/load-more.js"></script>
-    <script src="js/plugins/category.js "></script>
+    <script src="js/plugins/category.js"></script>
+    <script src="js/plugins/filterbyauthor.js"></script>
 
-    <script>
-        document.addEventListener('click', (e) => {
-  const btn = e.target.closest('.js-clear-filters');
-  if (!btn) return;
-  e.preventDefault();
-  clearAllFiltersAndURL();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}, true); // capture=true -> başka handler'lar engelleyemez
-
-    </script>
 </body>
 
 </html>

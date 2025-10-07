@@ -149,4 +149,20 @@
     if (!name) return clearFilter();
     return applyFilter(name);
   };
+  
+  // if another page set an author to filter, apply it once on load and then clear the flag
+  (async function applyPendingAuthor() {
+    try {
+      const pending = sessionStorage.getItem('filterAuthor');
+      if (!pending) return;
+      // remove it immediately so repeated loads don't reapply
+      sessionStorage.removeItem('filterAuthor');
+      // ensure the filter function exists and invoke it
+      if (typeof window.searchByAuthor === 'function') {
+        // small delay so other init tasks finish (load-more, mutations)
+        setTimeout(() => { window.searchByAuthor(pending); }, 60);
+      }
+    } catch (e) { /* ignore */ }
+  })();
+
 })();

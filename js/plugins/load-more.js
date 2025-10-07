@@ -1,52 +1,90 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const list = document.querySelector('.js-posts'); // posts container
+  const list = document.querySelector('.js-posts');
   if (!list) return;
-
-  const btn = document.getElementById('loadMore'); // load more button
+  const btn = document.getElementById('loadMore');
   if (!btn) return;
+  const btnRow = btn.closest('.col-lg-12') || btn.parentElement;
+  const BATCH = Math.max(1, Number(list.dataset.batch || 4));
 
-  const btnRow = btn.closest('.col-lg-12') || btn.parentElement; // the button's column
-  const BATCH = Number(list.dataset.batch || 4); // items per click
+  const getCols = () =>
+    Array.from(list.children || []).filter(node =>
+      node.classList && node.classList.contains('col-lg-12') && node.querySelector('.js-post')
+    );
 
-  // get columns that actually contain posts (keeps author-link sibling with each col)
-  const getCols = () => Array.from(list.querySelectorAll('.col-lg-12')).filter(col => col.querySelector('.js-post'));
-
-  // initial state: hide everything after initial batch
-  let cols = getCols();
-  cols.forEach((col, i) => { if (i >= BATCH) col.style.display = 'none'; });
-  let shown = Math.min(BATCH, cols.length);
-
-  // ensure the button row sits after the posts container (don't append into list)
-  if (btnRow && list.parentNode) {
-    list.parentNode.insertBefore(btnRow, list.nextSibling);
-    btnRow.style.display = ''; // ensure visible
+  function placeButtonAfterList() {
+    if (!btnRow || !list.parentNode) return;
+    try { list.parentNode.insertBefore(btnRow, list.nextSibling); } catch (e) {}
+    btnRow.style.display = '';
   }
 
-  btn.addEventListener('click', () => {
-    cols = getCols(); // recompute in case DOM changed
-    const next = Math.min(shown + BATCH, cols.length);
+  function initBatchState() {
+    const cols = getCols();
+    cols.forEach((col, i) => {
+      if (i < BATCH) {
+        col.classList.remove('lm-hidden');
+        col.style.display = '';
+        col.removeAttribute('aria-hidden');
+      } else {
+        col.classList.add('lm-hidden');
+        col.style.display = 'none';
+        col.setAttribute('aria-hidden', 'true');
+      }
+    });
+    btn.style.display = (cols.length > BATCH) ? '' : 'none';
+    btn.disabled = false;
+    btn.removeAttribute('aria-disabled');
+    placeButtonAfterList();
+  }
 
-    // reveal next batch and append them to the end of the posts container
-    for (let i = shown; i < next; i++) {
-      const col = cols[i];
-      if (!col) continue;
+  function revealNextBatch() {
+    const cols = getCols();
+    const hidden = cols.filter(c => c.classList.contains('lm-hidden'));
+    const toShow = hidden.slice(0, BATCH);
+    toShow.forEach(col => {
+      col.classList.remove('lm-hidden');
       col.style.display = '';
-      list.appendChild(col); // move to end so newly shown items appear before the button row
-    }
-    shown = next;
-
-    // keep the button row after the posts list
-    if (btnRow && list.parentNode) list.parentNode.insertBefore(btnRow, list.nextSibling);
-
-    // keep button visible
-    btn.scrollIntoView({ behavior: 'smooth', block: 'end' });
-
-    // disable button when done
-    if (shown >= cols.length) {
+      col.removeAttribute('aria-hidden');
+    });
+    placeButtonAfterList();
+    if (cols.filter(c => c.classList.contains('lm-hidden')).length === 0) {
+      btn.style.display = 'none';
       btn.disabled = true;
       btn.setAttribute('aria-disabled', 'true');
-      btn.classList.add('mil-disabled');
     }
+  }
+
+  // run init after other scripts — multiple times to be defensive
+  function boot() {
+    initBatchState();
+    // reapply after a short delay (overrides other scripts that toggle display)
+    setTimeout(initBatchState, 180);
+    // final guard after images/layout settle
+    setTimeout(initBatchState, 800);
+  }
+
+  requestAnimationFrame(boot);
+  window.addEventListener('load', boot);
+
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    revealNextBatch();
+    try { btn.scrollIntoView({ behavior: 'smooth', block: 'end' }); } catch (e) {}
   });
+
+  const mo = new MutationObserver(() => {
+    const filterActive = document.querySelector('.author-link.author-active') || document.querySelector('.kategori-active');
+    if (!filterActive) initBatchState();
+  });
+  mo.observe(list, { childList: true, subtree: true });
+
+  if (window.swup && typeof window.swup.on === 'function') {
+    try { window.swup.on('contentReplaced', boot); } catch (e) {}
+  }
+
+  // debug helper
+  window.__loadMoreStatus = () => {
+    const cols = getCols();
+    return { total: cols.length, visible: cols.filter(c => !c.classList.contains('lm-hidden') && c.style.display !== 'none').length, batch: BATCH };
+  };
 });
 
