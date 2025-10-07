@@ -118,7 +118,7 @@
     loadMoreBtn = document.getElementById('loadMore');
     initialBatch = Math.max(1, parseInt(postsContainer.dataset.batch || '4', 10));
     clearFilterUI();
-
+    
     const catList = document.querySelector('.mil-Kategori-list');
     if (catList) {
       catList.addEventListener('click', async (ev) => {
@@ -130,7 +130,7 @@
         catList.querySelectorAll('a').forEach(x => x.classList.remove('kategori-active', 'mil-active'));
 
         // apply both marker classes to clicked item so existing .mil-active CSS is used
-        a.classList.add('mil-active');
+        a.classList.add('kategori-active', 'mil-active');
 
         // call your filter (existing API): treat "Tüm Kategorİler" as clear
         const txt = (a.textContent || '').trim();

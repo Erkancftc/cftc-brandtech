@@ -291,7 +291,7 @@
                                         <li><a href="#" role="button" aria-pressed="false">Sanat</a></li>
                                         <li><a href="#" role="button" aria-pressed="false">Yazılım</a></li>
                                         <li><a href="#" role="button" aria-pressed="false">TEKNOLOJİ</a></li>
-                                        <li><a href="#" class="js-clear-filters mil-active">Tüm Kategorİler</a></li>
+                                        <li><a href="#" class="mil-active js-clear-filters ">Tüm Kategorİler</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -673,7 +673,16 @@
     <script src="js/plugins/load-more.js"></script>
     <script src="js/plugins/category.js "></script>
 
-    
+    <script>
+        document.addEventListener('click', (e) => {
+  const btn = e.target.closest('.js-clear-filters');
+  if (!btn) return;
+  e.preventDefault();
+  clearAllFiltersAndURL();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}, true); // capture=true -> başka handler'lar engelleyemez
+
+    </script>
 </body>
 
 </html>

@@ -1144,69 +1144,173 @@ function handleArrowClick(e){
 
 });
 // ---- BLOG FİLTRELERİ ----
+// ==== BLOG LIST CORE (idempotent) ====
 (function () {
-  // Türkçe güvenli, boşluk ve noktalama ayırt etmeyen normalize
-  const norm = s => (s || '')
-    .normalize('NFKC')
-    .toLocaleLowerCase('tr')
-    .replace(/\s+/g, '')             // tüm boşlukları sil
-    .replace(/[^\p{Letter}\p{Number}]+/gu, '') // harf/rakam dışını temizle
-    .trim();
-
-  function get(param) {
-    const usp = new URLSearchParams(location.search);
-    const v = usp.get(param);
-    return v ? decodeURIComponent(v) : null;
-  }
-
-  function showAll() {
-    document.querySelectorAll('.js-post').forEach(el => {
-      el.style.removeProperty('display');
-      el.hidden = false;
-      el.classList.remove('filtered-out','d-none','is-hidden');
-      const col = el.closest('.col, .col-lg-12, .col-md-12');
-      if (col) col.classList.remove('filtered-out','d-none','is-hidden');
-    });
-  }
-
-  function applyAuthorFromURL() {
-    const posts = Array.from(document.querySelectorAll('.js-post'));
-    if (!posts.length) return; // bu sayfa blog listesi değil
-
-    const authorRaw = get('author');
-    if (!authorRaw) { showAll(); return; }
-
-    const wanted = norm(authorRaw);
-
-    posts.forEach(post => {
-      const postAuthor = norm(post.dataset.author);
-      const match = (postAuthor === wanted);
-      post.style.display = match ? '' : 'none';
-      post.hidden = !match;
-      post.classList.toggle('filtered-out', !match);
-    });
-  }
-
-  function clearAllFiltersAndURL() {
-    showAll();
-    // URL parametrelerini temizle
-    const url = new URL(location.href);
-    ['author','category','tag','q','search'].forEach(k => url.searchParams.delete(k));
-    history.replaceState(null, '', url.pathname + (url.searchParams.toString() ? '?' + url.searchParams.toString() : ''));
-  }
-
-  // “Tüm Kategoriler” butonu
-  document.addEventListener('click', (e) => {
-    const btn = e.target.closest('.js-clear-filters');
-    if (!btn) return;
-    e.preventDefault();
-    clearAllFiltersAndURL();
+  // Global, tekil durum
+  const S = (window.__blogState ??= {
+    bound: false,
+    batchSize: 4,
+    shown: 0
   });
 
-  // Sayfa giriş noktaları: klasik yükleme + bfcache + Swup
-  function init() { applyAuthorFromURL(); }
-  document.addEventListener('DOMContentLoaded', init);
-  window.addEventListener('pageshow', init);
-  document.addEventListener('swup:contentReplaced', init);
+  // TR güvenli normalize
+  const norm = s => (s||'')
+    .normalize('NFKC')
+    .toLocaleLowerCase('tr')
+    .replace(/\s+/g,'')
+    .replace(/[^\p{Letter}\p{Number}]+/gu,'')
+    .trim();
+
+  function qs(sel, root=document){ return root.querySelector(sel); }
+  function qsa(sel, root=document){ return Array.from(root.querySelectorAll(sel)); }
+
+  function getPostsContainer(){
+    return qs('.js-posts');
+  }
+  function getAllCards(){
+    // kart <a class="js-post"> yapın için
+    return qsa('.js-post');
+  }
+  function getVisibleCards(){
+    return getAllCards().filter(el => el.offsetParent !== null);
+  }
+  function readBatch(){
+    const pc = getPostsContainer();
+    const d = pc?.dataset?.batch;
+    S.batchSize = Math.max(1, parseInt(d || '4', 10));
+  }
+
+  // ----- Görünürlük / reset yardımcıları -----
+  function showCard(card, yes=true){
+    card.style.removeProperty('display');
+    card.hidden = !yes;
+    card.classList.toggle('filtered-out', !yes);
+
+    const col = card.closest('.col, .col-lg-12, .col-md-12, .row > *');
+    if (col){
+      if (yes){
+        col.style.removeProperty('display');
+        col.hidden = false;
+        col.classList.remove('filtered-out','is-hidden','d-none','mil-hidden');
+      } else {
+        col.style.display = 'none';
+        col.hidden = true;
+        col.classList.add('filtered-out');
+      }
+    }
+  }
+
+  function showAll(){
+    getAllCards().forEach(c => showCard(c, true));
+    const pc = getPostsContainer();
+    if (pc){
+      ['author','category','tag','search','q'].forEach(k=>{
+        delete pc.dataset[k];
+        pc.removeAttribute('data-'+k);
+      });
+      pc.classList.remove('filtering','author-filter','category-filter','tag-filter');
+    }
+  }
+
+  // ----- URL / Filter uygulama -----
+  function applyAuthorFromURL(){
+    const usp = new URLSearchParams(location.search);
+    const raw = usp.get('author');
+    if (!raw){ showAll(); return; }
+
+    const want = norm(decodeURIComponent(raw));
+    getAllCards().forEach(card => {
+      const a = norm(card.dataset.author);
+      showCard(card, a === want);
+    });
+  }
+
+  function clearURLParams(keys=['author','category','tag','q','search']){
+    const u = new URL(location.href);
+    keys.forEach(k=>u.searchParams.delete(k));
+    history.replaceState(null,'', u.pathname + (u.searchParams.toString() ? '?'+u.searchParams.toString() : ''));
+  }
+
+  // ----- Load More -----
+  function updateLoadMoreVisibility(){
+    const btn = qs('#loadMore');
+    if (!btn) return;
+    const visible = getVisibleCards().length;
+    btn.style.display = (visible > S.batchSize) ? '' : 'none';
+  }
+
+  // ----- “Tüm Kategoriler” -----
+  function clearAllFiltersAndURL(){
+    showAll();
+    clearURLParams();
+    document.querySelectorAll('.is-active, .active')
+      .forEach(el => el.classList.remove('is-active','active'));
+    S.shown = 0; // varsa batch sayaçlarını resetle
+    updateLoadMoreVisibility();
+    try {
+      if (window.ScrollTrigger?.refresh) ScrollTrigger.refresh(true);
+      else window.dispatchEvent(new Event('scroll'));
+    } catch {}
+  }
+
+  // ----- Init (idempotent) -----
+  function initBlog(){
+    // Her gelişte DOM referanslarını tazele
+    readBatch();
+
+    // URL’de filtre varsa uygula, yoksa tümünü göster
+    const usp = new URLSearchParams(location.search);
+    if (['author','category','tag','q','search'].some(k=>usp.has(k))){
+      applyAuthorFromURL();   // şu an sadece author kullanıyorsun
+    } else {
+      showAll();
+    }
+
+    updateLoadMoreVisibility();
+
+    // Delegation – tek defa bağla
+    if (!S.bound){
+      S.bound = true;
+
+      // Tüm Kategoriler: capture + immediate stop → başka handler bozamaz
+      document.addEventListener('click', (ev) => {
+        const btn = ev.target.closest('.js-clear-filters');
+        if (!btn) return;
+        ev.preventDefault();
+        ev.stopImmediatePropagation();
+        clearAllFiltersAndURL();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, true);
+
+      // Kategori menüsünün kendi handler’ı varsa, “Tüm Kategoriler”i kısa devreye al
+      document.addEventListener('click', (ev) => {
+        if (ev.target.closest('.js-clear-filters')) return;
+        // burada kategori tıklarını kendi kodun yakalayabilir
+      });
+
+      // Back/forward cache ve Swup sonrası yeniden kur
+      window.addEventListener('pageshow', initBlog);
+      document.addEventListener('swup:contentReplaced', initBlog);
+    }
+  }
+
+  // İlk giriş
+  document.addEventListener('DOMContentLoaded', initBlog);
 })();
+// KATEGORİ SEÇİMİNİ GÖRSEL OLARAK SENKRONLA
+function updateActiveCategoryUI() {
+  const C = norm(state.category); // '' ise tümü
+  document.querySelectorAll('.mil-Kategori-list a').forEach(a => {
+    const txt = (a.textContent || '').trim();
+    const isAll =
+      /^t[uü]m\s*kategoriler$/i.test(txt) ||   // "Tüm Kategoriler"
+      /^t[uü]m$/i.test(txt) || /^tum$/i.test(txt);
+
+    const match = C ? (norm(txt) === C) : isAll;
+
+    a.classList.toggle('kategori-active', match);
+    a.classList.toggle('mil-active', match);
+  });
+}
+
 
