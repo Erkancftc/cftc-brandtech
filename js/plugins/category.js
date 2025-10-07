@@ -130,7 +130,7 @@
         catList.querySelectorAll('a').forEach(x => x.classList.remove('kategori-active', 'mil-active'));
 
         // apply both marker classes to clicked item so existing .mil-active CSS is used
-        a.classList.add('kategori-active', 'mil-active');
+        a.classList.add('mil-active');
 
         // call your filter (existing API): treat "Tüm Kategorİler" as clear
         const txt = (a.textContent || '').trim();
