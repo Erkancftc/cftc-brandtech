@@ -1274,7 +1274,7 @@ frame
   }
 }
 .mil-frame .mil-frame-bottom .mil-current-page {
-  pointer-events: none;
+  pointer-events: auto;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 2px;
