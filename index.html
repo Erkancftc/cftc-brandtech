@@ -9,7 +9,7 @@
 
   <!-- Kanonik -->
   <link rel="canonical" href="https://www.cftcbrandtech.com/">
-
+    <link rel="canonical" href="https://www.cftcbrandtech.com/en/">
   <!-- Çok dillilik -->
   <link rel="alternate" href="https://www.cftcbrandtech.com/" hreflang="tr-TR">
   <link rel="alternate" href="https://www.cftcbrandtech.com/en/" hreflang="en-US">
@@ -37,8 +37,8 @@
   <meta name="theme-color" content="#0f0f10">
 
   <!-- Favicon & App ikonları -->
-  <link rel="icon" href="/img/icons/favicon.svg" sizes="32x32" type="image/png">
-  <link rel="icon" href="/img/icons/favicon.svg" sizes="192x192" type="image/png">
+  <link rel="icon" href="/img/icons/favicon.svg" sizes="32x32" type="image/svg+xml">
+  <link rel="icon" href="/img/icons/favicon.svg" sizes="192x192" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/img/icons/apple-touch-icon.png">
   <!-- PWA kullanıyorsan aç -->
   <!-- <link rel="manifest" href="/site.webmanifest"> -->
@@ -111,8 +111,8 @@
 
 <body>
     <!-- Klavye kullanıcıları için: İçeriğe atla -->
-    <a class="skip-link" href="#main">İçeriği atla</a>
-
+    <!-- <a class="skip-link" href="#main">İçeriği atla</a> -->
+    <main class="skip-link" id="main">İçeriği atla</main>
         <!-- Sayfa sarmalayıcı -->
     <div class="mil-wrapper" id="top">
 
@@ -357,7 +357,7 @@
                                     <p class="mil-up mil-mb-60">Her adımda ortaklığın gücüne inanıyoruz. Çeşitliliği, yaratıcılığı ve yenilikçi düşünceyi harmanlayarak beklentilerin ötesinde sonuçlar sunuyoruz. Çünkü bizim için başarı yalnızca hedeflere ulaşmak değil, onları daha da ileriye taşımaktır.</p>
                                     <div class="mil-about-quote">
                                         <div class="mil-avatar mil-up">
-                                            <img src="img/faces/founders/2.jpg" alt="Kaan Doğan">
+                                            <img src="img/faces/founders/2.jpg" alt="Kaan Doğan" loading="lazy">
                                         </div>
                                         <h6 class="mil-quote mil-up">Tutkuyla Üreten <span class="mil-thin">Özgün tasarımlar</span> <br> Yaratıcı içerik <span class="mil-thin">Sınırsız potansiyel</span></h6>
                                     </div>
@@ -367,7 +367,7 @@
                                 <div class="mil-about-photo mil-mb-90">
                                     <div class="mil-lines-place"></div>
                                     <div class="mil-up mil-img-frame" style="padding-bottom: 160%;">
-                                        <img src="img/photo/1.jpg" alt="Marka Temsilcileri" class="mil-scale" data-value-1="1" data-value-2="1.2">
+                                        <img src="img/photo/1.jpg" alt="Marka Temsilcileri" class="mil-scale" data-value-1="1" data-value-2="1.2" loading="lazy">
                                     </div>
                                 </div>
                             </div>
@@ -396,7 +396,7 @@
 
                                 <div class="mil-complex-text justify-content-center mil-up mil-mb-15">
 
-                                    <span class="mil-text-image"><img src="img/photo/2.jpg" alt="Erkan Çiftçi"></span>
+                                    <span class="mil-text-image"><img src="img/photo/2.jpg" alt="Erkan Çiftçi" loading="lazy"></span>
                                     <h2 class="mil-h1 mil-muted mil-center"> <span class="mil-thin">Markanıza</span> Özgün</h2>
 
                                 </div>
@@ -482,7 +482,7 @@
                                             <p class="mil-mobile-hidden mil-text-sm mil-mb-30" style="height: 30px;"><span class="mil-accent">*</span> Marka çalışanları</p>
 
                                             <div class="mil-team-card mil-up mil-mb-30">
-                                                <img src="img/faces/2.jpg" alt="Erkan Çiftçi">
+                                                <img src="img/faces/2.jpg" alt="Erkan Çiftçi" loading="lazy">
                                                 <div class="mil-description">
                                                     <div class="mil-secrc-text">
                                                         <h5 class="mil-muted mil-mb-5"><a href="founder.html">Erkan Çiftçi</a></h5>
@@ -497,7 +497,7 @@
                                             </div>
 
                                             <div class="mil-team-card mil-up mil-mb-30">
-                                                <img src="img/faces/4.jpg" alt="Kaan Doğan">
+                                                <img src="img/faces/4.jpg" alt="Kaan Doğan" loading="lazy">
                                                 <div class="mil-description">
                                                     <div class="mil-secrc-text">
                                                         <h5 class="mil-muted mil-mb-5"><a href="co-founder.html">Kaan Doğan</a></h5>
@@ -515,7 +515,7 @@
                                         <div class="col-sm-6">
 
                                             <div class="mil-team-card mil-up mil-mb-30">
-                                                <img src="img/faces/1.jpg" alt="Kemal Efe Kolaylı">
+                                                <img src="img/faces/1.jpg" alt="Kemal Efe Kolaylı" loading="lazy">
                                                 <div class="mil-description">
                                                     <div class="mil-secrc-text">
                                                         <h5 class="mil-muted mil-mb-5"><a href="dev-1.html">Kemal Efe Kolaylı</a></h5>
@@ -530,7 +530,7 @@
                                             </div>
 
                                             <div class="mil-team-card mil-up mil-mb-30">
-                                                <img src="img/faces/3.jpg" alt="İsmet Tolga Yılmaz">
+                                                <img src="img/faces/3.jpg" alt="İsmet Tolga Yılmaz" loading="lazy">
                                                 <div class="mil-description">
                                                     <div class="mil-secrc-text">
                                                         <h5 class="mil-muted mil-mb-5"><a href="dev-2.html">İ.Tolga Yılmaz</a></h5>
@@ -652,16 +652,16 @@
                         <div class="swiper-container mil-infinite-show mil-up">
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide">
-                                    <a href="#." class="mil-partner-frame" style="width: 60px;"><img src="img/partners/apple-touch-icon.png" alt="logo"></a>
+                                    <a href="#." class="mil-partner-frame" style="width: 60px;"><img src="img/partners/apple-touch-icon.png" alt="logo" loading="lazy"></a>
                                 </div>
                                 <div class="swiper-slide">
-                                    <a href="#." class="mil-partner-frame" style="width: 100px;"><img src="https://www.villavillage.tr/assets/images/logo-light.png" alt="villa kiralama markası"></a>
+                                    <a href="#." class="mil-partner-frame" style="width: 100px;"><img src="https://www.villavillage.tr/assets/images/logo-light.png" alt="villa kiralama markası" loading="lazy"></a>
                                 </div>
                                 <div class="swiper-slide">
-                                    <a href="#." class="mil-partner-frame" style="width: 60px;"><img src="img/partners/apple-touch-icon.png" alt="logo"></a>
+                                    <a href="#." class="mil-partner-frame" style="width: 60px;"><img src="img/partners/apple-touch-icon.png" alt="logo" loading="lazy"></a>
                                 </div>
                                 <div class="swiper-slide">
-                                    <a href="#." class="mil-partner-frame" style="width: 100px;"><img src="https://www.villavillage.tr/assets/images/logo-light.png" alt="villa kiralama markası"></a>
+                                    <a href="#." class="mil-partner-frame" style="width: 100px;"><img src="https://www.villavillage.tr/assets/images/logo-light.png" alt="villa kiralama markası" loading="lazy"></a>
                                 </div>
                             </div>
                         </div>
@@ -690,7 +690,7 @@
 
                                 <a href="publication.html" class="mil-blog-card mil-mb-60">
                                     <div class="mil-cover-frame mil-up">
-                                        <img src="img/blog/1.jpg" alt="10 Adımda Daha İyi Bir Grafik Tasarımcı Olun">
+                                        <img src="img/blog/1.jpg" alt="10 Adımda Daha İyi Bir Grafik Tasarımcı Olun" loading="lazy">
                                     </div>
                                     <div class="mil-post-descr">
                                         <div class="mil-labels mil-up mil-mb-30">
@@ -710,7 +710,7 @@
 
                                 <a href="publication-2.html" class="mil-blog-card mil-mb-60">
                                     <div class="mil-cover-frame mil-up">
-                                        <img src="img/blog/Kaankurs.jpg" alt="En İyi Grafik Tasarım Kursları">
+                                        <img src="img/blog/Kaankurs.jpg" alt="En İyi Grafik Tasarım Kursları" loading="lazy">
                                     </div>
                                     <div class="mil-post-descr">
                                         <div class="mil-labels mil-up mil-mb-30">
@@ -738,7 +738,7 @@
                             <div class="row justify-content-between">
                                 <div class="col-md-4 col-lg-4 mil-mb-60">
 
-                                    <div class="mil-muted mil-logo mil-up mil-mb-30"><img src="img/partners/cftc-logo.svg" alt="cftcbrandtech logo"></div>
+                                    <div class="mil-muted mil-logo mil-up mil-mb-30"><img src="img/partners/cftc-logo.svg" alt="cftcbrandtech logo" loading="lazy"></div>
 
                                     <p class="mil-light-soft mil-up mil-mb-30">Yeni haberler için abone olun:</p>
 
@@ -957,13 +957,13 @@
     <!-- jQuery js -->
     <script src="js/plugins/jquery.min.js"></script>
     <!-- swup js -->
-    <script src="js/plugins/swup.min.js"></script>
+    <script src="js/plugins/swup.min.js" defer></script>
     <!-- swiper js -->
-    <script src="js/plugins/swiper.min.js"></script>
+    <script src="js/plugins/swiper.min.js" defer></script>
     <!-- fancybox js -->
     <script src="js/plugins/fancybox.min.js"></script>
     <!-- gsap js -->
-    <script src="js/plugins/gsap.min.js"></script>
+    <script src="js/plugins/gsap.min.js" defer></script>
     <!-- scroll smoother -->
     <script src="js/plugins/smooth-scroll.js"></script>
     <!-- scroll trigger js -->
