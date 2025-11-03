@@ -38,7 +38,7 @@ $(function () {
 
     ***************************/
 
-    var accent = '#ff0001';
+    var accent = 'rgba(255, 152, 0, 1)';
     var dark = '#000';
     var light = '#fff';
 
@@ -48,144 +48,134 @@ $(function () {
     
     ***************************/
 
-// — Preloader sadece ilk giriş (aynı sekme/oturum) —
-const PRELOADER_KEY = 'preloaderShown';
-const alreadyShown = sessionStorage.getItem(PRELOADER_KEY) === '1';
+    var timeline = gsap.timeline();
 
-if (alreadyShown) {
-  // Preloader'ı anında gizle, içerikleri görünür yap
-  gsap.set(".mil-preloader", { display: "none" });
-  gsap.set(".mil-up", { opacity: 1, y: 0, scale: 1 });
-} else {
-  // İlk giriş: animasyonu çalıştır, bitince bayrağı yaz
-  var timeline = gsap.timeline({
-    onComplete: function () {
-      // jQuery şart değil; vanilla JS ile de gizleyebiliriz
-      document.querySelector('.mil-preloader')?.classList.add('mil-hidden');
-      sessionStorage.setItem(PRELOADER_KEY, '1');
-    }
-  });
+    timeline.to(".mil-preloader-animation", {
+        opacity: 1,
+    });
 
-  // --- senin akışın (aynı bıraktım) ---
-  timeline.to(".mil-preloader-animation", { opacity: 1 });
+    timeline.fromTo(
+        ".mil-animation-1 .mil-h3", {
+            y: "30px",
+            opacity: 0
+        }, {
+            y: "0px",
+            opacity: 1,
+            stagger: 0.4
+        },
+    );
 
-  timeline.fromTo(".mil-animation-1 .mil-h3",
-    { y: "30px", opacity: 0 },
-    { y: "0px", opacity: 1, stagger: 0.4 }
-  );
+    timeline.to(".mil-animation-1 .mil-h3", {
+        opacity: 0,
+        y: '-30',
+    }, "+=.3");
 
-  timeline.to(".mil-animation-1 .mil-h3", { opacity: 0, y: "-30" }, "+=.3");
+    timeline.fromTo(".mil-reveal-box", 0.1, {
+        opacity: 0,
+    }, {
+        opacity: 1,
+        x: '-30',
+    });
 
-  timeline.fromTo(".mil-reveal-box", 0.1, { opacity: 0 }, { opacity: 1, x: "-30" });
-  timeline.to(".mil-reveal-box", 0.45, { width: "100%", x: 0 }, "+=.1");
-  timeline.to(".mil-reveal-box", { right: "0" });
-  timeline.to(".mil-reveal-box", 0.3, { width: "0%" });
+    timeline.to(".mil-reveal-box", 0.45, {
+        width: "100%",
+        x: 0,
+    }, "+=.1");
+    timeline.to(".mil-reveal-box", {
+        right: "0"
+    });
+    timeline.to(".mil-reveal-box", 0.3, {
+        width: "0%"
+    });
+    timeline.fromTo(".mil-animation-2 .mil-h3", {
+        opacity: 0,
+    }, {
+        opacity: 1,
+    }, "-=.5");
+    timeline.to(".mil-animation-2 .mil-h3", 0.6, {
+        opacity: 0,
+        y: '-30'
+    }, "+=.5");
+    timeline.to(".mil-preloader", 0.8, {
+        opacity: 0,
+        ease: 'sine',
+    }, "+=.2");
+    timeline.fromTo(".mil-up", 0.8, {
+        opacity: 0,
+        y: 40,
+        scale: .98,
+        ease: 'sine',
 
-  timeline.fromTo(".mil-animation-2 .mil-h3", { opacity: 0 }, { opacity: 1 }, "-=.5");
-  timeline.to(".mil-animation-2 .mil-h3", 0.6, { opacity: 0, y: "-30" }, "+=.5");
-
-  timeline.to(".mil-preloader", 0.8, { opacity: 0, ease: "sine" }, "+=.2");
-
-  timeline.fromTo(".mil-up", 0.8,
-    { opacity: 0, y: 40, scale: .98, ease: "sine" },
-    { y: 0, opacity: 1, scale: 1 }
-  );
-}
-
-
+    }, {
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        onComplete: function () {
+            $('.mil-preloader').addClass("mil-hidden");
+        },
+    }, "-=1");
     /***************************
 
     anchor scroll
 
     ***************************/
-    // Anchor scroll (jQuery) — güvenli sürüm
-$(document).on('click', 'a[href^="#"]:not(.author-link)', function (event) {
-  const href = this.getAttribute('href');
+    $(document).on('click', 'a[href^="#"]', function (event) {
+        event.preventDefault();
 
-  // Boş/sahte anchor'lar: #, #!, #0 → sayfayı oynatma
-  if (!href || href === '#' || href === '#!' || href === '#0') {
-    event.preventDefault();
-    return;
-  }
+        var target = $($.attr(this, 'href'));
+        var offset = 0;
 
-  const $target = $(href);
-  if (!$target.length) {
-    // Hedef yoksa bırak; seçici hatasına düşmeyelim
-    return;
-  }
+        if ($(window).width() < 1200) {
+            offset = 90;
+        }
 
-  event.preventDefault();
-
-  // Header yüksekliği vs. için offset
-  let offset = 0;
-  if ($(window).width() < 1200) offset = 90;
-
-  $('html, body').animate({
-    scrollTop: $target.offset().top - offset
-  }, 400);
-});
-
+        $('html, body').animate({
+            scrollTop: target.offset().top - offset
+        }, 400);
+    });
     /***************************
 
     append
 
-    ***************************/
-    // $(document).ready(function () {
-    //     $(".mil-arrow").clone().appendTo(".mil-arrow-place");
-    //     $(".mil-dodecahedron").clone().appendTo(".mil-animation");
-    //     $(".mil-lines").clone().appendTo(".mil-lines-place");
-    //     $(".mil-main-menu ul li.mil-active > a").clone().appendTo(".mil-current-page");
-    // });
     
-$(function () {
-  // Oklar
-  copyOnce('.mil-arrow',        '.mil-arrow-place');
+    ***************************/
 
-  // Dodecahedron
-  copyOnce('.mil-dodecahedron', '.mil-animation');
+    
+   $(document).ready(function () {
 
-  // Lines
-  copyOnce('.mil-lines',        '.mil-lines-place');
-
-  // Aktif menüdeki sayfa başlığı
-  copyOnce('.mil-main-menu ul li.mil-active > a', '.mil-current-page', {
-    clearTargetCompletely: true // mevcut <a>’ları komple temizle
+  // 1) Arrow
+  $('.mil-arrow-place').each(function () {
+    const $host = $(this);
+    if ($host.find('svg.mil-arrow').length) return; // zaten var
+    const $tpl = $('svg.mil-arrow').first().clone(true, true);
+    $host.append($tpl);
   });
 
-  // Aynı elementlere biriken event'leri tekilleştir
-  $('.mil-arrow').off('click').on('click', handleArrowClick);
+  // 2) Dodecahedron
+  $('.mil-animation').each(function () {
+    const $host = $(this);
+    if ($host.find('.mil-dodecahedron').length) return;
+    const $tpl = $('.mil-dodecahedron').first().clone(true, true);
+    $host.append($tpl);
+  });
+
+  // 3) Lines
+  $('.mil-lines-place').each(function () {
+    const $host = $(this);
+    if ($host.find('.mil-lines').length) return;
+    const $tpl = $('.mil-lines').first().clone(true, true);
+    $host.append($tpl);
+  });
+
+  // 4) Current Page Link
+  $('.mil-current-page').each(function () {
+    const $host = $(this);
+    if ($host.find('a').length) return;
+    const $a = $('.mil-main-menu ul li.mil-active > a').first().clone(true, true);
+    $host.append($a);
+  });
 });
 
-function copyOnce(srcSel, targetSel, opts = {}) {
-  const $targets = $(targetSel);
-  if ($targets.length === 0) return;
-
-  // Kaynaklardan sadece İLKİNİ al: birden fazla .mil-arrow varsa çoğalma engellenir
-  const $src = $(srcSel).first();
-  if ($src.length === 0) return;
-
-  $targets.each(function () {
-    const $t = $(this);
-
-    // Hedefte aynı tip öğe varsa temizle
-    if (opts.clearTargetCompletely) {
-      $t.empty(); // örn. .mil-current-page içini tamamen boşalt
-    } else {
-      // Sadece aynı sınıfa sahip kopyaları temizle
-      // (örn. .mil-arrow-place içindeki .mil-arrow'ları)
-      $t.find(srcSel).remove();
-    }
-
-    // KOPYALA → EKLE  (event'leriyle birlikte kopyalamak için true,true)
-    $src.clone(true, true).appendTo($t);
-  });
-}
-
-function handleArrowClick(e){
-  // ... senin click handler'ın
-}
-
-    
     /***************************
 
     accordion
@@ -251,156 +241,166 @@ function handleArrowClick(e){
     back to top
 
     ***************************/
-    const btt = document.querySelector(".mil-back-to-top .mil-link");
 
-    gsap.set(btt, {
-        x: -30,
-        opacity: 0,
-    });
+function initBackToTop() {
+  const btt = document.querySelector(".mil-back-to-top .mil-link");
+  if (!btt) return;                  // hedef yoksa sessizce çık
 
-    gsap.to(btt, {
-        x: 0,
-        opacity: 1,
-        ease: 'sine',
-        scrollTrigger: {
-            trigger: "body",
-            start: "top -40%",
-            end: "top -40%",
-            toggleActions: "play none reverse none"
-        }
-    });
+  gsap.set(btt, { x: -30, opacity: 0 });
+
+  gsap.to(btt, {
+    x: 0,
+    opacity: 1,
+    ease: 'sine',
+    scrollTrigger: {
+      trigger: "body",
+      start: "top -40%",
+      end: "top -40%",
+      toggleActions: "play none reverse none"
+    }
+  });
+}
+document.addEventListener('DOMContentLoaded', () => {
+  initBackToTop();
+});
+
+document.addEventListener('swup:contentReplaced', () => {
+  initBackToTop();
+});
+
+
     /***************************
 
     cursor
 
     ***************************/
-    // const cursor = document.querySelector('.mil-ball');
+    const cursor = document.querySelector('.mil-ball');
 
-    // gsap.set(cursor, {
-    //     xPercent: -50,
-    //     yPercent: -50,
-    // });
+    gsap.set(cursor, {
+        xPercent: -50,
+        yPercent: -50,
+    });
 
-    // document.addEventListener('pointermove', movecursor);
+    document.addEventListener('pointermove', movecursor);
 
-    // function movecursor(e) {
-    //     gsap.to(cursor, {
-    //         duration: 0.6,
-    //         ease: 'sine',
-    //         x: e.clientX,
-    //         y: e.clientY,
-    //     });
-    // }
+    function movecursor(e) {
+        gsap.to(cursor, {
+            duration: 0.6,
+            ease: 'sine',
+            x: e.clientX,
+            y: e.clientY,
+        });
+    }
 
-    // $('.mil-drag, .mil-more, .mil-choose').mouseover(function () {
-    //     gsap.to($(cursor), .2, {
-    //         width: 90,
-    //         height: 90,
-    //         opacity: 1,
-    //         ease: 'sine',
-    //     });
-    // });
+    $('.mil-drag, .mil-more, .mil-choose').mouseover(function () {
+        gsap.to($(cursor), .2, {
+            width: 90,
+            height: 90,
+            opacity: 1,
+            ease: 'sine',
+        });
+    });
 
-    // $('.mil-drag, .mil-more, .mil-choose').mouseleave(function () {
-    //     gsap.to($(cursor), .2, {
-    //         width: 20,
-    //         height: 20,
-    //         opacity: .1,
-    //         ease: 'sine',
-    //     });
-    // });
+    $('.mil-drag, .mil-more, .mil-choose').mouseleave(function () {
+        gsap.to($(cursor), .2, {
+            width: 20,
+            height: 20,
+            opacity: .1,
+            ease: 'sine',
+        });
+    });
 
-    // $('.mil-accent-cursor').mouseover(function () {
-    //     gsap.to($(cursor), .2, {
-    //         background: accent,
-    //         ease: 'sine',
-    //     });
-    //     $(cursor).addClass('mil-accent');
-    // });
+    $('.mil-accent-cursor').mouseover(function () {
+        gsap.to($(cursor), .2, {
+            background: accent,
+            ease: 'sine',
+        });
+        $(cursor).addClass('mil-accent');
+    });
 
-    // $('.mil-accent-cursor').mouseleave(function () {
-    //     gsap.to($(cursor), .2, {
-    //         background: dark,
-    //         ease: 'sine',
-    //     });
-    //     $(cursor).removeClass('mil-accent');
-    // });
+    $('.mil-accent-cursor').mouseleave(function () {
+        gsap.to($(cursor), .2, {
+            background: dark,
+            ease: 'sine',
+        });
+        $(cursor).removeClass('mil-accent');
+    });
 
-    // $('.mil-drag').mouseover(function () {
-    //     gsap.to($('.mil-ball .mil-icon-1'), .2, {
-    //         scale: '1',
-    //         ease: 'sine',
-    //     });
-    // });
+    $('.mil-drag').mouseover(function () {
+        gsap.to($('.mil-ball .mil-icon-1'), .2, {
+            scale: '1',
+            ease: 'sine',
+        });
+    });
 
-    // $('.mil-drag').mouseleave(function () {
-    //     gsap.to($('.mil-ball .mil-icon-1'), .2, {
-    //         scale: '0',
-    //         ease: 'sine',
-    //     });
-    // });
+    $('.mil-drag').mouseleave(function () {
+        gsap.to($('.mil-ball .mil-icon-1'), .2, {
+            scale: '0',
+            ease: 'sine',
+        });
+    });
 
-    // $('.mil-more').mouseover(function () {
-    //     gsap.to($('.mil-ball .mil-more-text'), .2, {
-    //         scale: '1',
-    //         ease: 'sine',
-    //     });
-    // });
+    $('.mil-more').mouseover(function () {
+        gsap.to($('.mil-ball .mil-more-text'), .2, {
+            scale: '1',
+            ease: 'sine',
+        });
+    });
 
-    // $('.mil-more').mouseleave(function () {
-    //     gsap.to($('.mil-ball .mil-more-text'), .2, {
-    //         scale: '0',
-    //         ease: 'sine',
-    //     });
-    // });
+    $('.mil-more').mouseleave(function () {
+        gsap.to($('.mil-ball .mil-more-text'), .2, {
+            scale: '0',
+            ease: 'sine',
+        });
+    });
 
-    // $('.mil-choose').mouseover(function () {
-    //     gsap.to($('.mil-ball .mil-choose-text'), .2, {
-    //         scale: '1',
-    //         ease: 'sine',
-    //     });
-    // });
+    $('.mil-choose').mouseover(function () {
+        gsap.to($('.mil-ball .mil-choose-text'), .2, {
+            scale: '1',
+            ease: 'sine',
+        });
+    });
 
-    // $('.mil-choose').mouseleave(function () {
-    //     gsap.to($('.mil-ball .mil-choose-text'), .2, {
-    //         scale: '0',
-    //         ease: 'sine',
-    //     });
-    // });
+    $('.mil-choose').mouseleave(function () {
+        gsap.to($('.mil-ball .mil-choose-text'), .2, {
+            scale: '0',
+            ease: 'sine',
+        });
+    });
 
-    // $('a:not(".mil-choose , .mil-more , .mil-drag , .mil-accent-cursor"), input , textarea, .mil-accordion-menu').mouseover(function () {
-    //     gsap.to($(cursor), .2, {
-    //         scale: 0,
-    //         ease: 'sine',
-    //     });
-    //     gsap.to($('.mil-ball svg'), .2, {
-    //         scale: 0,
-    //     });
-    // });
+    $('a:not(".mil-choose , .mil-more , .mil-drag , .mil-accent-cursor"), input , textarea, .mil-accordion-menu').mouseover(function () {
+        gsap.to($(cursor), .2, {
+            scale: 0,
+            ease: 'sine',
+        });
+        gsap.to($('.mil-ball svg'), .2, {
+            scale: 0,
+        });
+    });
 
-    // $('a:not(".mil-choose , .mil-more , .mil-drag , .mil-accent-cursor"), input, textarea, .mil-accordion-menu').mouseleave(function () {
-    //     gsap.to($(cursor), .2, {
-    //         scale: 1,
-    //         ease: 'sine',
-    //     });
+    $('a:not(".mil-choose , .mil-more , .mil-drag , .mil-accent-cursor"), input, textarea, .mil-accordion-menu').mouseleave(function () {
+        gsap.to($(cursor), .2, {
+            scale: 1,
+            ease: 'sine',
+        });
 
-    //     gsap.to($('.mil-ball svg'), .2, {
-    //         scale: 1,
-    //     });
-    // });
+        gsap.to($('.mil-ball svg'), .2, {
+            scale: 1,
+        });
+    });
 
-    // $('body').mousedown(function () {
-    //     gsap.to($(cursor), .2, {
-    //         scale: .1,
-    //         ease: 'sine',
-    //     });
-    // });
-    // $('body').mouseup(function () {
-    //     gsap.to($(cursor), .2, {
-    //         scale: 1,
-    //         ease: 'sine',
-    //     });
-    // });
+    $('body').mousedown(function () {
+        gsap.to($(cursor), .2, {
+            scale: .1,
+            ease: 'sine',
+        });
+    });
+    $('body').mouseup(function () {
+        gsap.to($(cursor), .2, {
+            scale: 1,
+            ease: 'sine',
+        });
+    });
     /***************************
 
      menu
@@ -681,62 +681,44 @@ function handleArrowClick(e){
         append
 
         ***************************/
-        // $(document).ready(function () {
-        //     $(".mil-arrow-place .mil-arrow, .mil-animation .mil-dodecahedron, .mil-current-page a").remove();
-        //     $(".mil-arrow").clone().appendTo(".mil-arrow-place");
-        //     $(".mil-dodecahedron").clone().appendTo(".mil-animation");
-        //     $(".mil-lines").clone().appendTo(".mil-lines-place");
-        //     $(".mil-main-menu ul li.mil-active > a").clone().appendTo(".mil-current-page");
-        // });
+       $(document).ready(function () {
 
-        $(function () {
-  // Oklar
-  copyOnce('.mil-arrow',        '.mil-arrow-place');
-
-  // Dodecahedron
-  copyOnce('.mil-dodecahedron', '.mil-animation');
-
-  // Lines
-  copyOnce('.mil-lines',        '.mil-lines-place');
-
-  // Aktif menüdeki sayfa başlığı
-  copyOnce('.mil-main-menu ul li.mil-active > a', '.mil-current-page', {
-    clearTargetCompletely: true // mevcut <a>’ları komple temizle
+  // 1) Arrow
+  $('.mil-arrow-place').each(function () {
+    const $host = $(this);
+    if ($host.find('svg.mil-arrow').length) return; // zaten var
+    const $tpl = $('svg.mil-arrow').first().clone(true, true);
+    $host.append($tpl);
   });
 
-  // Aynı elementlere biriken event'leri tekilleştir
-  $('.mil-arrow').off('click').on('click', handleArrowClick);
+  // 2) Dodecahedron
+  $('.mil-animation').each(function () {
+    const $host = $(this);
+    if ($host.find('.mil-dodecahedron').length) return;
+    const $tpl = $('.mil-dodecahedron').first().clone(true, true);
+    $host.append($tpl);
+  });
+
+  // 3) Lines
+  $('.mil-lines-place').each(function () {
+    const $host = $(this);
+    if ($host.find('.mil-lines').length) return;
+    const $tpl = $('.mil-lines').first().clone(true, true);
+    $host.append($tpl);
+  });
+
+  // 4) Current Page Link
+  $('.mil-current-page').each(function () {
+    const $host = $(this);
+    if ($host.find('a').length) return;
+    const $a = $('.mil-main-menu ul li.mil-active > a').first().clone(true, true);
+    $host.append($a);
+  });
 });
 
-function copyOnce(srcSel, targetSel, opts = {}) {
-  const $targets = $(targetSel);
-  if ($targets.length === 0) return;
 
-  // Kaynaklardan sadece İLKİNİ al: birden fazla .mil-arrow varsa çoğalma engellenir
-  const $src = $(srcSel).first();
-  if ($src.length === 0) return;
 
-  $targets.each(function () {
-    const $t = $(this);
-
-    // Hedefte aynı tip öğe varsa temizle
-    if (opts.clearTargetCompletely) {
-      $t.empty(); // örn. .mil-current-page içini tamamen boşalt
-    } else {
-      // Sadece aynı sınıfa sahip kopyaları temizle
-      // (örn. .mil-arrow-place içindeki .mil-arrow'ları)
-      $t.find(srcSel).remove();
-    }
-
-    // KOPYALA → EKLE  (event'leriyle birlikte kopyalamak için true,true)
-    $src.clone(true, true).appendTo($t);
-  });
-}
-
-function handleArrowClick(e){
-  // ... senin click handler'ın
-}
-
+        
         /***************************
 
         accordion
@@ -803,99 +785,341 @@ function handleArrowClick(e){
         cursor
 
         ***************************/
-         if (document.querySelector('.mil-cursor')) {
-        gsap.to('.mil-cursor', { duration: 0.3, opacity: 1 });
+
+        $('.mil-drag, .mil-more, .mil-choose').mouseover(function () {
+            gsap.to($(cursor), .2, {
+                width: 90,
+                height: 90,
+                opacity: 1,
+                ease: 'sine',
+            });
+        });
+
+        $('.mil-drag, .mil-more, .mil-choose').mouseleave(function () {
+            gsap.to($(cursor), .2, {
+                width: 20,
+                height: 20,
+                opacity: .1,
+                ease: 'sine',
+            });
+        });
+
+        $('.mil-accent-cursor').mouseover(function () {
+            gsap.to($(cursor), .2, {
+                background: accent,
+                ease: 'sine',
+            });
+            $(cursor).addClass('mil-accent');
+        });
+
+        $('.mil-accent-cursor').mouseleave(function () {
+            gsap.to($(cursor), .2, {
+                background: dark,
+                ease: 'sine',
+            });
+            $(cursor).removeClass('mil-accent');
+        });
+
+        $('.mil-drag').mouseover(function () {
+            gsap.to($('.mil-ball .mil-icon-1'), .2, {
+                scale: '1',
+                ease: 'sine',
+            });
+        });
+
+        $('.mil-drag').mouseleave(function () {
+            gsap.to($('.mil-ball .mil-icon-1'), .2, {
+                scale: '0',
+                ease: 'sine',
+            });
+        });
+
+        $('.mil-more').mouseover(function () {
+            gsap.to($('.mil-ball .mil-more-text'), .2, {
+                scale: '1',
+                ease: 'sine',
+            });
+        });
+
+        $('.mil-more').mouseleave(function () {
+            gsap.to($('.mil-ball .mil-more-text'), .2, {
+                scale: '0',
+                ease: 'sine',
+            });
+        });
+
+        $('.mil-choose').mouseover(function () {
+            gsap.to($('.mil-ball .mil-choose-text'), .2, {
+                scale: '1',
+                ease: 'sine',
+            });
+        });
+
+        $('.mil-choose').mouseleave(function () {
+            gsap.to($('.mil-ball .mil-choose-text'), .2, {
+                scale: '0',
+                ease: 'sine',
+            });
+        });
+
+        $('a:not(".mil-choose , .mil-more , .mil-drag , .mil-accent-cursor"), input , textarea, .mil-accordion-menu').mouseover(function () {
+            gsap.to($(cursor), .2, {
+                scale: 0,
+                ease: 'sine',
+            });
+            gsap.to($('.mil-ball svg'), .2, {
+                scale: 0,
+            });
+        });
+
+        $('a:not(".mil-choose , .mil-more , .mil-drag , .mil-accent-cursor"), input, textarea, .mil-accordion-menu').mouseleave(function () {
+            gsap.to($(cursor), .2, {
+                scale: 1,
+                ease: 'sine',
+            });
+
+            gsap.to($('.mil-ball svg'), .2, {
+                scale: 1,
+            });
+        });
+
+        $('body').mousedown(function () {
+            gsap.to($(cursor), .2, {
+                scale: .1,
+                ease: 'sine',
+            });
+        });
+        $('body').mouseup(function () {
+            gsap.to($(cursor), .2, {
+                scale: 1,
+                ease: 'sine',
+            });
+        });
+        /***************************
+
+        main menu
+
+        ***************************/
+        $('.mil-has-children a').on('click', function () {
+            $('.mil-has-children ul').removeClass('mil-active');
+            $('.mil-has-children a').removeClass('mil-active');
+            $(this).toggleClass('mil-active');
+            $(this).next().toggleClass('mil-active');
+        });
+        /***************************
+
+        scroll animations
+
+        ***************************/
+
+        const appearance = document.querySelectorAll(".mil-up");
+
+        appearance.forEach((section) => {
+            gsap.fromTo(section, {
+                opacity: 0,
+                y: 40,
+                scale: .98,
+                ease: 'sine',
+
+            }, {
+                y: 0,
+                opacity: 1,
+                scale: 1,
+                duration: .4,
+                scrollTrigger: {
+                    trigger: section,
+                    toggleActions: 'play none none reverse',
+                }
+            });
+        });
+
+        const scaleImage = document.querySelectorAll(".mil-scale");
+
+        scaleImage.forEach((section) => {
+            var value1 = $(section).data("value-1");
+            var value2 = $(section).data("value-2");
+            gsap.fromTo(section, {
+                ease: 'sine',
+                scale: value1,
+
+            }, {
+                scale: value2,
+                scrollTrigger: {
+                    trigger: section,
+                    scrub: true,
+                    toggleActions: 'play none none reverse',
+                }
+            });
+        });
+
+        const parallaxImage = document.querySelectorAll(".mil-parallax");
+
+
+        if ($(window).width() > 960) {
+            parallaxImage.forEach((section) => {
+                var value1 = $(section).data("value-1");
+                var value2 = $(section).data("value-2");
+                gsap.fromTo(section, {
+                    ease: 'sine',
+                    y: value1,
+
+                }, {
+                    y: value2,
+                    scrollTrigger: {
+                        trigger: section,
+                        scrub: true,
+                        toggleActions: 'play none none reverse',
+                    }
+                });
+            });
         }
-        // $('.mil-drag, .mil-more, .mil-choose').mouseover(function () {
-        //     gsap.to($(cursor), .2, {
-        //         width: 90,
-        //         height: 90,
-        //         opacity: 1,
-        //         ease: 'sine',
-        //     });
-        // });
 
-        // $('.mil-drag, .mil-more, .mil-choose').mouseleave(function () {
-        //     gsap.to($(cursor), .2, {
-        //         width: 20,
-        //         height: 20,
-        //         opacity: .1,
-        //         ease: 'sine',
-        //     });
-        // });
+        const rotate = document.querySelectorAll(".mil-rotate");
 
-        // $('.mil-accent-cursor').mouseover(function () {
-        //     gsap.to($(cursor), .2, {
-        //         background: accent,
-        //         ease: 'sine',
-        //     });
-        //     $(cursor).addClass('mil-accent');
-        // });
+        rotate.forEach((section) => {
+            var value = $(section).data("value");
+            gsap.fromTo(section, {
+                ease: 'sine',
+                rotate: 0,
 
-        // $('.mil-accent-cursor').mouseleave(function () {
-        //     gsap.to($(cursor), .2, {
-        //         background: dark,
-        //         ease: 'sine',
-        //     });
-        //     $(cursor).removeClass('mil-accent');
-        // });
+            }, {
+                rotate: value,
+                scrollTrigger: {
+                    trigger: section,
+                    scrub: true,
+                    toggleActions: 'play none none reverse',
+                }
+            });
+        });
+        /***************************
 
-        // $('.mil-drag').mouseover(function () {
-        //     gsap.to($('.mil-ball .mil-icon-1'), .2, {
-        //         scale: '1',
-        //         ease: 'sine',
-        //     });
-        // });
+        fancybox
 
-        // $('.mil-drag').mouseleave(function () {
-        //     gsap.to($('.mil-ball .mil-icon-1'), .2, {
-        //         scale: '0',
-        //         ease: 'sine',
-        //     });
-        // });
+        ***************************/
+        $('[data-fancybox="gallery"]').fancybox({
+            buttons: [
+            "slideShow",
+            "zoom",
+            "fullScreen",
+            "close"
+          ],
+            loop: false,
+            protect: true
+        });
+        $.fancybox.defaults.hash = false;
+        /***************************
 
-        // $('.mil-more').mouseover(function () {
-        //     gsap.to($('.mil-ball .mil-more-text'), .2, {
-        //         scale: '1',
-        //         ease: 'sine',
-        //     });
-        // });
+        reviews slider
 
-        // $('.mil-more').mouseleave(function () {
-        //     gsap.to($('.mil-ball .mil-more-text'), .2, {
-        //         scale: '0',
-        //         ease: 'sine',
-        //     });
-        // });
+        ***************************/
 
-        // $('.mil-choose').mouseover(function () {
-        //     gsap.to($('.mil-ball .mil-choose-text'), .2, {
-        //         scale: '1',
-        //         ease: 'sine',
-        //     });
-        // });
+        var menu = ['<div class="mil-custom-dot mil-slide-1"></div>', '<div class="mil-custom-dot mil-slide-2"></div>', '<div class="mil-custom-dot mil-slide-3"></div>', '<div class="mil-custom-dot mil-slide-4"></div>', '<div class="mil-custom-dot mil-slide-5"></div>', '<div class="mil-custom-dot mil-slide-6"></div>', '<div class="mil-custom-dot mil-slide-7"></div>']
+        var mySwiper = new Swiper('.mil-reviews-slider', {
+            // If we need pagination
+            pagination: {
+                el: '.mil-revi-pagination',
+                clickable: true,
+                renderBullet: function (index, className) {
+                    return '<span class="' + className + '">' + (menu[index]) + '</span>';
+                },
+            },
+            speed: 800,
+            effect: 'fade',
+            parallax: true,
+            navigation: {
+                nextEl: '.mil-revi-next',
+                prevEl: '.mil-revi-prev',
+            },
+        })
 
-        // $('.mil-choose').mouseleave(function () {
-        //     gsap.to($('.mil-ball .mil-choose-text'), .2, {
-        //         scale: '0',
-        //         ease: 'sine',
-        //     });
-        // });
+        /***************************
 
-        // $('a:not(".mil-choose , .mil-more , .mil-drag , .mil-accent-cursor"), input , textarea, .mil-accordion-menu').mouseover(function () {
-        //     gsap.to($(cursor), .2, {
-        //         scale: 0,
-        //         ease: 'sine',
-        //     });
-        //     gsap.to($('.mil-ball svg'), .2, {
-        //         scale: 0,
-        //     });
-        // });
+        infinite slider
 
-        // $('a:not(".mil-choose , .mil-more , .mil-drag , .mil-accent-cursor"), input, textarea, .mil-accordion-menu').mouseleave(function () {
-        //     gsap.to($(cursor), .2, {
-        //         scale: 1,
-        //         ease: 'sine',
-        //     });
+        ***************************/
+        var swiper = new Swiper('.mil-infinite-show', {
+            slidesPerView: 2,
+            spaceBetween: 30,
+            speed: 5000,
+            autoplay: true,
+            autoplay: {
+                delay: 0,
+            },
+            loop: true,
+            freeMode: true,
+            breakpoints: {
+                992: {
+                    slidesPerView: 4,
+                },
+            },
+        });
 
-    })});
+        /***************************
+
+        portfolio slider
+
+        ***************************/
+        var swiper = new Swiper('.mil-portfolio-slider', {
+            slidesPerView: 1,
+            spaceBetween: 0,
+            speed: 800,
+            parallax: true,
+            mousewheel: {
+                enable: true
+            },
+            navigation: {
+                nextEl: '.mil-portfolio-next',
+                prevEl: '.mil-portfolio-prev',
+            },
+            pagination: {
+                el: '.swiper-portfolio-pagination',
+                type: 'fraction',
+            },
+        });
+        /***************************
+
+        1 item slider
+
+        ***************************/
+        var swiper = new Swiper('.mil-1-slider', {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            speed: 800,
+            parallax: true,
+            navigation: {
+                nextEl: '.mil-portfolio-next',
+                prevEl: '.mil-portfolio-prev',
+            },
+            pagination: {
+                el: '.swiper-portfolio-pagination',
+                type: 'fraction',
+            },
+        });
+        /***************************
+
+        2 item slider
+
+        ***************************/
+        var swiper = new Swiper('.mil-2-slider', {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            speed: 800,
+            parallax: true,
+            navigation: {
+                nextEl: '.mil-portfolio-next',
+                prevEl: '.mil-portfolio-prev',
+            },
+            pagination: {
+                el: '.swiper-portfolio-pagination',
+                type: 'fraction',
+            },
+            breakpoints: {
+                992: {
+                    slidesPerView: 2,
+                },
+            },
+        });
+
+    });
+
+});

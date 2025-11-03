@@ -16,6 +16,7 @@
     <link rel="alternate" href="https://www.cftcbrandtech.com/" hreflang="tr">
     <link rel="alternate" href="https://www.cftcbrandtech.com/en/" hreflang="en">
     <link rel="alternate" href="https://www.cftcbrandtech.com/" hreflang="x-default">
+    
 
             <!-- Open Graph -->
     <meta property="og:site_name" content="CFTC BrandTech">
@@ -45,6 +46,10 @@
     <link rel="apple-touch-icon" href="/img/icons/apple-touch-icon.png">
     <link rel="mask-icon" href="/img/icons/safari-pinned-tab.svg" color="#e10600">
     <link rel="manifest" href="/site.webmanifest">
+    <!-- GEÇİCİ (local dev): integrity + crossorigin KALDIR -->
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
 
             <!-- Performans ipuçları (CDN kullanıyorsan) -->
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
@@ -151,7 +156,7 @@
                                 
                                 <li class="mil-has-children">
                                     <a href ="#."class="mil-submenu-toggle" aria-expanded="false" aria-controls="menu-hizmetler">Hizmetler</a>
-                                    <ul id="menu-hizmetler" class="mil-submenu" aria-hidden="true">
+                                    <ul id="menu-hizmetler" class="mil-submenu" aria-hidden="false">
                                         <li><a href="branding.html">Markalaşma</a></li>
                                         <li><a href="website-development.html">Web Tasarım ve Geliştirme</a></li>
                                         <li><a href="digital-marketing.html">Dijital Pazarlama</a></li>
@@ -160,7 +165,7 @@
                                 </li>
                                 <li class="mil-has-children">
                                     <a href="#" class="mil-submenu-toggle" aria-expanded="false" aria-controls="menu-portfoy">Portföy</a>
-                                    <ul id="menu-portfoy" class="mil-submenu" aria-hidden="true">
+                                    <ul id="menu-portfoy" class="mil-submenu" aria-hidden="false">
                                         <li><a href="portfolio-1.html">Portföy Liste Görünüm</a></li>
                                         <li><a href="portfolio-slide.html">Portföy Slayt Görünüm</a></li>
                                     </ul>
@@ -187,7 +192,7 @@
                     <div class="col-xl-7">
 
                         <div class="mil-menu-right-frame">
-                            <div class="mil-animation-in"aria-hidden="true">
+                            <div class="mil-animation-in"aria-hidden="false">
                                 <div class="mil-animation-frame">
                                     <div class="mil-animation mil-position-1 mil-scale" data-value-1="2" data-value-2="2"></div>
                                 </div>
@@ -482,5 +487,8 @@
     <script src="js/plugins/ScrollTo.min.js"></script>
     <!-- ashley js -->
     <script src="js/main.js"></script>
+    <script src="js/plugins/load-more.js"></script>
+    <script src="js/plugins/category.js"></script>
+    <script src="js/plugins/filterbyauthor.js"></script>
   </body>
 </html>
