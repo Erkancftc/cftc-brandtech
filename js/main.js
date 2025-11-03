@@ -899,3 +899,50 @@ function handleArrowClick(e){
         //     });
 
     })});
+
+try {
+  if (typeof Swup !== 'undefined' && !window.swup) {
+    // prefer #swupMain (your markup), fallback to #swup
+    const containerEl = document.querySelector('#swupMain') || document.querySelector('#swup');
+    if (containerEl) {
+      const selector = containerEl.id ? `#${containerEl.id}` : null;
+      try {
+        // Swup v2 expects an array of container selectors
+        if (selector) {
+          window.swup = new Swup({ containers: [selector] });
+        } else {
+          // last-resort: default init
+          window.swup = new Swup();
+        }
+      } catch (errInit) {
+        console.error('swup init failed:', errInit);
+        // don't rethrow — page should not break
+      }
+    } else {
+      console.warn('Swup not initialized: no #swupMain or #swup container found.');
+    }
+  }
+} catch (e) {
+  console.error('swup detection error', e);
+}
+
+// safe initializer to call plugin inits (idempotent)
+function initAllPlugins() {
+  try {
+    if (typeof window.loadMoreInit === 'function') window.loadMoreInit();
+  } catch (e) { console.error('loadMoreInit error', e); }
+  try {
+    if (typeof window.filterByAuthorInit === 'function') window.filterByAuthorInit();
+  } catch (e) { console.error('filterByAuthorInit error', e); }
+  try {
+    if (typeof window.initCategory === 'function') window.initCategory();
+  } catch (e) { console.error('initCategory error', e); }
+  // ensure left-side home button state
+  try { if (typeof window.setMilCurrentPageActive === 'function') window.setMilCurrentPageActive(); } catch (e) {}
+}
+
+// run safely on first load and after swup swaps
+document.addEventListener('DOMContentLoaded', initAllPlugins);
+if (window.swup && typeof window.swup.on === 'function') {
+  try { window.swup.on('contentReplaced', initAllPlugins); } catch (e) { console.error('swup hook error', e); }
+}
