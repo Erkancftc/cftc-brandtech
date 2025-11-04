@@ -616,6 +616,25 @@ button
   -webkit-transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
   transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
 }
+.mil-submenu-button {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 34px;
+    -webkit-transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
+    transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
+    background-color: inherit;
+    border: none;
+    font-family: "Outfit", sans-serif;
+}
+
+
 .mil-button span {
   white-space: nowrap;
 }
@@ -1572,6 +1591,7 @@ menu
     font-size: 26px;
   }
 }
+.mil-submenu-button:before,
 .mil-main-menu ul li a:before {
   content: "";
   position: absolute;
@@ -1604,10 +1624,12 @@ menu
   -webkit-filter: brightness(110%);
           filter: brightness(110%);
 }
+.mil-submenu-button:hover,
 .mil-main-menu ul li.mil-has-children > a:hover {
   color: rgb(255, 255, 255);
   padding-left: 25px;
 }
+.mil-submenu-button:hover:before,
 .mil-main-menu ul li.mil-has-children > a:hover:before {
   -webkit-transform: scale(1);
           transform: scale(1);

@@ -1123,3 +1123,14 @@ document.addEventListener('swup:contentReplaced', () => {
     });
 
 });
+document.querySelectorAll('.mil-submenu-button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const menu = document.getElementById(btn.getAttribute('aria-controls'));
+    const expanded = btn.getAttribute('aria-expanded') === "true";
+
+    btn.setAttribute('aria-expanded', !expanded);
+    menu.setAttribute('aria-hidden', expanded);
+
+    menu.classList.toggle('mil-active');
+  });
+});
