@@ -1572,7 +1572,8 @@ menu
 .mil-main-menu ul li:last-child {
   margin-bottom: 0;
 }
-.mil-main-menu ul li a {
+.mil-main-menu ul li a,
+.mil-submenu-button {
   position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1587,11 +1588,12 @@ menu
   transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
 }
 @media screen and (max-width: 992px) {
-  .mil-main-menu ul li a {
+  .mil-main-menu ul li a,
+  .mil-submenu-button {
     font-size: 26px;
   }
 }
-.mil-submenu-button:before,
+.mil-submenu-button::before,
 .mil-main-menu ul li a:before {
   content: "";
   position: absolute;
@@ -1605,35 +1607,50 @@ menu
   -webkit-transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
   transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
 }
-.mil-main-menu ul li a:hover {
+.mil-main-menu ul li a:hover,
+.mil-submenu-button:hover,
+.mil-main-menu ul li a:focus-visible,
+.mil-submenu-button:focus-visible {
   color: rgb(255, 255, 255);
+  padding-left: 25px;
+  outline: none; /* odak halkasını kendi stilinle yönetiyorsan */
 }
 .mil-main-menu ul li a.mil-active {
   padding-left: 25px;
 }
-.mil-main-menu ul li a.mil-active:before {
+.mil-main-menu ul li a.mil-active:before,
+.mil-submenu-button.mil-active::before {
   -webkit-transform: scale(1);
           transform: scale(1);
   background-color: var(--bs-red);
 }
-.mil-main-menu ul li.mil-active > a {
+.mil-main-menu ul li.mil-active > a,
+.mil-main-menu ul li.mil-active > .mil-submenu-button {
   color: var(--bs-red);
 }
-.mil-main-menu ul li.mil-active > a:hover {
+.mil-main-menu ul li.mil-active > a:hover,
+.mil-main-menu ul li.mil-active > .mil-submenu-button:hover {
   color: var(--bs-red) !important;
   -webkit-filter: brightness(110%);
           filter: brightness(110%);
 }
 .mil-submenu-button:hover,
-.mil-main-menu ul li.mil-has-children > a:hover {
+.mil-main-menu ul li.mil-has-children > a:hover,
+.mil-main-menu ul li.mil-has-children > .mil-submenu-button:hover {
   color: rgb(255, 255, 255);
   padding-left: 25px;
 }
-.mil-submenu-button:hover:before,
-.mil-main-menu ul li.mil-has-children > a:hover:before {
+.mil-main-menu ul li.mil-has-children > a:hover,
+.mil-main-menu ul li.mil-has-children > .mil-submenu-button:hover {
+  color: rgb(255, 255, 255);
+  padding-left: 25px;
+}
+.mil-main-menu ul li.mil-has-children > a:hover::before,
+.mil-main-menu ul li.mil-has-children > .mil-submenu-button:hover::before {
   -webkit-transform: scale(1);
           transform: scale(1);
 }
+
 .mil-main-menu ul li.mil-has-children ul {
   padding-left: 25px;
   overflow: hidden;
@@ -1687,15 +1704,18 @@ menu
   .mil-main-menu ul li {
     margin-bottom: 30px;
   }
-  .mil-main-menu ul li a {
+  .mil-main-menu ul li a,
+  .mil-submenu-button {
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
   }
-  .mil-main-menu ul li a:before {
+  .mil-main-menu ul li a::before,
+  .mil-submenu-button::before {
     display: none;
   }
-  .mil-main-menu ul li a.mil-active {
+  .mil-main-menu ul li a.mil-active,
+  .mil-submenu-button.mil-active {
     padding-left: 0 !important;
   }
   .mil-main-menu ul li.mil-has-children ul {
@@ -4310,3 +4330,147 @@ html.is-animating .mil-menu-frame {
 address{
   font-style: normal;
 }
+
+
+/* ======================================================================
+   CFTC MENU CLEAN (unified link+button styles)
+   - Replaces scattered/duplicated .mil-main-menu / .mil-submenu-button rules
+   - Keep this block AFTER older rules so it wins via cascade.
+   ====================================================================== */
+.mil-main-menu {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+.mil-main-menu ul { padding: 0; margin: 0; }
+.mil-main-menu ul li { margin-bottom: 40px; }
+.mil-main-menu ul li:last-child { margin-bottom: 0; }
+
+/* Link + Button ortak temel stiller */
+.mil-main-menu ul li a,
+.mil-main-menu ul li .mil-submenu-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  font-size: 34px;
+  color: rgba(255,255,255,.8);
+  transition: .4s cubic-bezier(0,0,.3642,1);
+}
+
+/* Button reset: link ile aynı görünüm */
+.mil-main-menu ul li .mil-submenu-button {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  appearance: none;
+  font: inherit;
+  line-height: inherit;
+  text-align: left;
+}
+
+/* Mobil font uyumu */
+@media (max-width: 992px) {
+  .mil-main-menu ul li a,
+  .mil-main-menu ul li .mil-submenu-button { font-size: 26px; font-weight: 500; }
+}
+
+/* Ortak nokta/dot göstergesi */
+.mil-main-menu ul li a::before,
+.mil-main-menu ul li .mil-submenu-button::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.4);
+  transform: scale(0);
+  transition: .4s cubic-bezier(0,0,.3642,1);
+}
+
+/* Hover & keyboard focus */
+.mil-main-menu ul li a:hover,
+.mil-main-menu ul li .mil-submenu-button:hover,
+.mil-main-menu ul li a:focus-visible,
+.mil-main-menu ul li .mil-submenu-button:focus-visible {
+  color: #fff;
+  padding-left: 25px;
+  outline: none;
+}
+.mil-main-menu ul li a:hover::before,
+.mil-main-menu ul li .mil-submenu-button:hover::before,
+.mil-main-menu ul li a:focus-visible::before,
+.mil-main-menu ul li .mil-submenu-button:focus-visible::before {
+  transform: scale(1);
+}
+
+/* Aktif durum */
+.mil-main-menu ul li a.mil-active,
+.mil-main-menu ul li .mil-submenu-button.mil-active { padding-left: 25px; }
+.mil-main-menu ul li a.mil-active::before,
+.mil-main-menu ul li .mil-submenu-button.mil-active::before {
+  transform: scale(1);
+  background: var(--bs-red);
+}
+
+/* Üst li aktifken renk */
+.mil-main-menu ul li.mil-active > a,
+.mil-main-menu ul li.mil-active > .mil-submenu-button { color: var(--bs-red); }
+.mil-main-menu ul li.mil-active > a:hover,
+.mil-main-menu ul li.mil-active > .mil-submenu-button:hover {
+  color: var(--bs-red) !important;
+  filter: brightness(110%);
+}
+
+/* Alt menülü öğelerde hover davranışı */
+.mil-main-menu ul li.mil-has-children > a:hover,
+.mil-main-menu ul li.mil-has-children > .mil-submenu-button:hover {
+  color: #fff; padding-left: 25px;
+}
+.mil-main-menu ul li.mil-has-children > a:hover::before,
+.mil-main-menu ul li.mil-has-children > .mil-submenu-button:hover::before {
+  transform: scale(1);
+}
+
+/* Submenu kap/ aç animasyonu */
+.mil-main-menu ul li.mil-has-children ul {
+  padding-left: 25px;
+  overflow: hidden;
+  max-height: 0;
+  transition: .6s cubic-bezier(0,0,.3642,1);
+}
+.mil-main-menu ul li.mil-has-children ul.mil-active { max-height: 260px; }
+.mil-main-menu ul li.mil-has-children ul li { margin-bottom: 5px; }
+.mil-main-menu ul li.mil-has-children ul li:first-child { margin-top: 40px; }
+.mil-main-menu ul li.mil-has-children ul li a {
+  display: block;
+  font-size: 12px;
+  color: rgba(255,255,255,.4);
+  letter-spacing: 2px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+.mil-main-menu ul li.mil-has-children ul li a::before { display: none; }
+.mil-main-menu ul li.mil-has-children ul li a:hover {
+  color: rgba(255,255,255,.8);
+  transform: translateX(5px);
+}
+
+/* 1200px altı hizalama */
+@media (max-width: 1200px) {
+  .mil-main-menu { justify-content: center; }
+  .mil-main-menu ul { display: flex; flex-direction: column; align-items: center; }
+  .mil-main-menu ul li { margin-bottom: 30px; place-items: anchor-center;}
+  .mil-main-menu ul li a,
+  .mil-main-menu ul li .mil-submenu-button { justify-content: center; }
+  .mil-main-menu ul li a::before,
+  .mil-main-menu ul li .mil-submenu-button::before { display: none; }
+  .mil-main-menu ul li a.mil-active,
+  .mil-main-menu ul li .mil-submenu-button.mil-active { padding-left: 0 !important; }
+  .mil-main-menu ul li.mil-has-children ul { padding-left: 0; }
+  .mil-main-menu ul li.mil-has-children ul li:first-child { margin-top: 30px; }
+}
+/* ====================================================================== */
+

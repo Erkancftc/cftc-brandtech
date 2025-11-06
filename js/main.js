@@ -1123,14 +1123,19 @@ document.addEventListener('swup:contentReplaced', () => {
     });
 
 });
-document.querySelectorAll('.mil-submenu-button').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const menu = document.getElementById(btn.getAttribute('aria-controls'));
-    const expanded = btn.getAttribute('aria-expanded') === "true";
+// tek kaynaktan dinle: yeni içerik yüklense bile çalışır
+document.addEventListener('click', function (e) {
+  const btn = e.target.closest('.mil-submenu-button');
+  if (!btn) return;
 
-    btn.setAttribute('aria-expanded', !expanded);
-    menu.setAttribute('aria-hidden', expanded);
+  const li = btn.closest('li.mil-has-children');
+  if (!li) return;
 
-    menu.classList.toggle('mil-active');
-  });
+  const sub = li.querySelector('ul');
+  if (!sub) return;
+
+  // görünürlük sınıfını değiştir
+  sub.classList.toggle('mil-active');
+  // aktif görünüm istiyorsan:
+  btn.classList.toggle('mil-active');
 });
