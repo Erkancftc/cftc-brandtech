@@ -126,7 +126,7 @@ body {
           flex-direction: column;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
-          justify-content: space-between;
+          justify-content: end;
   height: 100%;
 }
 
@@ -2700,7 +2700,7 @@ social icons
 ------------------------------------------- */
 .mil-social-icons {
   padding: 0;
-  margin: 0;
+  margin: 0 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -2712,7 +2712,7 @@ social icons
 }
 .mil-social-icons li {
   list-style-type: none;
-  margin-right: 15px;
+  margin-right: 24px;
 }
 .mil-social-icons li:last-child {
   margin-right: 0;
@@ -4366,7 +4366,6 @@ address{
   margin: 0;
   cursor: pointer;
   appearance: none;
-  font: inherit;
   line-height: inherit;
   text-align: left;
 }
