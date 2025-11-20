@@ -1141,45 +1141,45 @@ document.addEventListener('click', function (e) {
 });
 
 //hover gösterme
-// document.addEventListener('DOMContentLoaded', initHoverDemo);
-// document.addEventListener('swup:contentReplaced', initHoverDemo);
+document.addEventListener('DOMContentLoaded', initHoverDemo);
+document.addEventListener('swup:contentReplaced', initHoverDemo);
 
-//   function initHoverDemo() {
-//     const cards = document.querySelectorAll('.mil-service-card-sm');
-//     if (!cards.length) return;
+  function initHoverDemo() {
+    const cards = document.querySelectorAll('.mil-service-card-sm');
+    if (!cards.length) return;
 
-//     document.body.dataset.stopHoverDemo = '0';
-//     let index = 0;
+    document.body.dataset.stopHoverDemo = '0';
+    let index = 0;
 
-//     function showDemo() {
-//         if (document.body.dataset.stopHoverDemo === '1') return;
+    function showDemo() {
+        if (document.body.dataset.stopHoverDemo === '1') return;
 
-//         cards.forEach(card => card.classList.remove('is-hover-demo'));
+        cards.forEach(card => card.classList.remove('is-hover-demo'));
 
-//         const current = cards[index];
-//         if (current) {
-//             current.classList.add('is-hover-demo');
-//         }
+        const current = cards[index];
+        if (current) {
+            current.classList.add('is-hover-demo');
+        }
 
-//         index = (index + 1) % cards.length;
-//     }
+        index = (index + 1) % cards.length;
+    }
 
-//     // İlk gösterim
-//     showDemo();
+    // İlk gösterim
+    showDemo();
 
-//     // Animasyon başlasın
-//     const intervalId = setInterval(showDemo, 2500);
+    // Animasyon başlasın
+    const intervalId = setInterval(showDemo, 2500);
 
-//     const stopDemo = () => {
-//         document.body.dataset.stopHoverDemo = '1';
-//         clearInterval(intervalId);
-//         cards.forEach(card => card.classList.remove('is-hover-demo'));
-//     };
+    const stopDemo = () => {
+        document.body.dataset.stopHoverDemo = '1';
+        clearInterval(intervalId);
+        cards.forEach(card => card.classList.remove('is-hover-demo'));
+    };
 
-//     // Cardlara mouseenter ekle
-//     cards.forEach(card => {
-//         card.addEventListener('mouseenter', stopDemo, { once: true });
-//     });
-// }
+    // Cardlara mouseenter ekle
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', stopDemo, { once: true });
+    });
+}
 
 
