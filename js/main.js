@@ -103,7 +103,7 @@ $(function () {
     timeline.fromTo(".mil-up", 0.8, {
         opacity: 0,
         y: 40,
-        scale: .98,
+        // scale: .98,
         ease: 'sine',
 
     }, {
