@@ -1459,9 +1459,9 @@ menu
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: end;
-      -ms-flex-align: end;
-          align-items: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   border-left: solid 1px rgba(255, 255, 255, 0.1);
   opacity: 0;
   -webkit-transform: translateY(30px);
@@ -1469,9 +1469,7 @@ menu
   -webkit-transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
   transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
 }
-.mil-menu-frame .mil-menu-right-frame .mil-menu-right {
-  padding-bottom: 60px;
-}
+
 .mil-menu-frame .mil-menu-right-frame .mil-animation-in {
   position: absolute;
   top: -320px;
