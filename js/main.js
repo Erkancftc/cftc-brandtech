@@ -1141,8 +1141,17 @@ document.addEventListener('click', function (e) {
 });
 
 //hover gösterme
-document.addEventListener('DOMContentLoaded', initHoverDemo);
-document.addEventListener('swup:contentReplaced', initHoverDemo);
+// document.addEventListener('DOMContentLoaded', initHoverDemo);
+// document.addEventListener('swup:contentReplaced', initHoverDemo);
+function hasHover() {
+  return window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+}
+
+if (hasHover()) {
+  document.addEventListener('DOMContentLoaded', initHoverDemo);
+  // swup kullanacaksan:
+  document.addEventListener('swup:contentReplaced', initHoverDemo);
+}
 
   function initHoverDemo() {
     const cards = document.querySelectorAll('.mil-service-card-sm');
