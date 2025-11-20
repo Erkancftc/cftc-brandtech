@@ -2440,19 +2440,22 @@ services
   -webkit-transition: 0.6s cubic-bezier(0, 0, 0.3642, 1);
   transition: 0.6s cubic-bezier(0, 0, 0.3642, 1);
 }
-.mil-service-card-sm:hover p {
+.mil-service-card-sm:hover p,
+.mil-service-card-sm.is-hover-demo p {
   opacity: 1;
   -webkit-transform: translateY(0);
           transform: translateY(0);
 }
-.mil-service-card-sm:hover .mil-button {
+.mil-service-card-sm:hover .mil-button,
+.mil-service-card-sm.is-hover-demo .mil-button {
   -webkit-transform: scale(1);
           transform: scale(1);
   -webkit-filter: grayscale(0);
           filter: grayscale(0);
   opacity: 1;
 }
-.mil-service-card-sm:hover:before {
+.mil-service-card-sm:hover:before,
+.mil-service-card-sm.is-hover-demo:before {
   width: 100%;
 }
 @media screen and (max-width: 992px) {

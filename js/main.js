@@ -1139,3 +1139,48 @@ document.addEventListener('click', function (e) {
   // aktif görünüm istiyorsan:
   btn.classList.toggle('mil-active');
 });
+
+//hover gösterme
+  document.addEventListener('DOMContentLoaded', function () {
+    const cards = document.querySelectorAll('.mil-service-card-sm');
+    if (!cards.length) return;
+
+    let index = 0;
+
+    function showDemo() {
+      // Kullanıcı etkileşimi olduysa demo dursun
+      if (document.body.dataset.stopHoverDemo === '1') return;
+
+      cards.forEach(card => card.classList.remove('is-hover-demo'));
+
+      const current = cards[index];
+      if (current) {
+        current.classList.add('is-hover-demo');
+      }
+
+      index = (index + 1) % cards.length;
+    }
+
+    // İlk kartı göster
+     showDemo();
+
+    // Periyodik animasyon
+    const intervalId = setInterval(showDemo, 2500);
+
+    // Kullanıcı ilk kez herhangi bir karta mouse ile girince demo'yu kapat
+    const stopDemo = () => {
+        document.body.dataset.stopHoverDemo = '1';
+        clearInterval(intervalId);
+        cards.forEach(card => card.classList.remove('is-hover-demo'));
+
+        // Bu eventleri kaldırıyoruz
+        cards.forEach(card => {
+            card.removeEventListener('mouseenter', stopDemo);
+        });
+    };
+
+    // Tüm kartlara mouseenter event'i bağla
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', stopDemo, { once: true });
+    });
+});
