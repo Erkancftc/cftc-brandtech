@@ -103,13 +103,13 @@ $(function () {
     timeline.fromTo(".mil-up", 0.8, {
         opacity: 0,
         y: 40,
-        // scale: .98,
+        scale: .98,
         ease: 'sine',
 
     }, {
         y: 0,
         opacity: 1,
-        // scale: 1,
+        scale: 1,
         onComplete: function () {
             $('.mil-preloader').addClass("mil-hidden");
         },
@@ -446,13 +446,13 @@ document.addEventListener('swup:contentReplaced', () => {
         gsap.fromTo(section, {
             opacity: 0,
             y: 40,
-            // scale: .98,
+            scale: .98,
             ease: 'sine',
 
         }, {
             y: 0,
             opacity: 1,
-            // scale: 1,
+            scale: 1,
             duration: .4,
             scrollTrigger: {
                 trigger: section,
@@ -918,13 +918,13 @@ document.addEventListener('swup:contentReplaced', () => {
             gsap.fromTo(section, {
                 opacity: 0,
                 y: 40,
-                // scale: .98,
+                scale: .98,
                 ease: 'sine',
 
             }, {
                 y: 0,
                 opacity: 1,
-                // scale: 1,
+                scale: 1,
                 duration: .4,
                 scrollTrigger: {
                     trigger: section,
