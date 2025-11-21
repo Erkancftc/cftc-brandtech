@@ -4464,7 +4464,7 @@ address{
   .mil-main-menu ul { display: flex; flex-direction: column; align-items: center; }
   .mil-main-menu ul li { margin-bottom: 30px; place-items: anchor-center;}
   .mil-main-menu ul li a,
-  .mil-main-menu ul li .mil-submenu-button { justify-content: center; }
+  .mil-main-menu ul li .mil-submenu-button { place-items: anchor-center; }
   .mil-main-menu ul li a::before,
   .mil-main-menu ul li .mil-submenu-button::before { display: none; }
   .mil-main-menu ul li a.mil-active,
