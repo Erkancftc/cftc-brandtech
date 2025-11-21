@@ -4462,7 +4462,7 @@ address{
 @media (max-width: 1200px) {
   .mil-main-menu { justify-content: center; }
   .mil-main-menu ul { display: flex; flex-direction: column; align-items: center; }
-  .mil-main-menu ul li { margin-bottom: 30px; place-items: center;}
+  .mil-main-menu ul li { margin-bottom: 30px; justify-items: center;}
   .mil-main-menu ul li a,
   .mil-main-menu ul li .mil-submenu-button { justify-content: center; }
   .mil-main-menu ul li a::before,
