@@ -4464,7 +4464,7 @@ address{
   .mil-main-menu ul { display: flex; flex-direction: column; align-items: center; }
   .mil-main-menu ul li { margin-bottom: 30px; place-items: anchor-center;}
   .mil-main-menu ul li a,
-  .mil-main-menu ul li .mil-submenu-button { place-items: anchor-center; }
+  .mil-main-menu ul li .mil-submenu-button { justify-content: center; }
   .mil-main-menu ul li a::before,
   .mil-main-menu ul li .mil-submenu-button::before { display: none; }
   .mil-main-menu ul li a.mil-active,
@@ -4474,3 +4474,34 @@ address{
 }
 /* ====================================================================== */
 
+/* Mobil için */
+@media (max-width: 767px) {
+
+  /* Safari tespiti: -webkit-touch-callout hilesi */
+  @supports (-webkit-touch-callout: none) {
+
+    /* UL'yi tamamen resetle */
+    .ml-main-menu {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      -webkit-padding-start: 0; /* Safari'nin kendi iç boşluğu */
+      display: flex;
+      flex-direction: column;
+      align-items: center;      /* tüm li'lar ortada */
+    }
+
+    .ml-main-menu > li {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      text-align: center;       /* metin tam ortaya */
+      list-style: none;
+    }
+
+    .ml-main-menu > li > a {
+      display: inline-flex;     /* metni kendi kutusunda ortala */
+      justify-content: center;
+    }
+  }
+}
