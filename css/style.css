@@ -4473,35 +4473,3 @@ address{
   .mil-main-menu ul li.mil-has-children ul li:first-child { margin-top: 30px; }
 }
 /* ====================================================================== */
-
-/* Mobil için */
-@media (max-width: 767px) {
-
-  /* Safari tespiti: -webkit-touch-callout hilesi */
-  @supports (-webkit-touch-callout: none) {
-
-    /* UL'yi tamamen resetle */
-    .ml-main-menu {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      -webkit-padding-start: 0; /* Safari'nin kendi iç boşluğu */
-      display: flex;
-      flex-direction: column;
-      align-items: center;      /* tüm li'lar ortada */
-    }
-
-    .ml-main-menu > li {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      text-align: center;       /* metin tam ortaya */
-      list-style: none;
-    }
-
-    .ml-main-menu > li > a {
-      display: inline-flex;     /* metni kendi kutusunda ortala */
-      justify-content: center;
-    }
-  }
-}
