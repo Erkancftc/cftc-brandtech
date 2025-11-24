@@ -522,6 +522,11 @@ link
   letter-spacing: 2px;
   font-size: 12px;
 }
+@media (max-width : 500px ){
+  .mil-link{
+    margin-left: 10%;
+  }
+}
 .mil-link svg {
   margin-left: 15px;
   border-radius: 50%;
