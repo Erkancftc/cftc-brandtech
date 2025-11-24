@@ -638,7 +638,18 @@ button
     border: none;
     font-family: "Outfit", sans-serif;
 }
+@media (max-width: 768px) {
+  .mil-main-menu ul li a,
+  .mil-submenu-button {
+    padding-left: 0 !important;
+    transform: none !important;
+  }
 
+  .mil-main-menu ul li a:hover,
+  .mil-submenu-button:hover {
+    padding-left: 0 !important;
+}
+}
 
 .mil-button span {
   white-space: nowrap;
@@ -1590,6 +1601,9 @@ menu
   -webkit-transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
   transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
 }
+
+
+
 @media screen and (max-width: 992px) {
   .mil-main-menu ul li a,
   .mil-submenu-button {
