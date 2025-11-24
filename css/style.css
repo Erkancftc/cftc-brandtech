@@ -4491,7 +4491,7 @@ address{
   .mil-main-menu ul li a::before,
   .mil-main-menu ul li .mil-submenu-button::before { display: none; }
   .mil-main-menu ul li a.mil-active,
-  /* .mil-main-menu ul li .mil-submenu-button.mil-active { padding-left: 0 !important; } */
+  .mil-main-menu ul li .mil-submenu-button.mil-active { padding-left: 0 !important; }
   .mil-main-menu ul li.mil-has-children ul { padding-left: 0; }
   .mil-main-menu ul li.mil-has-children ul li:first-child { margin-top: 30px; }
 }
