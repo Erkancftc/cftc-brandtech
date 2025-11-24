@@ -638,22 +638,6 @@ button
     border: none;
     font-family: "Outfit", sans-serif;
 }
-@media (max-width: 768px) {
-  .mil-main-menu ul li a,
-  .mil-submenu-button {
-    padding-left: 0 !important;
-    transform: none !important;
-  }
-
-  .mil-main-menu ul li a:hover,
-  .mil-submenu-button:hover {
-    padding-left: 0 !important;
-}
-.mil-main-menu ul{
-  width: 100%;
-  text-align: center !important;
-}
-}
 
 .mil-button span {
   white-space: nowrap;
@@ -4485,15 +4469,75 @@ address{
 @media (max-width: 1200px) {
   .mil-main-menu { justify-content: center; }
   .mil-main-menu ul { display: flex; flex-direction: column; align-items: center; }
-  .mil-main-menu ul li { margin-bottom: 30px; justify-items: center;}
+  .mil-main-menu ul li { margin-bottom: 30px; justify-items: flex-end;}
   .mil-main-menu ul li a,
   .mil-main-menu ul li .mil-submenu-button { justify-content: center; }
   .mil-main-menu ul li a::before,
   .mil-main-menu ul li .mil-submenu-button::before { display: none; }
   .mil-main-menu ul li a.mil-active,
-  /* .mil-main-menu ul li .mil-submenu-button.mil-active { padding-left: 0 !important; } */
+  .mil-main-menu ul li .mil-submenu-button.mil-active { padding-left: 0 !important; }
   .mil-main-menu ul li.mil-has-children ul { padding-left: 0; }
   .mil-main-menu ul li.mil-has-children ul li:first-child { margin-top: 30px; }
 }
 /* ====================================================================== */
 
+
+/* Safari / mobil menü hizalama fix */
+/* @media screen and (max-width: 768px) { */
+
+  /* Tüm menü satırları tam genişlik alsın */
+  .mil-main-menu ul li {
+    width: 100% !important;
+  }
+
+  /* Hizmetler dahil, tüm ana link / butonlar ortalansın */
+  .mil-main-menu ul li>a,
+  .mil-main-menu ul li>.mil-submenu-button {
+    display: flex !important;
+    justify-content: center !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    padding-left: 0 !important;
+  }
+
+  /* Hizmetler’in altındaki liste de ortaya gelsin */
+  .mil-main-menu ul li.mil-has-children>ul {
+    text-align: center !important;
+    padding-left: 0 !important;
+  }
+
+  /* Alt listedeki linkler hafif ortalı dursun */
+  .mil-main-menu ul li.mil-has-children>ul li a {
+    justify-content: center !important;
+    transform: none !important;
+  }
+  /* @media (max-width: 1200px) {
+    .mil-main-menu { justify-content: center; }
+    .mil-main-menu ul { display: flex; flex-direction: column; align-items: center; }
+    .mil-main-menu ul li { margin-bottom: 30px; justify-items: flex-end; }
+    .mil-main-menu ul li a,
+    .mil-main-menu ul li .mil-submenu-button { justify-content: center; }
+
+} */
+@media (max-width: 1200px) {
+  .mil-main-menu {
+    justify-content: center;
+  }
+
+  .mil-main-menu ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .mil-main-menu ul li {
+    margin-bottom: 30px;
+    justify-items: flex-end;
+  }
+
+  .mil-main-menu ul li a,
+  .mil-main-menu ul li .mil-submenu-button {
+    justify-content: center;
+  }
+
+}
