@@ -649,6 +649,10 @@ button
   .mil-submenu-button:hover {
     padding-left: 0 !important;
 }
+.mil-main-menu ul{
+  width: 100%;
+  text-align: center !important;
+}
 }
 
 .mil-button span {
