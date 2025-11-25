@@ -119,20 +119,28 @@ $(function () {
     anchor scroll
 
     ***************************/
-    $(document).on('click', 'a[href^="#"]', function (event) {
-        event.preventDefault();
+$(document).on('click', 'a[href^="#"]', function (event) {
+    const href = $(this).attr('href');
 
-        var target = $($.attr(this, 'href'));
-        var offset = 0;
+    // Sadece # ise (kategori butonların gibi) hiçbir şey yapma, hatayı da engelle
+    if (!href || href === '#') return;
 
-        if ($(window).width() < 1200) {
-            offset = 90;
-        }
+    event.preventDefault();
 
-        $('html, body').animate({
-            scrollTop: target.offset().top - offset
-        }, 400);
-    });
+    const $target = $(href);
+    if (!$target.length) return; // hedef yoksa sessizce çık
+
+    let offset = 0;
+    if ($(window).width() < 1200) {
+        offset = 90;
+    }
+
+    $('html, body').animate({
+        scrollTop: $target.offset().top - offset
+    }, 400);
+});
+
+
     /***************************
 
     append
@@ -1181,5 +1189,7 @@ document.addEventListener('swup:contentReplaced', initHoverDemo);
         card.addEventListener('mouseenter', stopDemo, { once: true });
     });
 }
+
+
 
 

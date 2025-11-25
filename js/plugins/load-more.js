@@ -1,3 +1,23 @@
+
+// global yardımcı: blog kartlarının animasyonlarını yenile
+window.refreshBlogAnimations = function () {
+  try {
+    if (window.ScrollTrigger && typeof ScrollTrigger.refresh === 'function') {
+      ScrollTrigger.refresh(true);
+    } else if (window.gsap && typeof gsap.delayedCall === 'function') {
+      gsap.delayedCall(0.02, function () {
+        window.dispatchEvent(new Event('scroll'));
+      });
+    } else {
+      window.dispatchEvent(new Event('scroll'));
+    }
+  } catch (e) {
+    // sessizce geç
+  }
+};
+
+
+
 document.addEventListener('DOMContentLoaded', () => {
   const list = document.querySelector('.js-posts');
   if (!list) return;
@@ -36,22 +56,31 @@ document.addEventListener('DOMContentLoaded', () => {
     placeButtonAfterList();
   }
 
-  function revealNextBatch() {
-    const cols = getCols();
-    const hidden = cols.filter(c => c.classList.contains('lm-hidden'));
-    const toShow = hidden.slice(0, BATCH);
-    toShow.forEach(col => {
-      col.classList.remove('lm-hidden');
-      col.style.display = '';
-      col.removeAttribute('aria-hidden');
-    });
-    placeButtonAfterList();
-    if (cols.filter(c => c.classList.contains('lm-hidden')).length === 0) {
-      btn.style.display = 'none';
-      btn.disabled = true;
-      btn.setAttribute('aria-disabled', 'true');
-    }
+    function revealNextBatch() {
+  const cols = getCols();
+  const hidden = cols.filter(c => c.classList.contains('lm-hidden'));
+  const toShow = hidden.slice(0, BATCH);
+
+  toShow.forEach(col => {
+    col.classList.remove('lm-hidden');
+    col.style.display = '';
+    col.removeAttribute('aria-hidden');
+  });
+
+  placeButtonAfterList();
+
+  if (cols.filter(c => c.classList.contains('lm-hidden')).length === 0) {
+    btn.style.display = 'none';
+    btn.disabled = true;
+    btn.setAttribute('aria-disabled', 'true');
   }
+
+  // 👇 yeni: layout değişti, animasyonları yenile
+  if (typeof window.refreshBlogAnimations === 'function') {
+    window.refreshBlogAnimations();
+  }
+}
+
 
   // run init after other scripts — multiple times to be defensive
   function boot() {
@@ -61,6 +90,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // final guard after images/layout settle
     setTimeout(initBatchState, 800);
   }
+   window.__loadMoreInit = initBatchState;
+
+  requestAnimationFrame(boot);
+  window.addEventListener('load', boot);
 
   requestAnimationFrame(boot);
   window.addEventListener('load', boot);
