@@ -151,6 +151,42 @@ $(document).on('click', 'a[href^="#"]', function (event) {
     
    $(document).ready(function () {
 
+  // Active menu item (Ashley style)
+  window.setActiveMenuItem = function () {
+    var path = window.location.pathname.split('/').pop();
+
+    // root ise index olarak say
+    if (path === '' || path === '/') {
+      path = 'index.html';
+    }
+
+    // Eski aktif sınıfları temizle
+    $('#swupMenu li').removeClass('mil-active');
+    $('#swupMenu a').removeClass('mil-active');
+
+    // Linkleri dolaş
+    $('#swupMenu a').each(function () {
+      var href = $(this).attr('href');
+      if (!href) return;
+
+      // /services.html, ./services.html -> sadece dosya adını al
+      var last = href.split('/').pop();
+
+      // Anasayfa özel durumu
+      var isHome =
+        (path === 'index.html' &&
+          (href === '/' || href === './' || href === '#' || last === 'index.html'));
+
+      if (isHome || last === path) {
+        $(this).addClass('mil-active');          // <a> turuncu ve dot
+        $(this).closest('li').addClass('mil-active'); // <li> Ashley stili
+      }
+    });
+  };
+
+  // İlk yüklemede aktif menüyü ayarla
+  window.setActiveMenuItem();
+
   // 1) Arrow
   $('.mil-arrow-place').each(function () {
     const $host = $(this);
@@ -270,12 +306,17 @@ function initBackToTop() {
 }
 document.addEventListener('DOMContentLoaded', () => {
   initBackToTop();
+  if (window.setActiveMenuItem) {
+    window.setActiveMenuItem();
+  }
 });
 
 document.addEventListener('swup:contentReplaced', () => {
   initBackToTop();
+  if (window.setActiveMenuItem) {
+    window.setActiveMenuItem();
+  }
 });
-
 
     /***************************
 
@@ -1193,3 +1234,48 @@ document.addEventListener('swup:contentReplaced', initHoverDemo);
 
 
 
+// Aktif menü elemanını işaretle
+function setActiveMenuItem() {
+  // URL'den sadece dosya adını al (services.html, blog.html gibi)
+  let path = window.location.pathname.split('/').pop();
+
+  // root ise index.html varsay
+  if (path === '' || path === '/') {
+    path = 'index.html';
+  }
+
+  // Önce tüm menüdeki aktif sınıfları temizle
+  document.querySelectorAll('#swupMenu li, #swupMenu a').forEach(function (el) {
+    el.classList.remove('mil-active');
+  });
+
+  // Menü linklerini dolaş
+  document.querySelectorAll('#swupMenu a').forEach(function (link) {
+    // href'in son kısmını al
+    let href = link.getAttribute('href');
+    if (!href) return;
+
+    // Sadece aynı domain içi linklere bak
+    // href '/services.html' veya './services.html' vb olabilir
+    let hrefLast = href.split('/').pop();
+
+    // index için hem "index.html" hem de sadece "#" ya da "./" gibi durumları yakala
+    let isHome =
+      (path === 'index.html' &&
+        (href === '/' || href === './' || href === '#' || hrefLast === 'index.html'));
+
+    if (isHome || hrefLast === path) {
+      // <a> ya mil-active
+      link.classList.add('mil-active');
+      // parent <li> ye de mil-active
+      const li = link.closest('li');
+      if (li) li.classList.add('mil-active');
+    }
+  });
+}
+
+// Sayfa ilk yüklendiğinde çalıştır
+document.addEventListener('DOMContentLoaded', setActiveMenuItem);
+
+// Swup kullanıyorsan, içerik değişince de tekrar çalıştır
+document.addEventListener('swup:contentReplaced', setActiveMenuItem);
