@@ -1173,6 +1173,7 @@ document.addEventListener('swup:contentReplaced', () => {
 
 });
 // tek kaynaktan dinle: yeni içerik yüklense bile çalışır
+// Menüde sadece bir alt seviye açık kalsın
 document.addEventListener('click', function (e) {
   const btn = e.target.closest('.mil-submenu-button');
   if (!btn) return;
@@ -1183,9 +1184,19 @@ document.addEventListener('click', function (e) {
   const sub = li.querySelector('ul');
   if (!sub) return;
 
-  // görünürlük sınıfını değiştir
+  // Önce diğer tüm menüleri kapat
+  document.querySelectorAll('li.mil-has-children').forEach(function (item) {
+    if (item === li) return; // tıklanan elemanı şimdilik bırak
+
+    const otherSub = item.querySelector('ul');
+    const otherBtn = item.querySelector('.mil-submenu-button');
+
+    if (otherSub) otherSub.classList.remove('mil-active');
+    if (otherBtn) otherBtn.classList.remove('mil-active');
+  });
+
+  // Şimdi tıklananı toggle et
   sub.classList.toggle('mil-active');
-  // aktif görünüm istiyorsan:
   btn.classList.toggle('mil-active');
 });
 
