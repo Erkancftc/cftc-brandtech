@@ -2406,9 +2406,14 @@ services
 }
 
 .mil-service-card-sm {
-  position: relative;
-  display: block;
-  padding: 60px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Üst yazı – alt ok arası */
+  align-items: flex-start;
+  width: 100%;
+  height: 100%; /* Tüm kartlar eşit yükseklik */
+  padding: 40px 30px; /* kendi tasarımına göre oyna */
+  box-sizing: border-box;
 }
 .mil-service-card-sm p {
   opacity: 0;
