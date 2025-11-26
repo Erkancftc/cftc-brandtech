@@ -4491,6 +4491,7 @@ address{
   }
 
   /* Hizmetler dahil, tüm ana link / butonlar ortalansın */
+  @media (max-width:1200px ){
   .mil-main-menu ul li>a,
   .mil-main-menu ul li>.mil-submenu-button {
     display: flex !important;
@@ -4499,7 +4500,17 @@ address{
     margin: 0 auto !important;
     padding-left: 0 !important;
   }
-
+  }
+  @media (min-width:1200px){
+  .mil-main-menu ul li>a,
+  .mil-main-menu ul li>.mil-submenu-button {
+    display: flex !important;
+    justify-content: start !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    padding-left: 0 !important;
+  }
+  }
   /* Hizmetler’in altındaki liste de ortaya gelsin */
   .mil-main-menu ul li.mil-has-children>ul {
     text-align: center !important;
