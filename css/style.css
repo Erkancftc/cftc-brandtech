@@ -1578,7 +1578,8 @@ menu
 .mil-main-menu ul li:last-child {
   margin-bottom: 0;
 }
-.mil-main-menu ul li a {
+.mil-main-menu ul li a, 
+.mil-main-menu ul li button {
   position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1591,16 +1592,19 @@ menu
   font-size: 34px;
   -webkit-transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
   transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
+  cursor: pointer !important;
 }
 
 
 
 @media screen and (max-width: 992px) {
-  .mil-main-menu ul li a {
+  .mil-main-menu ul li a,
+  .mil-main-menu ul li button {
     font-size: 26px;
   }
 }
-.mil-main-menu ul li a:before {
+.mil-main-menu ul li a:before,
+.mil-main-menu ul li button::before {
   content: "";
   position: absolute;
   left: 0;
@@ -1613,13 +1617,16 @@ menu
   -webkit-transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
   transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
 }
-.mil-main-menu ul li a:hover {
+.mil-main-menu ul li a:hover,
+.mil-main-menu ul li button:hover {
   color: rgb(255, 255, 255);
 }
-.mil-main-menu ul li a.mil-active {
+.mil-main-menu ul li a.mil-active,
+.mil-main-menu ul li button.mil-active {
   padding-left: 25px;
 }
-.mil-main-menu ul li a.mil-active:before {
+.mil-main-menu ul li a.mil-active:before,
+.mil-main-menu ul li button.mil-active::before {
   -webkit-transform: scale(1);
           transform: scale(1);
   background-color: var(--bs-red);
@@ -1632,11 +1639,13 @@ menu
   -webkit-filter: brightness(110%);
           filter: brightness(110%);
 }
-.mil-main-menu ul li.mil-has-children > a:hover {
+.mil-main-menu ul li.mil-has-children > a:hover,
+.mil-main-menu ul li.mil-has-children > button:hover {
   color: rgb(255, 255, 255);
   padding-left: 25px;
 }
-.mil-main-menu ul li.mil-has-children > a:hover:before {
+.mil-main-menu ul li.mil-has-children > a:hover:before, 
+.mil-main-menu ul li.mil-has-children > button:hover:before {
   -webkit-transform: scale(1);
           transform: scale(1);
 }
@@ -1694,15 +1703,18 @@ menu
   .mil-main-menu ul li {
     margin-bottom: 30px;
   }
-  .mil-main-menu ul li a {
+  .mil-main-menu ul li a,
+  .mil-main-menu ul li button {
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
   }
-  .mil-main-menu ul li a:before {
+  .mil-main-menu ul li a:before,
+  .mil-main-menu ul li button::before {
     display: none;
   }
-  .mil-main-menu ul li a.mil-active {
+  .mil-main-menu ul li a.mil-active,
+  .mil-main-menu ul li button.mil-active {
     padding-left: 0 !important;
   }
   .mil-main-menu ul li.mil-has-children ul {
