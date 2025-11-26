@@ -4508,7 +4508,7 @@ address{
     justify-content: start !important;
     width: 100% !important;
     margin: 0 auto !important;
-    padding-left: 0 !important;
+    padding-left: 25px !important;
   }
   }
   /* Hizmetler’in altındaki liste de ortaya gelsin */
