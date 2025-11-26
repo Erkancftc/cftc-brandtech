@@ -4500,6 +4500,9 @@ address{
     margin: 0 auto !important;
     padding-left: 0 !important;
   }
+  .mil-main-menu ul li.mil-has-children>ul li a{
+    justify-content: center !important;
+  }
   }
   @media (min-width:1200px){
   .mil-main-menu ul li>a,
@@ -4510,7 +4513,13 @@ address{
     margin: 0 auto !important;
     padding-left: 25px !important;
   }
+  .mil-main-menu ul li.mil-has-children>ul li a{
+    justify-content: start !important;
+
   }
+  }
+
+
   /* Hizmetler’in altındaki liste de ortaya gelsin */
   .mil-main-menu ul li.mil-has-children>ul {
     text-align: center !important;
@@ -4519,7 +4528,7 @@ address{
 
   /* Alt listedeki linkler hafif ortalı dursun */
   .mil-main-menu ul li.mil-has-children>ul li a {
-    justify-content: center !important;
+    /* justify-content: center !important; */
     transform: none !important;
   }
   /* @media (max-width: 1200px) {
