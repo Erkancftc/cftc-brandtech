@@ -41,6 +41,10 @@ sermaye.value = Number(yeniSermaye());
  }} else{
     alert('Lütfen bir sermaye tipi seç!')
  }
+
+ profitResult.textContent = yeniSermaye() - Number(sermaye.value);
+
+
 });
 
 resetBtn.addEventListener('click', ()=>{
