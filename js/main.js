@@ -47,7 +47,8 @@ $(function () {
     preloader
     
     ***************************/
-
+if (document.querySelector(".mil-preloader") &&
+    document.querySelector(".mil-preloader-animation")) {
     var timeline = gsap.timeline();
 
     timeline.to(".mil-preloader-animation", {
@@ -113,7 +114,7 @@ $(function () {
         onComplete: function () {
             $('.mil-preloader').addClass("mil-hidden");
         },
-    }, "-=1");
+    }, "-=1")};
     /***************************
 
     anchor scroll
