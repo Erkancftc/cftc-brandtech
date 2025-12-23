@@ -34,20 +34,15 @@ calculateBtn.addEventListener("click", () => {
     let temp = sermaye.value;
     for (let i = 0; i < kacIslem.value; i++) {
       sermaye.value = yeniSermaye();
-      lastSermaye.textContent = yeniSermaye();
-      profitResult.textContent =  yeniSermaye() - temp;
+      lastSermaye.textContent = Math.trunc(yeniSermaye());
+      profitResult.textContent = Math.trunc(yeniSermaye() - temp);
     } sermaye.value = temp;
 
   } else if (sabit.checked) {
-      const temp2 = sermaye.value;
+      let temp2 = sermaye.value;
     for (let i = 0; i < kacIslem.value; i++) {
        
-             
-lastSermaye.textContent = calc([i]);
-
-        
-        
-        console.log(temp2, lastSermaye.textContent, calc(), yeniSermaye());
+        console.log(temp2, lastSermaye.textContent, calc(), yeniSermaye(), profitResult.textContent);
     }
         
   } else {
