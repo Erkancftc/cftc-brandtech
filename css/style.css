@@ -3407,6 +3407,7 @@ portfolio
             flex-direction: column;
     height: auto;
     padding: 30px;
+    align-items: start;
   }
 }
 

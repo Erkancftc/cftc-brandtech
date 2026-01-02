@@ -11,7 +11,7 @@
 (function () {
   "use strict";
 
-  const ROOT_ID = "publicationRoot";
+  const ROOT_ID = "swupMain";
   const JSON_PATH = (window.PUBLICATIONS_JSON_PATH || "/data/publications.json");
 
   /** Basit yardımcılar **/
@@ -185,29 +185,11 @@
   }
 
   // Sadece publication sayfasında root oluştur / güncelle
-  function mount(html) {
-    let root = document.getElementById(ROOT_ID);
-
-    // publication.html'deysek ve root yoksa otomatik oluştur
-    if (!root && isPublicationPage()) {
-      console.warn(
-        `[publications] #${ROOT_ID} bulunamadı. Gövde sonuna eklendi.`
-      );
-      root = document.createElement("div");
-      root.id = ROOT_ID;
-      document.body.appendChild(root);
-    }
-
-    if (!root) {
-      // Örneğin blog.html'de script çağrılmışsa, hiçbir şey yapma
-      console.warn(
-        `[publications] #${ROOT_ID} yok ve publication sayfasında değiliz, render atlandı.`
-      );
-      return;
-    }
-
-    root.innerHTML = html;
-  }
+ function mount(html) {
+  const root = document.getElementById(ROOT_ID);
+  if (!root) return;
+  root.innerHTML = html;
+}
 
   async function main() {
     // Blog ve diğer sayfalarda hiç çalışmasın
