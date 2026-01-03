@@ -43,7 +43,7 @@
     <link rel="apple-touch-icon" href="/img/icons/apple-touch-icon.png" />
 
     <!-- reCAPTCHA v3 -->
-   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&render=explicit" async defer></script>
 
     <!-- PWA kullanıyorsan aç -->
     <!-- <link rel="manifest" href="/site.webmanifest"> -->
@@ -315,10 +315,10 @@
               <h3 class="mil-center mil-up mil-mb-120">Birlikte <span class="mil-thin">Planlayalım!</span></h3>
               <form class="row align-items-center" id="contactForm">
                 <div class="col-lg-6 mil-up">
-                  <input type="text" placeholder="ADINIZ" required id="name"/>
+                  <input type="text" placeholder="ADINIZ" required id="name" />
                 </div>
                 <div class="col-lg-6 mil-up">
-                  <input type="email" placeholder="E-POSTA ADRESİNİZ" required id="email"/>
+                  <input type="email" placeholder="E-POSTA ADRESİNİZ" required id="email" />
                 </div>
                 <div class="col-lg-12 mil-up">
                   <textarea placeholder="PROJENİZ HAKKINDA BİLGİ VERİN" required id="message"></textarea>
@@ -333,8 +333,10 @@
                     </button>
                   </div>
                 </div>
-                <div class="g-recaptcha" data-sitekey="6LfwAj8sAAAAAOFYr9hCMZALZ7pdyq4NWrvW3zx_"></div>
-                <div id="formMsg" style="margin-top:10px;" class="mil-dark"></div>
+                <!-- <div class="g-recaptcha" data-sitekey="6LfwAj8sAAAAAOFYr9hCMZALZ7pdyq4NWrvW3zx_"></div> -->
+                <div id="recaptcha-container"></div>
+
+                <div id="formMsg" style="margin-top: 10px" class="mil-dark"></div>
               </form>
             </div>
           </section>
