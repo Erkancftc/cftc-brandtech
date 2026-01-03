@@ -584,5 +584,21 @@
     <script src="js/plugins/filterbyauthor.js" defer></script>
     <script src="js/plugins/publications.js" defer></script>
     <script src="js/plugins/mail.js" defer></script>
+    <script>
+  window.recaptchaWidgetId = null;
+
+  window.onRecaptchaLoad = function () {
+    const container = document.getElementById("recaptcha-container");
+    if (!container) return;
+
+    // aynı sayfada tekrar render etme
+    if (window.recaptchaWidgetId !== null) return;
+
+    window.recaptchaWidgetId = grecaptcha.render(container, {
+      sitekey: "6LfwAj8sAAAAAOFYr9hCMZALZ7pdyq4NWrvW3zx_"
+    });
+  };
+</script>
+
   </body>
 </html>
