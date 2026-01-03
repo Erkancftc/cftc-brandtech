@@ -1321,3 +1321,5 @@ document.addEventListener("swup:contentReplaced", () => {
   window.recaptchaWidgetId = null;
   window.renderRecaptcha();
 });
+// main.js: renderRecaptcha tanımlandıktan sonra
+if (window.__recaptchaApiLoaded) window.renderRecaptcha();

@@ -43,7 +43,18 @@
     <link rel="apple-touch-icon" href="/img/icons/apple-touch-icon.png" />
 
     <!-- reCAPTCHA v3 -->
-    <script src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&render=explicit" async defer></script>
+     <script>
+  // Google önce gelirse diye köprü
+  window.__recaptchaApiLoaded = false;
+  window.onRecaptchaLoad = function () {
+    window.__recaptchaApiLoaded = true;
+    // main.js daha yüklenmediyse sorun değil; yüklendiğinde tekrar deneyeceğiz
+    if (window.renderRecaptcha) window.renderRecaptcha();
+  };
+</script>
+
+<script src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&render=explicit" async defer></script>
+
 
 
     <!-- PWA kullanıyorsan aç -->
