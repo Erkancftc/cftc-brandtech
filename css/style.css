@@ -4340,4 +4340,41 @@ address{
   font-style: normal;
 }
 
+/* Buton disabled iken tıklanamaz + hover yok */
+#sendBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* İkon yerini koru, sadece animasyon/opacity ver */
+#sendBtn.is-loading .btn-icon {
+  opacity: 0.6;
+}
+
+
+/* Input hata vurgusu */
+.input-error {
+  border: 1px solid #d93025 !important;
+  outline: none;
+}
+
+/* Mesaj kutusu stilleri (istersen sadeleştir) */
+#formMsg {
+  margin-top: 12px;
+  opacity: 1;
+  transition: opacity 0.6s ease;
+}
+
+#formMsg.is-success {
+  color: #0a7a2f;
+}
+
+#formMsg.is-error {
+  color: #d93025;
+}
+
+#formMsg.is-fade {
+  opacity: 0;
+}
 
