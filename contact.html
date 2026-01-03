@@ -556,33 +556,6 @@
           </div>
         </footer>
         <!-- footer end -->
-         <script>
-  window.recaptchaWidgetId = null;
-
-  window.renderRecaptcha = function () {
-    // Script daha yüklenmediyse çık
-    if (!window.grecaptcha) return;
-
-    const el = document.getElementById("recaptcha-container");
-    if (!el) return; // contact sayfasında değiliz
-
-    // Aynı container yeniden geldiyse önce temizle
-    el.innerHTML = "";
-    window.recaptchaWidgetId = grecaptcha.render(el, {
-      sitekey: "6LfwAj8sAAAAAOFYr9hCMZALZ7pdyq4NWrvW3zx_"
-    });
-  };
-
-  window.onRecaptchaLoad = function () {
-    window.renderRecaptcha();
-  };
-</script>
-
-<script
-  src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&render=explicit"
-  async defer>
-</script>
-
       </div>
       <!-- content -->
     </div>
@@ -611,6 +584,8 @@
     <script src="js/plugins/filterbyauthor.js" defer></script>
     <script src="js/plugins/publications.js" defer></script>
     <script src="js/plugins/mail.js" defer></script>
+    <script src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&render=explicit" async defer></script>
+
     <!-- <script>
   window.recaptchaWidgetId = null;
 
@@ -626,6 +601,5 @@
     });
   };
 </script> -->
-
   </body>
 </html>

@@ -67,3 +67,33 @@ form.addEventListener("submit", async e => {
     if (label) label.textContent = "MESAJ GÖNDER"
   }
 })
+// ======================
+// reCAPTCHA (global)
+// ======================
+window.recaptchaWidgetId = null;
+
+window.renderRecaptcha = function () {
+  // Google script yüklenmediyse çık
+  if (!window.grecaptcha) return;
+
+  const el = document.getElementById("recaptcha-container");
+  if (!el) return; // contact sayfasında değiliz
+
+  // container temizle ve tekrar render et
+  el.innerHTML = "";
+  window.recaptchaWidgetId = grecaptcha.render(el, {
+    sitekey: "6LfwAj8sAAAAAOFYr9hCMZALZ7pdyq4NWrvW3zx_",
+  });
+};
+
+// reCAPTCHA script callback
+window.onRecaptchaLoad = function () {
+  window.renderRecaptcha();
+};
+
+// Swup geçişlerinden sonra (contact’a gelince) tekrar render
+document.addEventListener("swup:contentReplaced", () => {
+  // her geçişte widget resetle ve gerekiyorsa render et
+  window.recaptchaWidgetId = null;
+  window.renderRecaptcha();
+});
