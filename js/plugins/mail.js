@@ -6,20 +6,13 @@ const label = btn.querySelector(".btn-label")
 const FUNCTION_URL = "https://coinwdmofzqhobmqzniv.supabase.co/functions/v1/send-contact"
 const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_-IOZRI2zsxDArrl8Sy11Bg_7iNbLGs3"
 
-
 form.addEventListener("submit", async e => {
   e.preventDefault()
   if (btn.disabled) return
 
-  // ✅ Widget daha render olmadıysa: kullanıcıya net mesaj
-  if (recaptchaWidgetId === null) {
-    msgBox.textContent = "❌ reCAPTCHA henüz yüklenmedi. Sayfayı yenileyip tekrar deneyin."
-    return
-  }
-
-  // ✅ Token al
-  if (window.recaptchaWidgetId === null) {
-    msgBox.textContent = "❌ reCAPTCHA henüz yüklenmedi. Lütfen sayfayı yenileyin."
+  // reCAPTCHA widget hazır mı?
+  if (window.recaptchaWidgetId === null || !window.grecaptcha) {
+    msgBox.textContent = "❌ reCAPTCHA henüz yüklenmedi. Lütfen 1-2 saniye bekleyin."
     return
   }
 
@@ -28,7 +21,6 @@ form.addEventListener("submit", async e => {
     msgBox.textContent = "❌ Lütfen 'Ben robot değilim' doğrulamasını yapın."
     return
   }
-
 
   btn.disabled = true
   btn.classList.add("is-loading")
@@ -58,9 +50,8 @@ form.addEventListener("submit", async e => {
     msgBox.textContent = "✅ Mesajınız alındı. En kısa sürede dönüş yapacağız."
     form.reset()
 
-    // ✅ Checkbox’ı sıfırla
-   grecaptcha.reset(window.recaptchaWidgetId)
-
+    // checkbox reset
+    grecaptcha.reset(window.recaptchaWidgetId)
 
     msgBox.classList.add("show")
     setTimeout(() => msgBox.classList.add("fade"), 3500)
