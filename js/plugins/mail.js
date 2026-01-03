@@ -10,8 +10,7 @@ form.addEventListener("submit", async e => {
   e.preventDefault()
   if (btn.disabled) return
 
-  // reCAPTCHA widget hazır mı?
-  if (window.recaptchaWidgetId === null || !window.grecaptcha) {
+  if (!window.grecaptcha || window.recaptchaWidgetId === null) {
     msgBox.textContent = "❌ reCAPTCHA henüz yüklenmedi. Lütfen 1-2 saniye bekleyin."
     return
   }
