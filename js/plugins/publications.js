@@ -148,6 +148,14 @@
     return `
     <section id="blog">
       <div class="container mil-p-120-90">
+      <div class="container">
+                            <ul class="mil-breadcrumbs mil-mb-60">
+                                <li><a href="index.html">Anasayfa</a></li>
+                                <li><a href="blog.html">Blog</a></li>
+                                <li><a href="#">${esc(it.title)}</a></li>
+                            </ul>
+                            <h1 class="mil-mb-60">${esc(it.title)}</h1>  
+                        </div>
         <div class="row justify-content-center">
           <div class="col-lg-12">
             <div class="mil-image-frame mil-horizontal mil-up">
@@ -160,16 +168,10 @@
             </div>
 
             <div class="mil-info mil-up mil-mb-90">
-              <div>Kategori: &nbsp;<span class="mil-dark">${esc(
-                it.category
-              )}</span></div>
-              <div>Tarih: &nbsp;<span class="mil-dark">${esc(
-                it.date
-              )}</span></div>
+              <div>Kategori: &nbsp;<span class="mil-dark">${esc(it.category)}</span></div>
+              <div>Tarih: &nbsp;<span class="mil-dark">${esc(it.date)}</span></div>
               <div>
-                <a class="author-link" href="/blog.html?author=${encodeURIComponent(
-                  it.author
-                )}" title="Yazarın Makaleleri">
+                <a class="author-link" href="/blog.html?author=${encodeURIComponent(it.author)}" title="Yazarın Makaleleri">
                   Yazar: <span class="mil-accent">${esc(it.author)}</span>
                 </a>
               </div>
@@ -181,7 +183,7 @@
         </div>
       </div>
     </section>
-  `;
+  `
   }
 
   // Sadece publication sayfasında root oluştur / güncelle
