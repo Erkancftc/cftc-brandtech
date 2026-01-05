@@ -937,7 +937,17 @@
       <!-- content -->
     </div>
     <!-- wrapper end -->
+    <script>
+  // Google önce gelirse diye köprü
+  window.__recaptchaApiLoaded = false;
+  window.onRecaptchaLoad = function () {
+    window.__recaptchaApiLoaded = true;
+    // main.js daha yüklenmediyse sorun değil; yüklendiğinde tekrar deneyeceğiz
+    if (window.renderRecaptcha) window.renderRecaptcha();
+  };
+</script>
 
+<script src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&render=explicit" async defer></script>
     <!-- jQuery js -->
     <script src="js/plugins/jquery.min.js" defer></script>
     <!-- swup js -->
