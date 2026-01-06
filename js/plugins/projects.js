@@ -49,6 +49,27 @@
   }
 
   async function loadProjectFromJson() {
+    function setImageSlot(slotId, src) {
+      const img = document.getElementById(slotId + "Img")
+      const zoom = document.getElementById(slotId + "Zoom")
+
+      // slotun ana kapsayıcısı (mil-image-frame) -> bunu saklayacağız
+      const frame = (img && img.closest(".mil-image-frame")) || (zoom && zoom.closest(".mil-image-frame"))
+
+      if (!src) {
+        // Görsel yoksa: tüm slotu gizle + eski defaultları temizle
+        if (frame) frame.style.display = "none"
+        if (img) img.removeAttribute("src")
+        if (zoom) zoom.removeAttribute("href")
+        return
+      }
+
+      // Görsel varsa: slotu görünür yap + src/href set et
+      if (frame) frame.style.display = ""
+      if (img) img.src = src
+      if (zoom) zoom.href = src
+    }
+
     const params = new URLSearchParams(window.location.search)
     const slug = params.get("slug")
     if (!slug) return
@@ -73,29 +94,34 @@
     const client = document.getElementById("clientName")
     const date = document.getElementById("projectDate")
     const owner = document.getElementById("projectOwner")
-    const link = document.getElementById("webSiteLink").attributes.href
+    const webSiteLink = document.getElementById("webSiteLink")
     if (client) client.textContent = project.client || "-"
     if (date) date.textContent = project.date || "-"
     if (owner) owner.textContent = project.owner || "-"
-    if (link) link.textContent = project.link || "-"
+    if (webSiteLink) webSiteLink.href = project.link || "#"
 
     // Cover
     const coverImg = document.getElementById("coverImg")
     const coverZoom = document.getElementById("coverZoom")
-    if (coverImg && project.cover) coverImg.src = project.cover
-    if (coverZoom && project.cover) coverZoom.href = project.cover
+    const coverFrame = (coverImg && coverImg.closest(".mil-image-frame")) || (coverZoom && coverZoom.closest(".mil-image-frame"))
 
-    // Gallery (g2-g7)
-    const ids = ["g2", "g3", "g4", "g5", "g6", "g7"]
-    if (Array.isArray(project.gallery)) {
-      ids.forEach((id, i) => {
-        const img = document.getElementById(id + "Img")
-        const zoom = document.getElementById(id + "Zoom")
-        const src = project.gallery[i]
-        if (img && src) img.src = src
-        if (zoom && src) zoom.href = src
-      })
+    if (!project.cover) {
+      if (coverFrame) coverFrame.style.display = "none"
+      if (coverImg) coverImg.removeAttribute("src")
+      if (coverZoom) coverZoom.removeAttribute("href")
+    } else {
+      if (coverFrame) coverFrame.style.display = ""
+      if (coverImg) coverImg.src = project.cover
+      if (coverZoom) coverZoom.href = project.cover
     }
+
+    // Gallery (g2-g7) – kaç foto varsa o kadar göster
+    const ids = ["g2", "g3", "g4", "g5", "g6", "g7"]
+    const gallery = Array.isArray(project.gallery) ? project.gallery : []
+
+    ids.forEach((id, i) => {
+      setImageSlot(id, gallery[i])
+    })
 
     // Content
     const sectionTitle = document.getElementById("sectionTitle")
@@ -125,6 +151,42 @@
 
     // İstersen SEO title da güncellenebilir:
     // document.title = (project.seoTitle || project.titleMain || "Proje") + " | CFTC BrandTech";
+    function setupPrevNextProjects(projects, currentSlug) {
+      const prevBtn = document.getElementById("prevProject")
+      const nextBtn = document.getElementById("nextProject")
+
+      if (!prevBtn || !nextBtn) return
+
+      const index = projects.findIndex(p => p.slug === currentSlug)
+
+      if (index === -1) {
+        prevBtn.style.display = "none"
+        nextBtn.style.display = "none"
+        return
+      }
+
+      // ÖNCEKİ
+      if (index > 0) {
+        const prevProject = projects[index - 1]
+        prevBtn.href = `projects.html?slug=${prevProject.slug}`
+        prevBtn.classList.remove("mil-disabled")
+      } else {
+        prevBtn.classList.add("mil-disabled")
+        prevBtn.removeAttribute("href")
+      }
+
+      // SONRAKİ
+      if (index < projects.length - 1) {
+        const nextProject = projects[index + 1]
+        nextBtn.href = `projects.html?slug=${nextProject.slug}`
+        nextBtn.classList.remove("mil-disabled")
+      } else {
+        nextBtn.classList.add("mil-disabled")
+        nextBtn.removeAttribute("href")
+      }
+    }
+setupPrevNextProjects(projects, slug)
+
   }
 
   let initLock = false
