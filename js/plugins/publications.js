@@ -149,7 +149,7 @@
     <section id="blog">
       <div class="container mil-p-120-90">
       <div class="container">
-                            <ul class="mil-breadcrumbs mil-mb-60">
+                            <ul class="mil-breadcrumbs mil-mb-60 pt-5">
                                 <li><a href="index.html">Anasayfa</a></li>
                                 <li><a href="blog.html">Blog</a></li>
                                 <li><a href="#">${esc(it.title)}</a></li>
