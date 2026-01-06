@@ -290,11 +290,15 @@
                         </div>
                         <div class="container">
                             <ul class="mil-breadcrumbs mil-mb-60">
-                                <li><a href="index.html">Anasayfa</a></li>
-                                <li><a href="portfolio-1.html">Portföy</a></li>
-                                <li><a href="project-1.html">PROJE-1</a></li>
+                            <li><a href="index.html">Anasayfa</a></li>
+                            <li><a href="portfolio-1.html">Portföy</a></li>
+                            <li><a href="project-1.html" id="projectBreadcrumb">PROJE</a></li>
                             </ul>
-                            <h1 class="mil-mb-60">Front-End <span class="mil-thin">Development</span></h1>
+
+                            <h1 class="mil-mb-60" id="projectTitle">
+                            Başlık <span class="mil-thin">Alt Başlık</span>
+                            </h1>
+
                             <a href="#project" class="mil-link mil-dark mil-arrow-place mil-down-arrow">
                                 <span>Bilgi için</span>
                             </a>
@@ -307,15 +311,15 @@
                 <section class="mil-p-120-0">
                     <div class="container mil-p-0-120" id="project">
                         <div class="mil-image-frame mil-horizontal mil-up">
-                            <img src="img/works/1/1.jpg" alt="image">
-                            <a data-fancybox="gallery" data-no-swup href="img/works/1/1.jpg" class="mil-zoom-btn">
+                            <img id="coverImg" src="img/works/1/1.jpg" alt="image">
+                            <a id="coverZoom" data-fancybox="gallery" data-no-swup href="img/works/1/1.jpg" class="mil-zoom-btn">
                                 <img src="img/icons/zoom.svg" alt="zoom">
                             </a>
                         </div>
                         <div class="mil-info mil-up">
-                            <div>MÜŞTERİ: &nbsp;<span class="mil-dark">CFTC SmartTech</span></div>
-                            <div>TARİH: &nbsp;<span class="mil-dark">NİSAN 2025</span></div>
-                            <div>YETKİLİ KİŞİ: &nbsp;;<span class="mil-dark">CFTC BrandTech EKİP</span></div>
+                            <div>MÜŞTERİ: &nbsp;<span class="mil-dark" id="clientName">-</span></div>
+                            <div>TARİH: &nbsp;<span class="mil-dark" id="projectDate">-</span></div>
+                            <div>YETKİLİ KİŞİ: &nbsp;<span class="mil-dark" id="projectOwner">-</span></div>
                         </div>
                         <div class="mil-p-120-0">
 
@@ -323,8 +327,8 @@
                                 <div class="col-lg-6">
 
                                     <div class="mil-image-frame mil-square mil-up mil-mb-30">
-                                        <img src="img/works/1/2.jpg" alt="image">
-                                        <a data-fancybox="gallery" data-no-swup href="img/works/1/2.jpg" class="mil-zoom-btn">
+                                        <img id="g2Img" src="img/works/1/2.jpg" alt="image">
+                                        <a id="g2Zoom" data-fancybox="gallery" data-no-swup href="img/works/1/2.jpg" class="mil-zoom-btn">
                                             <img src="img/icons/zoom.svg" alt="zoom">
                                         </a>
                                     </div>
@@ -333,8 +337,8 @@
                                 <div class="col-lg-6">
 
                                     <div class="mil-image-frame mil-square mil-up mil-mb-30">
-                                        <img src="img/works/1/3.jpg" alt="image">
-                                        <a data-fancybox="gallery" data-no-swup href="img/works/1/3.jpg" class="mil-zoom-btn">
+                                        <img id="g3Img" src="img/works/1/3.jpg" alt="image">
+                                        <a id="g3Zoom" data-fancybox="gallery" data-no-swup href="img/works/1/3.jpg" class="mil-zoom-btn">
                                             <img src="img/icons/zoom.svg" alt="zoom">
                                         </a>
                                     </div>
@@ -343,8 +347,8 @@
                                 <div class="col-lg-6">
 
                                     <div class="mil-image-frame mil-square mil-up mil-mb-30">
-                                        <img src="img/works/1/4.jpg" alt="image">
-                                        <a data-fancybox="gallery" data-no-swup href="img/works/1/4.jpg" class="mil-zoom-btn">
+                                        <img id="g4Img" src="img/works/1/4.jpg" alt="image">
+                                        <a id="g4Zoom" data-fancybox="gallery" data-no-swup href="img/works/1/4.jpg" class="mil-zoom-btn">
                                             <img src="img/icons/zoom.svg" alt="zoom">
                                         </a>
                                     </div>
@@ -353,8 +357,8 @@
                                 <div class="col-lg-6">
 
                                     <div class="mil-image-frame mil-square mil-up mil-mb-30">
-                                        <img src="img/works/1/5.jpg" alt="image">
-                                        <a data-fancybox="gallery" data-no-swup href="img/works/1/5.jpg" class="mil-zoom-btn">
+                                        <img id="g5Img" src="img/works/1/5.jpg" alt="image">
+                                        <a id="g5Zoom" data-fancybox="gallery" data-no-swup href="img/works/1/5.jpg" class="mil-zoom-btn">
                                             <img src="img/icons/zoom.svg" alt="zoom">
                                         </a>
                                     </div>
@@ -363,9 +367,9 @@
                             </div>
                             <div class="row justify-content-between mil-p-90-120">
                                 <div class="col-lg-5">
-                                    <h3 class="mil-up mil-mb-60">Sadelik, Şıklık, Güvenlik</h3>
+                                    <h3 id="sectionTitle" class="mil-up mil-mb-60">Sadelik, Şıklık, Güvenlik</h3>
                                 </div>
-                                <div class="col-lg-6">
+                                <div  id="sectionBody" class="col-lg-6">
                                     <p class="mil-up mil-mb-30"><b>CFTC SmartTech,</b> akıllı ev teknolojilerini modern yaşamla buluşturarak güvenliği, konforu ve verimliliği yeniden tanımlar. Akıllı Geçiş Kontrol sistemlerinden aydınlatmaya, sensörlerden kontrol gruplarına kadar sunduğumuz tüm çözümler, günlük yaşamınızı daha kolay, güvenli ve keyifli hale getirmek için tasarlanmıştır.</p>
 
                                     <p class="mil-up">Her ürün, yüksek teknoloji ve kullanıcı dostu tasarımın birleşimi olarak öne çıkar. Enerji tasarrufu, uzaktan erişim ve otomasyon özellikleri sayesinde hem evinizde hem de iş yerinizde modern yaşamın ihtiyaçlarını karşılamanıza yardımcı olur.
@@ -384,8 +388,8 @@
                                 <div class="col-lg-6">
 
                                     <div class="mil-image-frame mil-vertical mil-up mil-mb-30">
-                                        <img src="img/works/1/6.jpg" alt="image">
-                                        <a data-fancybox="gallery" data-no-swup href="img/works/1/6.jpg" class="mil-zoom-btn">
+                                        <img id="g6Img" src="img/works/1/6.jpg" alt="image">
+                                        <a id="g6Zoom" data-fancybox="gallery" data-no-swup href="img/works/1/6.jpg" class="mil-zoom-btn">
                                             <img src="img/icons/zoom.svg" alt="zoom">
                                         </a>
                                     </div>
@@ -394,8 +398,8 @@
                                 <div class="col-lg-6">
 
                                     <div class="mil-image-frame mil-vertical mil-up mil-mb-30">
-                                        <img src="img/works/1/7.jpg" alt="image">
-                                        <a data-fancybox="gallery" data-no-swup href="img/works/1/7.jpg" class="mil-zoom-btn">
+                                        <img id="g7Img" src="img/works/1/7.jpg" alt="image">
+                                        <a id="g7Zoom" data-fancybox="gallery" data-no-swup href="img/works/1/7.jpg" class="mil-zoom-btn">
                                             <img src="img/icons/zoom.svg" alt="zoom">
                                         </a>
                                     </div>
@@ -678,6 +682,7 @@
     <script src="js/plugins/category.js" defer></script>
     <script src="js/plugins/filterbyauthor.js" defer></script>
     <script src="js/plugins/publications.js" defer></script>
+    <script src="js/plugins/projects.js"></script>
 
 </body>
 
