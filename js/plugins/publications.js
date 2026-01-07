@@ -182,6 +182,62 @@
           <div id="article" class="col-lg-8"></div>
         </div>
       </div>
+      <!-- similar -->
+      <section class="mil-soft-bg">
+        <div class="container mil-p-120-60">
+          <div class="row align-items-center mil-mb-30">
+            <div class="col-lg-6 mil-mb-30">
+              <h3 class="mil-up">İlgini Çekebilecek Yazılar:</h3>
+            </div>
+            <div class="col-lg-6 mil-mb-30">
+              <div class="mil-adaptive-right mil-up">
+                <a href="blog.html" class="mil-link mil-dark mil-arrow-place">
+                  <span>Tümünü gör</span>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6">
+              <a href="publication.html" class="mil-blog-card mil-mb-60">
+                <div class="mil-cover-frame mil-up">
+                  <img src="img/blog/ind-blog-01.jpg" alt="Tasarım" />
+                </div>
+                <div class="mil-post-descr">
+                  <div class="mil-labels mil-up mil-mb-30">
+                    <div class="mil-label mil-upper mil-accent">Tasarım</div>
+                    <div class="mil-label mil-upper">24 Nisan 2025</div>
+                  </div>
+                  <h4 class="mil-up mil-mb-30">10 Basit Adımda Grafik Tasarımcı Nasıl Olunur?</h4>
+                  <p class="mil-post-text mil-up mil-mb-30">Grafik tasarım, yaratıcılığı görsel çözümlere dönüştürme sanatıdır. Bu yazıda, tasarıma ilgi duyan herkesin adım adım takip ederek başarılı bir grafik tasarımcı olabileceği 10 basit yolu keşfedeceksiniz.</p>
+                  <div class="mil-link mil-dark mil-arrow-place mil-up">
+                    <span>Bilgi için</span>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="col-lg-6">
+              <a href="publication.html?slug=en-iyi-grafik-kurslari" class="mil-blog-card mil-mb-60">
+                <div class="mil-cover-frame mil-up">
+                  <img src="img/blog/Kaankurs1.jpg" alt="Tasarım" />
+                </div>
+                <div class="mil-post-descr">
+                  <div class="mil-labels mil-up mil-mb-30">
+                    <div class="mil-label mil-upper mil-accent">Tasarım</div>
+                    <div class="mil-label mil-upper">12 Mayıs 2025</div>
+                  </div>
+                  <h4 class="mil-up mil-mb-30">Grafik Tasarım İçin En İyi Online ve Offline Kurs</h4>
+                  <p class="mil-post-text mil-up mil-mb-30">Profesyonel tasarım dünyasında yer edinmek için doğru eğitim programını seçmek büyük önem taşır. İşte grafik tasarımda öne çıkan 16 kurs ile bilgi ve becerilerinizi ileriye taşıyın.</p>
+                  <div class="mil-link mil-dark mil-arrow-place mil-up">
+                    <span>Bilgi için</span>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- similar end -->
     </section>
   `
   }
