@@ -84,12 +84,12 @@ body {
 
 *::-moz-selection {
   color: inherit;
-  background-color: var(--bs-red);
+  background-color: #ffbaba;
 }
 
 *::selection {
   color: inherit;
-  background-color: var(--bs-red);
+  background-color: #ffbaba;
 }
 
 .mil-wrapper {
