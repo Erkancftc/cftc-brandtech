@@ -2,8 +2,8 @@
   {
     "slug": "cftc-smarttech-frontend",
     "breadcrumb": "CFTC SmartTech",
-    "titleMain": "Front-End",
-    "titleThin": "Development",
+    "titleMain": "Akıllı Ev Sistemleri",
+    "titleThin": "Websitesi",
     "client": "CFTC SmartTech",
     "date": "NİSAN 2025",
     "owner": "CFTC BrandTech EKİP",
@@ -22,7 +22,7 @@
       },
       {
         "type": "p",
-        "html": "<b>CFTC SmartTech çözümleri ile:</b>"
+        "html": "<b class='mil-dark'>CFTC SmartTech çözümleri ile:</b>"
       },
       {
         "type": "ul",
@@ -33,12 +33,12 @@
   {
     "slug": "villavillage-website-redesign",
     "breadcrumb": "Villa Village",
-    "titleMain": "Full-Stack",
-    "titleThin": "Development",
+    "titleMain": "Villa Kiralama",
+    "titleThin": "Websitesi",
     "client": "Villa Village",
     "date": "Mayıs 2025",
     "owner": "CFTC BrandTech EKİP",
-    "cover": "img/works/2/villavillage.gif",
+    "cover": "img/works/2/villavillage-2.gif",
     "gallery": [ "img/works/2/2.jpg", "img/works/2/3.jpg", "img/works/2/4.jpg"],
     "link" :"https://www.villavillage.tr",
     "sectionTitle": "Sadelik, Zarafet, Yenilik",
@@ -61,8 +61,8 @@
   {
     "slug": "siempretour-website-redesign",
     "breadcrumb": "Siempretour",
-    "titleMain": "Full-Stack",
-    "titleThin": "Development",
+    "titleMain": "Tur Kiralama",
+    "titleThin": "Websitesi",
     "client": "Murat Gökyokuş",
     "date": "Ekim 2025",
     "owner": "Murat Gökyokuş",
@@ -88,8 +88,8 @@
   {
     "slug": "zckolaylı-lawyer-website",
     "breadcrumb": "ZCKolaylı",
-    "titleMain": "Full-Stack",
-    "titleThin": "Development",
+    "titleMain": "Avukat Özel",
+    "titleThin": "Websitesi",
     "client": "Zeynep Cansu Kolaylı Çiftçi",
     "date": "Aralık 2025",
     "owner": "Zeynep Cansu Kolaylı Çiftçi",
@@ -108,11 +108,11 @@
       },
       {
         "type": "p",
-        "html": "Her ürün, yüksek teknoloji ve kullanıcı dostu tasarımın birleşimi olarak öne çıkar. Enerji tasarrufu, uzaktan erişim ve otomasyon özellikleri sayesinde hem evinizde hem de iş yerinizde modern yaşamın ihtiyaçlarını karşılamanıza yardımcı olur. <br>Hukuk büroları gibi güvenin kritik olduğu alanlarda,sadece estetik değil; şeffaf, anlaşılır ve güven veren dijital deneyimler tasarlarız. <br><ul><li> Kurumsal avukatlık web siteleri</li><li> Online danışmanlık ve ödeme alabilen sistemler</li><li> Dosya, vaka veya borç sorgulama altyapıları</li><li> Kredi kartı, IBAN ve QR destekli ödeme ekranları</li></ul>"
+        "html": "Her ürün, yüksek teknoloji ve kullanıcı dostu tasarımın birleşimi olarak öne çıkar. Enerji tasarrufu, uzaktan erişim ve otomasyon özellikleri sayesinde hem evinizde hem de iş yerinizde modern yaşamın ihtiyaçlarını karşılamanıza yardımcı olur. <br>Hukuk büroları gibi güvenin kritik olduğu alanlarda,sadece estetik değil; şeffaf, anlaşılır ve güven veren dijital deneyimler tasarlarız. <br> <br><ul><li> Kurumsal avukatlık web siteleri</li><li> Online danışmanlık ve ödeme alabilen sistemler</li><li> Dosya, vaka veya borç sorgulama altyapıları</li><li> Kredi kartı, IBAN ve QR destekli ödeme ekranları</li></ul>"
       },
       {
         "type": "p",
-        "html": "<b>Neyi Farklı Yapıyoruz?</b> <ul><li> Hazır tema değil, ihtiyaca özel tasarım</li> <li> Gerçek kullanıcı davranışına göre UX kurgusu</li><li> Online ödeme ve güvenli altyapı entegrasyonları</li><li> Mobil, tablet ve masaüstünde kusursuz deneyim</li> <li> SEO, hız ve güvenlik odaklı geliştirme</li></ul> <br><br> Her detay, ziyaretçinin siteye girdiği ilk saniyeden, işlemini tamamladığı ana kadar planlanır.<br><br> <b>Tasarım Biter, İş Başlar</b><br><br> Bizim için bir web sitesi yayına girdiğinde iş bitmez. Asıl hedef; sitenin iş üretmesi, güven vermesi ve dönüşüm sağlamasıdır. Bu yüzden projelerimiz; Sadece “güzel görünen” değil Kullanan, anlayan ve işlem yapan sistemlerdir."
+        "html": "<b class='mil-dark'>Neyi Farklı Yapıyoruz?</b> <ul><li> Hazır tema değil, ihtiyaca özel tasarım</li> <li> Gerçek kullanıcı davranışına göre UX kurgusu</li><li> Online ödeme ve güvenli altyapı entegrasyonları</li><li> Mobil, tablet ve masaüstünde kusursuz deneyim</li> <li> SEO, hız ve güvenlik odaklı geliştirme</li></ul> <br><br> Her detay, ziyaretçinin siteye girdiği ilk saniyeden, işlemini tamamladığı ana kadar planlanır.<br><br> <b>Tasarım Biter, İş Başlar</b><br><br> Bizim için bir web sitesi yayına girdiğinde iş bitmez. Asıl hedef; sitenin iş üretmesi, güven vermesi ve dönüşüm sağlamasıdır. Bu yüzden projelerimiz; Sadece “güzel görünen” değil Kullanan, anlayan ve işlem yapan sistemlerdir."
       }
     ]
   }
