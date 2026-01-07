@@ -2,8 +2,8 @@
   {
     "slug": "cftc-smarttech-frontend",
     "breadcrumb": "CFTC SmartTech",
-    "titleMain": "Front-End",
-    "titleThin": "Development",
+    "titleMain": "Akıllı Ev Sistemleri",
+    "titleThin": "Websitesi",
     "client": "CFTC SmartTech",
     "date": "NİSAN 2025",
     "owner": "CFTC BrandTech EKİP",
@@ -33,8 +33,8 @@
   {
     "slug": "villavillage-website-redesign",
     "breadcrumb": "Villa Village",
-    "titleMain": "Full-Stack",
-    "titleThin": "Development",
+    "titleMain": "Villa Kiralama",
+    "titleThin": "Websitesi",
     "client": "Villa Village",
     "date": "Mayıs 2025",
     "owner": "CFTC BrandTech EKİP",
@@ -61,8 +61,8 @@
   {
     "slug": "siempretour-website-redesign",
     "breadcrumb": "Siempretour",
-    "titleMain": "Full-Stack",
-    "titleThin": "Development",
+    "titleMain": "Tur Kiralama",
+    "titleThin": "Websitesi",
     "client": "Murat Gökyokuş",
     "date": "Ekim 2025",
     "owner": "Murat Gökyokuş",
@@ -88,8 +88,8 @@
   {
     "slug": "zckolaylı-lawyer-website",
     "breadcrumb": "ZCKolaylı",
-    "titleMain": "Full-Stack",
-    "titleThin": "Development",
+    "titleMain": "Avukat Özel",
+    "titleThin": "Websitesi",
     "client": "Zeynep Cansu Kolaylı Çiftçi",
     "date": "Aralık 2025",
     "owner": "Zeynep Cansu Kolaylı Çiftçi",

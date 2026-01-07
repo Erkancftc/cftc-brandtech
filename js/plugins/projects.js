@@ -124,27 +124,37 @@
     })
 
     // Content
+    // Content
     const sectionTitle = document.getElementById("sectionTitle")
     if (sectionTitle) sectionTitle.textContent = project.sectionTitle || "-"
 
-    const sectionBody = document.getElementById("sectionBody")
-    if (sectionBody) {
-      sectionBody.innerHTML = ""
-      ;(project.content || []).forEach(block => {
+    // Tüm içerik tek yerde (solda)
+    const contentEl = document.getElementById("sectionContent")
+
+    if (contentEl) {
+      contentEl.innerHTML = ""
+
+      const blocks = Array.isArray(project.content) ? project.content : []
+
+      blocks.forEach(block => {
         if (block.type === "p") {
           const p = document.createElement("p")
           p.className = "mil-up mil-mb-30"
           p.innerHTML = block.html || ""
-          sectionBody.appendChild(p)
+          contentEl.appendChild(p)
         }
+
         if (block.type === "ul") {
           const ul = document.createElement("ul")
-          ;(block.items || []).forEach(itemHtml => {
+          ul.className = "mil-up mil-mb-30"
+          ;(block.items || []).forEach(item => {
             const li = document.createElement("li")
-            li.innerHTML = itemHtml
+            li.className = "mil-up"
+            li.innerHTML = item
             ul.appendChild(li)
           })
-          sectionBody.appendChild(ul)
+
+          contentEl.appendChild(ul)
         }
       })
     }
@@ -185,8 +195,7 @@
         nextBtn.removeAttribute("href")
       }
     }
-setupPrevNextProjects(projects, slug)
-
+    setupPrevNextProjects(projects, slug)
   }
 
   let initLock = false
