@@ -75,6 +75,9 @@ body {
   -ms-scroll-chaining: none;
       overscroll-behavior: inherit;
 }
+li {
+  list-style: inside !important;
+}
 @media screen and (max-width: 768px) {
   html,
 body {
