@@ -75,7 +75,7 @@ body {
   -ms-scroll-chaining: none;
       overscroll-behavior: inherit;
 }
-li {
+#sectionContent > ul {
   list-style: inside;
 }
 @media screen and (max-width: 768px) {
