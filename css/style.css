@@ -381,7 +381,9 @@ list-style: circle;
 .mil-thin {
   font-weight: 100;
 }
-
+.mil-medium {
+  font-weight: 300 !important;
+}
 a {
   color: inherit;
   text-decoration: none;

@@ -154,7 +154,7 @@
                                 <li><a href="blog.html">Blog</a></li>
                                 <li><a href="#">${esc(it.title)}</a></li>
                             </ul>
-                            <h1 class="mil-mb-60">${esc(it.title)}</h1>  
+                            <h1 class="mil-mb-60 mil-medium">${esc(it.title)}</h1>  
                         </div>
         <div class="row justify-content-center">
           <div class="col-lg-12">
@@ -235,8 +235,8 @@
         // Gerekirse burada sayfa-özel animasyon/init çağır (GSAP korumalı)
       } else {
         updateSEO({
-          title: "Yayınlar | CFTC BrandTech",
-          description: "CFTC BrandTech yayınları ve makaleler.",
+          title: "Makaleler | CFTC BrandTech",
+          description: "CFTC BrandTech Makaleler.",
           image: (items[0] && items[0].cover) || "",
         });
         mount(renderList(items));
@@ -244,7 +244,7 @@
     } catch (err) {
       console.error(err);
       mount(
-        `<section class="container"><p>Yayınlar yüklenirken bir sorun oluştu.</p></section>`
+        `<section class="container"><p>Makaleler yüklenirken bir sorun oluştu.</p></section>`
       );
     }
   }
