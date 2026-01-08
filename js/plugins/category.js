@@ -87,11 +87,12 @@
     });
   }
 
-  document.addEventListener("DOMContentLoaded", initCategoryUI);
-  document.addEventListener("swup:contentReplaced", initCategoryUI);
-  if (window.swup && typeof window.swup.on === "function") {
-    try {
-      window.swup.on("contentReplaced", initCategoryUI);
-    } catch (e) {}
+  // Use global content ready utility (handles DOMContentLoaded and swup:contentReplaced)
+  if (typeof window.onContentReady === "function") {
+    window.onContentReady(initCategoryUI);
+  } else {
+    // Fallback if swup-utils.js hasn't loaded yet
+    document.addEventListener("DOMContentLoaded", initCategoryUI);
+    document.addEventListener("swup:contentReplaced", initCategoryUI);
   }
 })();
