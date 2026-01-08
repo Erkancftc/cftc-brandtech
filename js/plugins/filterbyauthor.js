@@ -44,6 +44,11 @@
         }
       }
     }
+
+    // Refresh animations
+    if (typeof window.refreshBlogAnimations === "function") {
+      window.refreshBlogAnimations();
+    }
   }
 
   // Dışarıdan da çağrılabilir
@@ -85,10 +90,33 @@
     });
   }
 
-  document.addEventListener("DOMContentLoaded", initAuthorUI);
-  if (window.swup && typeof window.swup.on === "function") {
-    try {
-      window.swup.on("contentReplaced", initAuthorUI);
-    } catch (e) {}
+  /**
+   * Check URL for author query parameter and auto-filter
+   */
+  function checkAuthorQueryParam() {
+    const params = new URLSearchParams(window.location.search);
+    const author = params.get("author");
+
+    if (author) {
+      // Auto-filter by this author
+      window.searchByAuthor(decodeURIComponent(author));
+    }
+  }
+
+  /**
+   * Initialize both UI and auto-filter
+   */
+  function initAll() {
+    initAuthorUI();
+    checkAuthorQueryParam();
+  }
+
+  // Use global content ready utility (handles DOMContentLoaded and swup:contentReplaced)
+  if (typeof window.onContentReady === "function") {
+    window.onContentReady(initAll);
+  } else {
+    // Fallback if swup-utils.js hasn't loaded yet
+    document.addEventListener("DOMContentLoaded", initAll);
+    document.addEventListener("swup:contentReplaced", initAll);
   }
 })();
