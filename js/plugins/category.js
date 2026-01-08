@@ -88,6 +88,7 @@
   }
 
   document.addEventListener("DOMContentLoaded", initCategoryUI);
+  document.addEventListener("swup:contentReplaced", initCategoryUI);
   if (window.swup && typeof window.swup.on === "function") {
     try {
       window.swup.on("contentReplaced", initCategoryUI);
