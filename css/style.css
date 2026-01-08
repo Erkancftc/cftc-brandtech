@@ -76,7 +76,8 @@ body {
       overscroll-behavior: inherit;
 }
 
-#sectionContent ul > li {
+#sectionContent ul > li,
+#swupMain > section.mil-dark-bg > div > div > div > div > div.row.mil-accordion-content > div > ul > li {
   list-style: inside;
 }
 @media screen and (max-width: 768px) {
