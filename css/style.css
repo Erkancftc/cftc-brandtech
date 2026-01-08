@@ -3538,6 +3538,9 @@ accordion
   overflow: hidden;
 }
 
+
+
+
 /***************************
 
 price
@@ -4385,3 +4388,13 @@ address{
   opacity: 0;
 }
 
+@media(min-width: 1920px){
+  #swupMain > section.mil-dark-bg > div > div > div:nth-child(2) > div > div.row.mil-accordion-content > div:nth-child(2) {
+    padding-left: 60px;
+  }
+}
+@media(max-width: 1919px){
+  #swupMain > section.mil-dark-bg > div > div > div:nth-child(2) > div > div.row.mil-accordion-content > div:nth-child(2) {
+    padding-left: 0px;
+  }
+}
