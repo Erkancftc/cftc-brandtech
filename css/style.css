@@ -4389,12 +4389,12 @@ address{
 }
 
 @media(min-width: 1920px){
-  #swupMain > section.mil-dark-bg > div > div > div:nth-child(2) > div > div.row.mil-accordion-content > div:nth-child(2) {
+ .right-side-p60 {
     padding-left: 60px;
   }
 }
 @media(max-width: 1919px){
-  #swupMain > section.mil-dark-bg > div > div > div:nth-child(2) > div > div.row.mil-accordion-content > div:nth-child(2) {
+ .right-side-p60 {
     padding-left: 0px;
   }
 }
