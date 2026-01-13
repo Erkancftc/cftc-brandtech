@@ -39,10 +39,10 @@ calculateBtn.addEventListener("click", () => {
     } sermaye.value = temp;
 
   } else if (sabit.checked) {
-      let temp2 = sermaye.value;
     for (let i = 0; i < kacIslem.value; i++) {
+       calc()*[i];
+       console.log(profitResult.value);
        
-        console.log(temp2, lastSermaye.textContent, calc(), yeniSermaye(), profitResult.textContent);
     }
         
   } else {
@@ -53,6 +53,10 @@ calculateBtn.addEventListener("click", () => {
 
 
 
+
+
+
+//reset butonu
 resetBtn.addEventListener("click", () => {
   sermaye.value = 100;
   winRate.value = 100;
