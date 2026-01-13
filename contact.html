@@ -43,9 +43,6 @@
     <link rel="apple-touch-icon" href="/img/icons/apple-touch-icon.png" />
 
     <!-- reCAPTCHA v3 -->
-     
-
-
 
     <!-- PWA kullanıyorsan aç -->
     <!-- <link rel="manifest" href="/site.webmanifest"> -->
@@ -175,7 +172,7 @@
                       </ul>
                     </li>
                     <li class="mil-has-children">
-                      <a href="contact.html">İletişim</a>
+                      <a href="contact.html" data-no-swup>İletişim</a>
                     </li>
                     <li class="mil-has-children">
                       <a href="blog.html">Blog</a>
@@ -205,11 +202,11 @@
                       <section class="col-lg-8 mil-mb-60" aria-labelledby="projelerimiz">
                         <h5 id="projelerimiz" class="mil-muted mil-mb-30">Projelerimiz</h5>
                         <ul class="mil-menu-list" role="list">
-                              <li><a href="projects.html?slug=cftc-smarttech-frontend" class="mil-light-soft">Akıllı Ev Sistemleri Websitesi</a></li>
-                              <li><a href="projects.html?slug=villavillage-website-redesign"  class="mil-light-soft">Villa Kiralama Websitesi</a></li>
-                              <li><a href="projects.html?slug=siempretour-website-redesign"  class="mil-light-soft">Tur Kiralama Websitesi</a></li>
-                              <li><a href="projects.html?slug=zckolaylı-lawyer-website"  class="mil-light-soft">Avukat Özel Websitesi</a></li>
-                          </ul>
+                          <li><a href="projects.html?slug=cftc-smarttech-frontend" class="mil-light-soft">Akıllı Ev Sistemleri Websitesi</a></li>
+                          <li><a href="projects.html?slug=villavillage-website-redesign" class="mil-light-soft">Villa Kiralama Websitesi</a></li>
+                          <li><a href="projects.html?slug=siempretour-website-redesign" class="mil-light-soft">Tur Kiralama Websitesi</a></li>
+                          <li><a href="projects.html?slug=zckolaylı-lawyer-website" class="mil-light-soft">Avukat Özel Websitesi</a></li>
+                        </ul>
                       </section>
                       <section class="col-lg-4 mil-mb-60" aria-labelledby="diger-sayfalar">
                         <h5 id="diger-sayfalar" class="mil-muted mil-mb-30">Diğer Sayfalar</h5>
@@ -284,7 +281,7 @@
               <div class="container">
                 <ul class="mil-breadcrumbs mil-center mil-mb-60">
                   <li><a href="index.html">Anasayfa</a></li>
-                  <li><a href="contact.html">İLETİŞİM</a></li>
+                  <li><a href="contact.html" data-no-swup>İLETİŞİM</a></li>
                 </ul>
                 <h1 class="mil-mb-60">İletişime Geçin!</h1>
                 <a href="#contact" class="mil-link mil-dark mil-arrow-place mil-down-arrow">
@@ -491,7 +488,7 @@
                             <a href="portfolio-1.html">Portföy</a>
                           </li>
                           <li class="mil-up">
-                            <a href="contact.html">İletişim</a>
+                            <a href="contact.html" data-no-swup>İletişim</a>
                           </li>
                           <li class="mil-up">
                             <a href="blog.html">Blog</a>
@@ -564,17 +561,17 @@
 
     <!-- jQuery js -->
     <script src="js/plugins/jquery.min.js" defer></script>
-    <script>
-  // Google önce gelirse diye köprü
-  window.__recaptchaApiLoaded = false;
-  window.onRecaptchaLoad = function () {
-    window.__recaptchaApiLoaded = true;
-    // main.js daha yüklenmediyse sorun değil; yüklendiğinde tekrar deneyeceğiz
-    if (window.renderRecaptcha) window.renderRecaptcha();
-  };
-</script>
+    <!-- <script>
+      // Google önce gelirse diye köprü
+      window.__recaptchaApiLoaded = false
+      window.onRecaptchaLoad = function () {
+        window.__recaptchaApiLoaded = true
+        // main.js daha yüklenmediyse sorun değil; yüklendiğinde tekrar deneyeceğiz
+        if (window.renderRecaptcha) window.renderRecaptcha()
+      }
+    </script> -->
 
-<script src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&render=explicit" async defer></script>
+    <script src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&render=explicit" defer></script>
     <!-- swup js -->
 
     <script src="js/plugins/swup.min.js" defer></script>
@@ -592,29 +589,12 @@
     <script src="js/plugins/ScrollTo.min.js" defer></script>
     <!-- ashley js -->
     <script src="js/main.js" defer></script>
-<script src="js/plugins/swup-utils.js" defer></script>
+    <script src="js/plugins/swup-utils.js" defer></script>
     <script src="js/plugins/load-more.js" defer></script>
     <script src="js/plugins/category.js" defer></script>
     <script src="js/plugins/filterbyauthor.js" defer></script>
     <script src="js/plugins/publications.js" defer></script>
     <script src="js/plugins/projects.js" defer></script>
     <script src="js/plugins/mail.js" defer></script>
-     
-
-    <!-- <script>
-  window.recaptchaWidgetId = null;
-
-  window.onRecaptchaLoad = function () {
-    const container = document.getElementById("recaptcha-container");
-    if (!container) return;
-
-    // aynı sayfada tekrar render etme
-    if (window.recaptchaWidgetId !== null) return;
-
-    window.recaptchaWidgetId = grecaptcha.render(container, {
-      sitekey: "6LfwAj8sAAAAAOFYr9hCMZALZ7pdyq4NWrvW3zx_"
-    });
-  };
-</script> -->
   </body>
 </html>
