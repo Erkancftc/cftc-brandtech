@@ -3537,7 +3537,11 @@ accordion
   height: 0;
   overflow: hidden;
 }
-
+@media (max-width: 768px) {
+  .mil-price-card .mil-accordion-menu{
+    flex-direction: column;
+  }
+}
 
 
 
