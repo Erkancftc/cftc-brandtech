@@ -794,6 +794,13 @@ breadcrumbs
           align-items: center;
   position: relative;
 }
+
+@media(max-width: 768px) {
+  .mil-breadcrumbs {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
 .mil-breadcrumbs:before {
   content: "";
   position: absolute;
