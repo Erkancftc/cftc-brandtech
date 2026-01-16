@@ -1085,10 +1085,11 @@ preloader
   left: 0;
   width: 100%;
   height: 100vh;
-  background-color: rgb(0, 0, 0);
+  background-color: rgb(0, 0, 0, 0.5);
 }
 .mil-preloader .mil-preloader-animation {
   opacity: 0;
+  top: -160px;
   position: relative;
   height: 100vh;
   color: rgb(255, 255, 255);
